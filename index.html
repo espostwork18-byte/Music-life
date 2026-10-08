@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Life — Entertainment Company</title>
+<meta name="description" content="Music Life — direzione artistica, booking, eventi e comunicazione. People. Music. Experiences. Around the world.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ====================================================================
+     SFONDO FISSO A TUTTA PAGINA — unico punto da modificare per
+     sostituire l'immagine hero: vedi assets/generate-responsive-images.sh
+     ==================================================================== -->
+<div class="bg-fixed" aria-hidden="true">
+  <picture>
+    <source type="image/avif" srcset="assets/hero-640.avif 640w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w, assets/hero-2000.avif 2000w, assets/hero-2800.avif 2800w" sizes="100vw">
+    <source type="image/webp" srcset="assets/hero-640.webp 640w, assets/hero-960.webp 960w, assets/hero-1440.webp 1440w, assets/hero-2000.webp 2000w, assets/hero-2800.webp 2800w" sizes="100vw">
+    <img class="bg-fixed__img" src="assets/hero-1440.jpg" srcset="assets/hero-640.jpg 640w, assets/hero-960.jpg 960w, assets/hero-1440.jpg 1440w, assets/hero-2000.jpg 2000w, assets/hero-2800.jpg 2800w" sizes="100vw" alt="">
+  </picture>
+  <div class="bg-fixed__overlay"></div>
+</div>
+
+<header class="site-header">
+  <a href="#top" class="logo">
+    <span class="logo__name">Music Life</span>
+    <span class="logo__tag">Entertainment Company</span>
+  </a>
+
+  <nav class="site-nav" id="site-nav">
+    <a href="#about">About</a>
+    <a href="#services">Entertainment</a>
+    <a href="#services">Communications</a>
+    <a href="#projects">Our Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="header-right">
+    <div class="lang-switch">
+      <button type="button" class="lang-switch__item is-active">EN</button>
+      <span class="lang-switch__sep">|</span>
+      <button type="button" class="lang-switch__item">IT</button>
+    </div>
+    <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Apri il menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <a href="#about">About</a>
+  <a href="#services">Entertainment</a>
+  <a href="#services">Communications</a>
+  <a href="#projects">Our Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero__content">
+      <span class="dash"></span>
+      <h1 class="hero__title">Music Life</h1>
+      <p class="hero__subtitle">Entertainment Company</p>
+      <p class="hero__tagline">People. Music. Experiences.<br>Around the world.</p>
+      <a href="#services" class="btn btn--outline">Discover <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="service">
+      <span class="service__index">01</span>
+      <h2 class="service__title">Entertainment</h2>
+      <p class="service__text">Direzione artistica, booking, organizzazione e produzione di eventi su misura.</p>
+      <a href="#contact" class="link-arrow">Explore <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="service">
+      <span class="service__index">02</span>
+      <h2 class="service__title">Communications</h2>
+      <p class="service__text">Strategia, branding, contenuti digitali e comunicazione integrata.</p>
+      <a href="#contact" class="link-arrow">Explore <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <div class="projects__head">
+      <p class="eyebrow"><span class="dash"></span>Our Projects</p>
+      <p class="projects__claim">Same passion.<br>Different destinations.</p>
+    </div>
+
+    <ul class="locations">
+      <li><span class="locations__city">Riccione</span><span class="locations__country">Italy</span></li>
+      <li><span class="locations__city">Saint Tropez</span><span class="locations__country">France</span></li>
+      <li><span class="locations__city">Saint Barth</span><span class="locations__country">Caribbean</span></li>
+      <li><span class="locations__city">Courchevel</span><span class="locations__country">France</span></li>
+      <li><span class="locations__city">Ibiza</span><span class="locations__country">Spain</span></li>
+      <li><span class="locations__city">Punta del Este</span><span class="locations__country">Uruguay</span></li>
+      <li><span class="locations__city">Marbella</span><span class="locations__country">Spain</span></li>
+      <li><span class="locations__city">New York</span><span class="locations__country">USA</span></li>
+    </ul>
+  </section>
+
+  <section class="cta" id="contact">
+    <span class="dash"></span>
+    <p class="cta__title">Let's create<br>the next experience together.</p>
+    <a href="mailto:hello@musiclife.example" class="btn btn--outline">Get in touch <span aria-hidden="true">&rarr;</span></a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> Music Life Entertainment Company</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
