@@ -9,6 +9,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<script>
+  // applica subito (prima del paint) la classe per chi preferisce poco/nessun movimento
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reduced-motion');
+  }
+</script>
 </head>
 <body>
 
@@ -61,13 +67,32 @@
 
 <main id="top">
 
-  <section class="hero">
-    <div class="hero__content">
-      <span class="dash"></span>
-      <h1 class="hero__title">Music Life</h1>
-      <p class="hero__subtitle">Entertainment Company</p>
-      <p class="hero__tagline">People. Music. Experiences.<br>Around the world.</p>
-      <a href="#services" class="btn btn--outline">Discover <span aria-hidden="true">&rarr;</span></a>
+  <section class="hero" id="hero">
+    <div class="hero__pin" id="hero-pin">
+
+      <div class="hero__frame" id="hero-frame">
+        <picture>
+          <source type="image/avif" srcset="assets/hero-640.avif 640w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w, assets/hero-2000.avif 2000w, assets/hero-2800.avif 2800w" sizes="100vw">
+          <source type="image/webp" srcset="assets/hero-640.webp 640w, assets/hero-960.webp 960w, assets/hero-1440.webp 1440w, assets/hero-2000.webp 2000w, assets/hero-2800.webp 2800w" sizes="100vw">
+          <img class="hero__frame-img" src="assets/hero-1440.jpg" srcset="assets/hero-640.jpg 640w, assets/hero-960.jpg 960w, assets/hero-1440.jpg 1440w, assets/hero-2000.jpg 2000w, assets/hero-2800.jpg 2800w" sizes="100vw" alt="">
+        </picture>
+        <div class="hero__frame-overlay"></div>
+
+        <h1 class="hero__split hero__split--left" id="hero-split-left">People.<br>Music.</h1>
+        <p class="hero__split hero__split--right" id="hero-split-right">Experiences.<br>Around the world.</p>
+      </div>
+
+      <div class="hero__frame-border" id="hero-frame-border" aria-hidden="true"></div>
+
+      <div class="hero__brand" id="hero-brand">
+        <span class="dash"></span>
+        <span class="hero__brand-name">Music Life</span>
+        <span class="hero__brand-tag">Entertainment Company</span>
+      </div>
+
+      <p class="hero__rising" id="hero-rising">Direzione artistica, produzione di eventi e comunicazione per i migliori indirizzi internazionali.</p>
+
+      <a href="#services" class="btn btn--outline hero__cta" id="hero-cta">Discover <span aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
@@ -116,6 +141,11 @@
   <p>&copy; <span id="year"></span> Music Life Entertainment Company</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="js/motion-config.js"></script>
+<script src="js/motion.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
