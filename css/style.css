@@ -45,7 +45,7 @@
   /* navigazione a vetro */
   --nav-w: min(460px, calc(100vw - 32px));
   --nav-bar-h: 54px;
-  --glass-bg: rgba(18, 13, 10, 0.55);
+  --glass-bg: rgba(18, 13, 10, 0.74);
   --glass-blur: 18px;
 
   /* movimento */
@@ -567,6 +567,90 @@ h1, h2, p { margin: 0; }
 .dest__row:focus-visible::before { opacity: 1; transform: translateY(-50%) scale(1); }
 
 /* ==========================================================================
+   Pagina locale (es. Riccione → Space)
+   ========================================================================== */
+.venue { padding: 7.5rem var(--space-5) var(--space-7); }
+.venue__crumb {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-4);
+  font-size: 0.7rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+.venue__crumb a { border-bottom: 1px solid var(--color-ink); padding-bottom: 0.2em; }
+.venue__crumb span { color: var(--color-taupe); }
+.venue__name {
+  margin: 0 0 var(--space-5);
+  font-size: clamp(4.5rem, 20vw, 17rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+.venue__photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+.venue__photo { margin: 0; overflow: hidden; background: var(--color-ink); }
+.venue__photo--wide { grid-column: 1 / -1; }
+.venue__photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease-out);
+}
+.venue__photo--wide img { aspect-ratio: 16 / 8; }
+.venue__photo:hover img { transform: scale(1.03); }
+
+.venue__info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+.venue__label {
+  margin: 0 0 var(--space-2);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-taupe);
+}
+.venue__text {
+  margin: 0;
+  max-width: 34rem;
+  font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.venue__links { border-top: 1px solid var(--color-ink); align-self: start; }
+.venue__links li { border-bottom: 1px solid rgba(18, 13, 10, 0.18); }
+.venue__links a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  transition: padding var(--dur-med) var(--ease-out), background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.venue__links a:hover,
+.venue__links a:focus-visible {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+}
+.venue__link-label {
+  font-size: 0.7rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+.venue__link-value { font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: -0.01em; }
+
+/* ==========================================================================
    CTA finale (scuro)
    ========================================================================== */
 .cta {
@@ -622,7 +706,8 @@ h1, h2, p { margin: 0; }
    Responsive
    ========================================================================== */
 @media (max-width: 1024px) {
-  .intro, .jump, .projects { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .intro, .jump, .projects, .venue { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .venue__info { grid-template-columns: 1fr; gap: var(--space-4); }
   .jump { grid-template-columns: 1fr; gap: var(--space-3); }
   .jump__label { border-right: 0; border-bottom: 1px solid var(--color-ink); padding: 0 0 var(--space-2); }
 }
@@ -645,7 +730,9 @@ h1, h2, p { margin: 0; }
 }
 
 @media (max-width: 480px) {
-  .intro, .jump, .projects, .cta { padding-left: var(--space-3); padding-right: var(--space-3); }
+  .intro, .jump, .projects, .venue, .cta { padding-left: var(--space-3); padding-right: var(--space-3); }
+  .venue__photos { grid-template-columns: 1fr; }
+  .venue__photo--wide img { aspect-ratio: 16 / 10; }
   .jump__grid { grid-template-columns: 1fr; }
   .card { grid-template-columns: 7.5rem 1fr; }
   .dest__row::before { display: none; }

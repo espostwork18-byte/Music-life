@@ -27,8 +27,9 @@
   // --- Hero: sezione pinnata con titolo diviso, paragrafo e riquadro ----
   var heroEl = document.getElementById('hero');
   var pinEl = document.getElementById('hero-pin');
-  if (!heroEl || !pinEl) return;
+  if (heroEl && pinEl) buildHero();
 
+  function buildHero() {
   var h = cfg.hero;
 
   var tl = gsap.timeline({
@@ -87,6 +88,7 @@
     ease: cfg.ease.out,
     duration: h.revealEnd - h.frameShrinkEnd
   }, h.frameShrinkEnd);
+  }
 
   // --- Testi grandi: parole che si accendono con lo scroll ----------------
   function splitWords(root) {
@@ -121,7 +123,7 @@
   });
 
   // --- Ingresso morbido di card, righe destinazione, titoli ---------------
-  var fadeUp = gsap.utils.toArray('.card, .dest li, .projects__head, .jump__label, .cta .btn, .cta__kicker');
+  var fadeUp = gsap.utils.toArray('.card, .dest li, .projects__head, .jump__label, .cta .btn, .cta__kicker, .venue__crumb, .venue__name, .venue__photo, .venue__about, .venue__links li');
   gsap.set(fadeUp, { opacity: 0, y: 28 });
   ScrollTrigger.batch(fadeUp, {
     start: 'top 90%',
