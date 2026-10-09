@@ -25,6 +25,13 @@ window.MOTION = {
     frameScaleEnd: 0.62,
     paragraphTravel: 70 // px di risalita del paragrafo
   },
+  nav: {
+    openDur: 0.7,
+    closeDur: 0.5,
+    itemDur: 0.6,
+    itemStagger: 0.05,
+    itemTravel: 10
+  },
   lenis: {
     duration: 1.1,
     easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); }

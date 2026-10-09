@@ -31,39 +31,44 @@
   <div class="bg-fixed__overlay"></div>
 </div>
 
-<header class="site-header">
-  <a href="#top" class="logo">
-    <span class="logo__name">Music Life</span>
-    <span class="logo__tag">Entertainment Company</span>
-  </a>
+<header class="nav" id="nav">
+  <div class="nav__bar">
+    <a href="#projects" class="nav__link">Work</a>
+    <a href="#top" class="nav__logo" aria-label="Music Life — home">Music Life</a>
+    <button type="button" class="nav__link nav__link--right" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">About</button>
+  </div>
 
-  <nav class="site-nav" id="site-nav">
-    <a href="#about">About</a>
-    <a href="#services">Entertainment</a>
-    <a href="#services">Communications</a>
-    <a href="#projects">Our Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <div class="header-right">
-    <div class="lang-switch">
-      <button type="button" class="lang-switch__item is-active">EN</button>
-      <span class="lang-switch__sep">|</span>
-      <button type="button" class="lang-switch__item">IT</button>
+  <div class="nav__panel" id="nav-panel" inert>
+    <div class="nav__panel-bg" id="nav-panel-bg" aria-hidden="true"></div>
+    <div class="nav__panel-inner" id="nav-panel-inner">
+      <nav class="nav__grid" aria-label="Sezioni">
+        <a href="#about">About</a>
+        <a href="#services">Entertainment</a>
+        <a href="#services">Communications</a>
+        <a href="#projects">Our Projects</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav__info">
+        <div>
+          <p class="nav__label">General inquiries</p>
+          <p>+00 000 000 0000</p>
+          <p>hello@musiclife.example</p>
+          <a href="#contact">Plan a call</a>
+        </div>
+        <div>
+          <p class="nav__label">Visit</p>
+          <p>Via Esempio 00<br>00000 Città<br>Italia</p>
+        </div>
+        <div class="nav__lang">
+          <button type="button" class="is-active">EN</button>
+          <span aria-hidden="true">|</span>
+          <button type="button">IT</button>
+        </div>
+      </div>
     </div>
-    <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Apri il menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
-
-<nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
-  <a href="#about">About</a>
-  <a href="#services">Entertainment</a>
-  <a href="#services">Communications</a>
-  <a href="#projects">Our Projects</a>
-  <a href="#contact">Contact</a>
-</nav>
 
 <main id="top">
 
@@ -146,6 +151,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="js/motion-config.js"></script>
 <script src="js/motion.js"></script>
+<script src="js/nav.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
