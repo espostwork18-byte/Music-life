@@ -18,19 +18,6 @@
 </head>
 <body>
 
-<!-- ====================================================================
-     SFONDO FISSO A TUTTA PAGINA — unico punto da modificare per
-     sostituire l'immagine hero: vedi assets/generate-responsive-images.sh
-     ==================================================================== -->
-<div class="bg-fixed" aria-hidden="true">
-  <picture>
-    <source type="image/avif" srcset="assets/hero-640.avif 640w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w, assets/hero-2000.avif 2000w, assets/hero-2800.avif 2800w" sizes="100vw">
-    <source type="image/webp" srcset="assets/hero-640.webp 640w, assets/hero-960.webp 960w, assets/hero-1440.webp 1440w, assets/hero-2000.webp 2000w, assets/hero-2800.webp 2800w" sizes="100vw">
-    <img class="bg-fixed__img" src="assets/hero-1440.jpg" srcset="assets/hero-640.jpg 640w, assets/hero-960.jpg 960w, assets/hero-1440.jpg 1440w, assets/hero-2000.jpg 2000w, assets/hero-2800.jpg 2800w" sizes="100vw" alt="">
-  </picture>
-  <div class="bg-fixed__overlay"></div>
-</div>
-
 <header class="nav" id="nav">
   <div class="nav__bar">
     <a href="#projects" class="nav__link">Work</a>
@@ -43,8 +30,8 @@
     <div class="nav__panel-inner" id="nav-panel-inner">
       <nav class="nav__grid" aria-label="Sezioni">
         <a href="#about">About</a>
-        <a href="#services">Entertainment</a>
-        <a href="#services">Communications</a>
+        <a href="#entertainment">Entertainment</a>
+        <a href="#communications">Communications</a>
         <a href="#projects">Our Projects</a>
         <a href="#team">Team</a>
         <a href="#contact">Contact</a>
@@ -75,6 +62,8 @@
   <section class="hero" id="hero">
     <div class="hero__pin" id="hero-pin">
 
+      <div class="hero__light" id="hero-light" aria-hidden="true"></div>
+
       <div class="hero__frame" id="hero-frame">
         <picture>
           <source type="image/avif" srcset="assets/hero-640.avif 640w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w, assets/hero-2000.avif 2000w, assets/hero-2800.avif 2800w" sizes="100vw">
@@ -97,46 +86,76 @@
 
       <p class="hero__rising" id="hero-rising">Direzione artistica, produzione di eventi e comunicazione per i migliori indirizzi internazionali.</p>
 
-      <a href="#services" class="btn btn--outline hero__cta" id="hero-cta">Discover <span aria-hidden="true">&rarr;</span></a>
+      <a href="#about" class="btn btn--outline hero__cta" id="hero-cta">Discover <span aria-hidden="true">&rarr;</span></a>
     </div>
   </section>
 
-  <section class="services" id="services">
-    <div class="service">
-      <span class="service__index">01</span>
-      <h2 class="service__title">Entertainment</h2>
-      <p class="service__text">Direzione artistica, booking, organizzazione e produzione di eventi su misura.</p>
-      <a href="#contact" class="link-arrow">Explore <span aria-hidden="true">&rarr;</span></a>
-    </div>
-    <div class="service">
-      <span class="service__index">02</span>
-      <h2 class="service__title">Communications</h2>
-      <p class="service__text">Strategia, branding, contenuti digitali e comunicazione integrata.</p>
-      <a href="#contact" class="link-arrow">Explore <span aria-hidden="true">&rarr;</span></a>
-    </div>
-  </section>
+  <div class="light">
 
-  <section class="projects" id="projects">
-    <div class="projects__head">
-      <p class="eyebrow"><span class="dash"></span>Our Projects</p>
-      <p class="projects__claim">Same passion.<br>Different destinations.</p>
-    </div>
+    <section class="intro" id="about">
+      <p class="intro__text" data-reveal-words>Music Life is an entertainment company shaping nights people remember: artistic direction, booking and production for the world's most-loved destinations, from <a href="#projects">Riccione</a>, <a href="#projects">Saint Tropez</a>, <a href="#projects">Saint Barth</a> and <a href="#projects">Courchevel</a> to <a href="#projects">Ibiza</a>, <a href="#projects">Punta del Este</a>, <a href="#projects">Marbella</a> and <a href="#projects">New York</a>.</p>
+    </section>
 
-    <ul class="locations">
-      <li><span class="locations__city">Riccione</span><span class="locations__country">Italy</span></li>
-      <li><span class="locations__city">Saint Tropez</span><span class="locations__country">France</span></li>
-      <li><span class="locations__city">Saint Barth</span><span class="locations__country">Caribbean</span></li>
-      <li><span class="locations__city">Courchevel</span><span class="locations__country">France</span></li>
-      <li><span class="locations__city">Ibiza</span><span class="locations__country">Spain</span></li>
-      <li><span class="locations__city">Punta del Este</span><span class="locations__country">Uruguay</span></li>
-      <li><span class="locations__city">Marbella</span><span class="locations__country">Spain</span></li>
-      <li><span class="locations__city">New York</span><span class="locations__country">USA</span></li>
-    </ul>
-  </section>
+    <section class="jump" id="jump">
+      <h2 class="jump__label">Jump to</h2>
+      <div class="jump__grid">
+        <a href="#projects" class="card" id="entertainment">
+          <span class="card__thumb" style="--thumb-pos: 18% 12%"></span>
+          <span class="card__body">
+            <span class="card__title">01 Entertainment</span>
+            <span class="card__text">Artistic direction, booking, event organization and production.</span>
+            <span class="card__more">Explore <span aria-hidden="true">&rarr;</span></span>
+          </span>
+        </a>
+        <a href="#projects" class="card" id="communications">
+          <span class="card__thumb" style="--thumb-pos: 82% 34%"></span>
+          <span class="card__body">
+            <span class="card__title">02 Communications</span>
+            <span class="card__text">Strategy, branding, digital content and communication.</span>
+            <span class="card__more">Explore <span aria-hidden="true">&rarr;</span></span>
+          </span>
+        </a>
+        <a href="#contact" class="card" id="team">
+          <span class="card__thumb" style="--thumb-pos: 55% 78%"></span>
+          <span class="card__body">
+            <span class="card__title">Our team</span>
+            <span class="card__text">Small team, big nights.</span>
+            <span class="card__more">Meet team <span aria-hidden="true">&rarr;</span></span>
+          </span>
+        </a>
+        <a href="#contact" class="card">
+          <span class="card__thumb" style="--thumb-pos: 30% 55%"></span>
+          <span class="card__body">
+            <span class="card__title">Contact</span>
+            <span class="card__text">By mail, phone or book a call.</span>
+            <span class="card__more">Learn more <span aria-hidden="true">&rarr;</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="projects__head">
+        <h2 class="projects__title">Our Projects</h2>
+        <p class="projects__sub">Same passion. Different destinations.</p>
+      </div>
+      <ul class="dest">
+        <li><a href="#contact" class="dest__row" style="--thumb-pos: 12% 20%"><span class="dest__city">Riccione</span><span class="dest__country">Italy</span></a></li>
+        <li><a href="#contact" class="dest__row" style="--thumb-pos: 70% 15%"><span class="dest__city">Saint Tropez</span><span class="dest__country">France</span></a></li>
+        <li><a href="#contact" class="dest__row" style="--thumb-pos: 40% 60%"><span class="dest__city">Saint Barth</span><span class="dest__country">Caribbean</span></a></li>
+        <li><a href="#contact" class="dest__row" style="--thumb-pos: 88% 70%"><span class="dest__city">Courchevel</span><span class="dest__country">France</span></a></li>
+        <li><a href="#contact" class="dest__row" style="--thumb-pos: 25% 85%"><span class="dest__city">Ibiza</span><span class="dest__country">Spain</span></a></li>
+        <li><a href="#contact" class="dest__row" style="--thumb-pos: 60% 40%"><span class="dest__city">Punta del Este</span><span class="dest__country">Uruguay</span></a></li>
+        <li><a href="#contact" class="dest__row" style="--thumb-pos: 8% 55%"><span class="dest__city">Marbella</span><span class="dest__country">Spain</span></a></li>
+        <li><a href="#contact" class="dest__row" style="--thumb-pos: 95% 30%"><span class="dest__city">New York</span><span class="dest__country">USA</span></a></li>
+      </ul>
+    </section>
+
+  </div>
 
   <section class="cta" id="contact">
-    <span class="dash"></span>
-    <p class="cta__title">Let's create<br>the next experience together.</p>
+    <p class="cta__kicker">Ready when you are</p>
+    <p class="cta__title" data-reveal-words>Let's create the next experience together.</p>
     <a href="mailto:hello@musiclife.example" class="btn btn--outline">Get in touch <span aria-hidden="true">&rarr;</span></a>
   </section>
 
