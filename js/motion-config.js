@@ -26,11 +26,12 @@ window.MOTION = {
     paragraphTravel: 70 // px di risalita del paragrafo
   },
   nav: {
-    openDur: 0.7,
-    closeDur: 0.5,
-    itemDur: 0.6,
-    itemStagger: 0.05,
-    itemTravel: 10
+    // UI usata spesso: tempi brevi, uscita più rapida dell'ingresso
+    openDur: 0.38,
+    closeDur: 0.22,
+    itemDur: 0.32,
+    itemStagger: 0.035,
+    itemTravel: 8
   },
   lenis: {
     duration: 1.1,
