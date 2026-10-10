@@ -497,7 +497,12 @@ h1, h2, h3, h4, p { margin: 0; }
   background: var(--color-ink);
   color: var(--color-paper);
 }
-.page-hero picture { display: contents; }
+.page-hero--plain {
+  min-height: 72vh;
+  background:
+    radial-gradient(70% 90% at 85% 110%, rgba(201, 168, 118, 0.14), transparent 70%),
+    var(--color-ink);
+}
 .page-hero__img {
   position: absolute;
   inset: 0;
@@ -509,7 +514,9 @@ h1, h2, h3, h4, p { margin: 0; }
 .page-hero__overlay {
   position: absolute;
   inset: 0;
-  background-image: var(--overlay-hero), var(--overlay-fade);
+  background-image:
+    linear-gradient(to top, rgba(10, 7, 5, 0.88) 0%, rgba(10, 7, 5, 0.35) 42%, rgba(10, 7, 5, 0.12) 100%),
+    linear-gradient(90deg, rgba(10, 7, 5, 0.5) 0%, rgba(10, 7, 5, 0) 55%);
 }
 .page-hero__inner { position: relative; max-width: 64rem; }
 .page-hero__crumb {
@@ -661,15 +668,14 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 
 .team { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4) var(--space-3); margin-top: var(--space-5); }
-.team__img { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--color-ink); }
-.team__img::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("../assets/hero-960.jpg");
-  background-size: 360%;
-  background-position: var(--pos, 50% 50%);
+.team__img {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
 }
+.team__img::after { content: "Foto"; font-size: 0.72rem; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
 .team__name { margin-top: var(--space-2); font-size: 1.15rem; font-weight: 700; }
 .team__role { margin-top: 0.2em; font-size: 0.72rem; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--muted); }
 .team__bio { margin-top: var(--space-1); color: var(--muted); line-height: 1.45; }
@@ -728,15 +734,15 @@ h1, h2, h3, h4, p { margin: 0; }
   top: 50%;
   width: 11rem;
   aspect-ratio: 4 / 3;
-  background-image: url("../assets/hero-960.jpg");
-  background-size: 360%;
-  background-position: var(--thumb-pos, 50% 50%);
+  background-image: var(--thumb, none);
+  background-size: cover;
+  background-position: center;
   opacity: 0;
   transform: translateY(-50%) scale(0.96);
   transition: opacity 0.35s var(--ease-out), transform 0.5s var(--ease-out);
   pointer-events: none;
 }
-
+.dest__row:not([data-thumb])::before { display: none; }
 .dest__row--blank { pointer-events: none; cursor: default; }
 .dest__row--blank .dest__city { color: var(--muted); }
 .more { margin-top: var(--space-5); border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line); }
@@ -779,6 +785,20 @@ h1, h2, h3, h4, p { margin: 0; }
 .gallery figure { margin: 0; overflow: hidden; background: var(--color-ink); }
 .gallery figure:first-child { grid-column: 1 / -1; }
 .gallery img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; transition: transform 1.4s var(--ease-out); }
+.gallery__slot {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  border: 1px dashed var(--line-strong);
+  background: transparent !important;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+.gallery figure.gallery__slot:first-child { aspect-ratio: 16 / 8; }
+.gallery figure:last-child:nth-child(even) { grid-column: 1 / -1; }
+.gallery figure:last-child:nth-child(even) img { aspect-ratio: 16 / 8; }
 .gallery figure:first-child img { aspect-ratio: 16 / 8; }
 .todo {
   margin-top: var(--space-3);

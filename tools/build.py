@@ -124,6 +124,24 @@ BLANK_NY = {"blank": True, "name": "New York", "place": "USA"}
 # ---------------------------------------------------------------------------
 # Componenti
 # ---------------------------------------------------------------------------
+
+IMG_EXT = (".jpg", ".jpeg", ".png", ".webp")
+
+
+def venue_images(slug):
+    """Foto di una venue: assets/projects/<slug>/. 'hero.*' = immagine di apertura,
+    tutte le altre (ordine alfabetico: 01.jpg, 02.jpg, ...) = galleria."""
+    folder = os.path.join(ROOT, "assets", "projects", slug)
+    os.makedirs(folder, exist_ok=True)
+    keep = os.path.join(folder, ".gitkeep")
+    if not os.path.exists(keep):
+        open(keep, "w").close()
+    files = sorted(f for f in os.listdir(folder) if f.lower().endswith(IMG_EXT))
+    hero = next((f for f in files if os.path.splitext(f)[0].lower() == "hero"), None)
+    gallery = [f for f in files if f != hero]
+    return hero, gallery
+
+
 def esc(t):
     return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
@@ -293,7 +311,7 @@ def cta(title, text="", button=("", ""), kicker=""):
 </section>""" % (k, title, t, btn(button[0], button[1]))
 
 
-def page_hero(p, title, text="", tag="", crumb="", pos="62% 30%", name_style=False):
+def page_hero(p, title, text="", tag="", crumb="", pos="62% 30%", name_style=False, img=None):
     cr = ""
     if crumb:
         cr = '<p class="page-hero__crumb" data-in>%s</p>' % crumb
@@ -302,17 +320,21 @@ def page_hero(p, title, text="", tag="", crumb="", pos="62% 30%", name_style=Fal
     if text:
         tx = "".join('<p class="page-hero__text" data-in>%s</p>' % t for t in (text if isinstance(text, list) else [text]))
     tg = '<p class="page-hero__tag" data-in>%s</p>' % tag if tag else ""
-    return """<section class="page-hero" style="--hero-pos: %(pos)s">
-  %(pic)s
-  <div class="page-hero__overlay"></div>
+    if img:
+        media = '<img class="page-hero__img" src="%s" alt="" fetchpriority="high">\n  <div class="page-hero__overlay"></div>' % img
+        cls = "page-hero"
+    else:
+        media = ""
+        cls = "page-hero page-hero--plain"
+    return """<section class="%(cls)s" style="--hero-pos: %(pos)s">
+  %(media)s
   <div class="page-hero__inner">
     %(cr)s
     <h1%(tt)s data-in>%(title)s</h1>
     %(tx)s
     %(tg)s
   </div>
-</section>""" % {"pos": pos, "pic": picture(p, "page-hero__img", "", ' fetchpriority="high"'), "cr": cr, "tt": tt,
-                 "title": title, "tx": tx, "tg": tg}
+</section>""" % {"cls": cls, "pos": pos, "media": media, "cr": cr, "tt": tt, "title": title, "tx": tx, "tg": tg}
 
 
 def rows(items):
@@ -352,11 +374,14 @@ def dest_list(items, prefix_href, with_desc=True, go="Scopri il progetto"):
         </div></li>""" % (v["name"].upper(), v["place"]))
             continue
         desc = '<p class="dest__desc">%s</p>' % v["card"] if (with_desc and v.get("card")) else ""
+        h_, g_ = venue_images(v["slug"])
+        thumb_file = h_ or (g_[0] if g_ else None)
+        thumb = (' data-thumb style="--thumb: url(\'../assets/projects/%s/%s\')"' % (v["slug"], thumb_file)) if thumb_file else ""
         go_html = '<span class="dest__go">%s &rarr;</span>' % go if with_desc else ""
-        out.append("""<li data-fade><a href="%(h)sprogetti/%(slug)s.html" class="dest__row" style="--thumb-pos: %(pos)s">
+        out.append("""<li data-fade><a href="%(h)sprogetti/%(slug)s.html" class="dest__row"%(thumb)s>
           <span class="dest__city">%(name)s</span><span class="dest__country">%(place)s</span>%(desc)s%(go)s
         </a></li>""" % {"h": prefix_href, "slug": v["slug"], "name": v["name"].upper(), "place": v["place"],
-                        "pos": v["pos"], "desc": desc, "go": go_html})
+                        "thumb": thumb, "desc": desc, "go": go_html})
     return '<ul class="dest">\n        %s\n      </ul>' % "\n        ".join(out)
 
 
@@ -493,7 +518,7 @@ def page_chi_siamo():
     p = ""
     hero = page_hero(p, "Le idee prendono vita quando le persone giuste si incontrano.",
                      "MUSIC LIFE è una società indipendente di entertainment che riunisce professionisti provenienti da diversi ambiti dell'industria musicale e della comunicazione.",
-                     "People. Music. Experiences. Around the world.", pos="50% 35%")
+                     "People. Music. Experiences. Around the world.")
 
     s1 = section("light", "01 / Chi siamo", "Esperienze diverse. Una visione condivisa.", prose([
         "MUSIC LIFE nasce dalla volontà di unire professionalità, competenze e visioni differenti all'interno di un unico progetto.",
@@ -521,13 +546,13 @@ def page_chi_siamo():
               "Business management", "Produzione e logistica", "Strategia creativa e comunicazione"]
     chips = '<ul class="chips" data-fade>%s</ul>' % "".join("<li>%s</li>" % s for s in skills)
     team = []
-    for i, pos in enumerate(["20% 14%", "75% 38%", "45% 80%"]):
+    for i in range(3):
         team.append("""<article class="team__card" data-fade>
-          <div class="team__img" style="--pos: %s" aria-hidden="true"></div>
+          <div class="team__img" aria-hidden="true"></div>
           <h3 class="team__name">Nome Cognome</h3>
           <p class="team__role">Ruolo</p>
           <p class="team__bio">Breve biografia in arrivo.</p>
-        </article>""" % pos)
+        </article>""")
     # NOTA: schede nominative del management e del team da inserire (ruolo, foto, breve biografia)
     s4 = section("dark", "04 / Le nostre persone", "Le competenze fanno la differenza.",
                  prose(["Il valore di MUSIC LIFE nasce dalle persone che ne fanno parte.",
@@ -553,8 +578,7 @@ def page_chi_siamo():
 def page_entertainment():
     p = ""
     hero = page_hero(p, "La visione prende forma. La musica prende vita.",
-                     "Dall'ideazione di un progetto alla sua realizzazione, MUSIC LIFE integra competenze artistiche, creative, tecniche e organizzative per costruire esperienze di entertainment.",
-                     pos="20% 18%")
+                     "Dall'ideazione di un progetto alla sua realizzazione, MUSIC LIFE integra competenze artistiche, creative, tecniche e organizzative per costruire esperienze di entertainment.")
     s1 = section("light", "01 / La nostra visione", "Un'esperienza è molto più di quello che accade sul palco.", prose([
         "Dietro ogni evento, festival o venue esiste un universo fatto di idee, persone, spazi, suoni e processi.",
         "Il nostro lavoro è dare forma a questo universo.",
@@ -601,7 +625,7 @@ def page_entertainment():
 def page_communications():
     p = ""
     hero = page_hero(p, "Ogni esperienza ha una storia. Noi le diamo voce.",
-                     "Costruiamo strategie, identità e contenuti capaci di connettere brand, progetti e persone.", pos="80% 40%")
+                     "Costruiamo strategie, identità e contenuti capaci di connettere brand, progetti e persone.")
     s1 = section("light", "01 / La nostra visione", "Un'esperienza non inizia quando si aprono le porte.", prose([
         "E non finisce quando la musica si spegne.",
         "Ogni progetto vive attraverso il modo in cui viene raccontato, percepito e condiviso.",
@@ -651,7 +675,7 @@ def page_progetti():
     p = ""
     hero = page_hero(p, "Una visione. Luoghi diversi. Esperienze uniche.",
                      ["Ogni collaborazione rappresenta un incontro tra persone, competenze e identità differenti.",
-                      "Dai club alle destinazioni internazionali, scopri alcune delle realtà con cui MUSIC LIFE collabora."], pos="70% 20%")
+                      "Dai club alle destinazioni internazionali, scopri alcune delle realtà con cui MUSIC LIFE collabora."])
     sel = [V["space-riccione"], V["indie-beach"], V["cat-club"]]
     s1 = section("light", "01 / Collaborazioni selezionate", "", dest_list(sel, ""), "collaborazioni")
 
@@ -671,8 +695,10 @@ def page_progetti():
 # ---------------------------------------------------------------------------
 def page_venue(v):
     p = "../"
+    hero_file, gal_files = venue_images(v["slug"])
+    hero_img = "%sassets/projects/%s/%s" % (p, v["slug"], hero_file) if hero_file else None
     hero = page_hero(p, esc(v["short"]), v["intro"][0],
-                     crumb='<a href="%sprogetti.html">&larr; Progetti</a><span>%s</span>' % (p, v["place"]), pos=v["pos"], name_style=True)
+                     crumb='<a href="%sprogetti.html">&larr; Progetti</a><span>%s</span>' % (p, v["place"]), pos=v["pos"], name_style=True, img=hero_img)
 
     if not v["web"]:
         links = '<p class="todo" data-fade>Sito web e Instagram ufficiali: da inserire.</p>'
@@ -691,10 +717,14 @@ def page_venue(v):
     s3 = section("light", "03 / Le competenze coinvolte", "",
                  '<p class="todo" data-fade>Da definire, selezionando solo le attività pertinenti: direzione artistica · booking · produzione · progettazione tecnica · comunicazione.</p>', "competenze")
 
-    figs = "".join('<figure data-fade><img src="%sassets/projects/%s-%d.jpg" alt="%s — immagine %d" width="1800" height="1125"%s></figure>' % (
-        p, v["slug"], i, esc(v["name"]), i, "" if i == 1 else ' loading="lazy" decoding="async"') for i in (1, 2, 3))
-    s4 = section("dark", "04 / L'esperienza", "",
-                 '<div class="gallery">%s</div>\n      <p class="todo" data-fade>Gallery di fotografie, video, materiali creativi e contenuti ufficiali: da inserire (le immagini attuali sono segnaposto).</p>' % figs, "esperienza")
+    if gal_files:
+        figs = "".join('<figure data-fade><img src="%sassets/projects/%s/%s" alt="%s — immagine %d"%s></figure>' % (
+            p, v["slug"], f, esc(v["name"]), i, "" if i == 1 else ' loading="lazy" decoding="async"') for i, f in enumerate(gal_files, 1))
+        gal_html = '<div class="gallery">%s</div>' % figs
+    else:
+        slots = "".join('<figure class="gallery__slot" data-fade><span>Foto in arrivo</span></figure>' for _ in range(3))
+        gal_html = '<div class="gallery">%s</div>' % slots
+    s4 = section("dark", "04 / L'esperienza", "", gal_html, "esperienza")
 
     s5 = section("light", "05 / Risultati", "",
                  '<p class="todo" data-fade>Eventuali risultati, traguardi o dati autorizzati alla pubblicazione: da inserire.</p>', "risultati")
@@ -715,7 +745,7 @@ def page_contatti():
     hero = page_hero(p, "La prossima esperienza potrebbe iniziare qui.",
                      ["Un nuovo progetto. Un'idea da sviluppare. Una collaborazione da costruire.",
                       "Siamo sempre interessati a incontrare persone e realtà che condividono la nostra visione dell'entertainment."],
-                     "Parliamone.", pos="55% 70%")
+                     "Parliamone.")
 
     form = """<form class="form" id="contact-form" novalidate>
         <label class="field" data-field="name" data-fade><span class="field__label">Nome e cognome</span>
