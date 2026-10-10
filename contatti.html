@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contatti — Music Life</title>
+<meta name="description" content="Hai un progetto musicale da sviluppare? Scrivi a MUSIC LIFE: Entertainment, Communications o entrambe.">
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reduced-motion');
+  }
+</script>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav__bar">
+    <a href="progetti.html" class="nav__link">Progetti</a>
+    <a href="index.html" class="nav__logo" aria-label="Music Life — home">Music Life</a>
+    <button type="button" class="nav__link nav__link--right" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">Menu</button>
+  </div>
+  <div class="nav__panel" id="nav-panel" inert>
+    <div class="nav__panel-bg" id="nav-panel-bg" aria-hidden="true"></div>
+    <div class="nav__panel-inner" id="nav-panel-inner">
+      <nav class="nav__grid" aria-label="Sezioni del sito"><a href="index.html">Home</a><a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a></nav>
+      <div class="nav__info">
+        <div>
+          <p class="nav__label">Contatti</p>
+          <p>[Email aziendale]</p>
+          <p>[LinkedIn / Instagram]</p>
+          <a href="contatti.html">Parliamone</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="page-hero" style="--hero-pos: 55% 70%">
+  <picture><source type="image/avif" srcset="assets/hero-640.avif 640w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w, assets/hero-2000.avif 2000w, assets/hero-2800.avif 2800w" sizes="100vw"><source type="image/webp" srcset="assets/hero-640.webp 640w, assets/hero-960.webp 960w, assets/hero-1440.webp 1440w, assets/hero-2000.webp 2000w, assets/hero-2800.webp 2800w" sizes="100vw"><img class="page-hero__img" src="assets/hero-1440.jpg" srcset="assets/hero-640.jpg 640w, assets/hero-960.jpg 960w, assets/hero-1440.jpg 1440w, assets/hero-2000.jpg 2000w, assets/hero-2800.jpg 2800w" sizes="100vw" alt="" fetchpriority="high"></picture>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__inner">
+    
+    <h1 class="page-hero__title" data-in>La prossima esperienza potrebbe iniziare qui.</h1>
+    <p class="page-hero__text" data-in>Un nuovo progetto. Un'idea da sviluppare. Una collaborazione da costruire.</p><p class="page-hero__text" data-in>Siamo sempre interessati a incontrare persone e realtà che condividono la nostra visione dell'entertainment.</p>
+    <p class="page-hero__tag" data-in>Parliamone.</p>
+  </div>
+</section>
+
+<section class="sec sec--light" id="contattaci">
+  <div class="sec__grid">
+    <p class="sec__label">Contatti</p>
+    <div>
+      <h2 class="sec__title sec__title--wide" data-fade>Contattaci</h2>
+      <div class="prose" data-fade>
+        <p class="lead">Hai un progetto musicale da sviluppare?</p>
+        <p>Vuoi dare vita a un nuovo format, valorizzare una venue o costruire una collaborazione tra il tuo brand e il mondo dell'entertainment?</p>
+        <p>Raccontaci la tua idea.</p>
+      </div>
+      <form class="form" id="contact-form" novalidate>
+        <label class="field" data-field="name" data-fade><span class="field__label">Nome e cognome</span>
+          <input class="field__input" type="text" name="name" autocomplete="name" required>
+          <span class="field__error" role="alert"></span></label>
+        <label class="field" data-field="email" data-fade><span class="field__label">Email</span>
+          <input class="field__input" type="email" name="email" autocomplete="email" required>
+          <span class="field__error" role="alert"></span></label>
+        <label class="field" data-field="org" data-fade><span class="field__label">Azienda / Organizzazione</span>
+          <input class="field__input" type="text" name="org" autocomplete="organization" required>
+          <span class="field__error" role="alert"></span></label>
+        <fieldset class="field" data-field="area" data-fade>
+          <legend class="field__label">Area di interesse</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="area" value="Entertainment"><span>Entertainment</span></label>
+            <label class="choice"><input type="radio" name="area" value="Communications"><span>Communications</span></label>
+            <label class="choice"><input type="radio" name="area" value="Entrambe"><span>Entrambe</span></label>
+            <label class="choice"><input type="radio" name="area" value="Altro"><span>Altro</span></label>
+          </div>
+          <span class="field__error" role="alert"></span>
+        </fieldset>
+        <label class="field" data-field="message" data-fade><span class="field__label">Il tuo progetto</span>
+          <textarea class="field__input" name="message" rows="6" placeholder="Messaggio libero" required></textarea>
+          <span class="field__error" role="alert"></span></label>
+        <div class="field" data-field="consent" data-fade>
+          <label class="consent"><input type="checkbox" name="consent" required><span>Consenso al trattamento dei dati personali secondo l'<a href="privacy-policy.html">informativa privacy</a>.</span></label>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <button type="submit" class="btn btn--outline" data-fade>Invia il messaggio <span aria-hidden="true">&rarr;</span></button>
+        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="diretto">
+  <div class="sec__grid">
+    <p class="sec__label">Contatto diretto</p>
+    <div>
+      <h2 class="sec__title sec__title--wide" data-fade>Preferisci scriverci direttamente?</h2>
+      <div class="contact-direct" data-fade><p>[Email aziendale]</p><p>[LinkedIn / Instagram]</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer__grid">
+    <div>
+      <p class="footer__brand">Music Life</p>
+      <p class="footer__company">Entertainment Company</p>
+      <p class="footer__tagline">People. Music. Experiences. Around the world.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <p class="footer__title">Sezioni</p>
+      <a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <div class="footer__contact">
+      <p class="footer__title">Contatti</p>
+      <p>[Email]</p>
+      <p>[Social]</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>&copy; MUSIC LIFE — Tutti i diritti riservati.</p>
+    <nav class="footer__legal" aria-label="Informazioni legali"><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="preferenze-cookie.html">Preferenze cookie</a><a href="note-legali.html">Note legali</a><a href="termini-e-condizioni.html">Termini e condizioni</a></nav>
+  </div>
+</footer>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/motion-config.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/form.js"></script>
+</body>
+</html>

@@ -122,14 +122,22 @@
     });
   });
 
-  // --- Ingresso morbido di card, righe destinazione, titoli ---------------
-  var fadeUp = gsap.utils.toArray('.card, .dest li, .projects__head, .jump__label, .cta .btn, .cta__kicker, .venue__crumb, .venue__name, .venue__photo, .venue__about, .venue__links li');
-  gsap.set(fadeUp, { opacity: 0, y: 28 });
-  ScrollTrigger.batch(fadeUp, {
-    start: 'top 90%',
-    once: true,
-    onEnter: function (batch) {
-      gsap.to(batch, { opacity: 1, y: 0, duration: cfg.dur.base, ease: cfg.ease.out, stagger: 0.08 });
-    }
-  });
+  // --- Ingresso morbido dei blocchi marcati con data-fade -----------------
+  var fadeUp = gsap.utils.toArray('[data-fade]');
+  if (fadeUp.length) {
+    gsap.set(fadeUp, { opacity: 0, y: 28 });
+    ScrollTrigger.batch(fadeUp, {
+      start: 'top 92%',
+      once: true,
+      onEnter: function (batch) {
+        gsap.to(batch, { opacity: 1, y: 0, duration: cfg.dur.base, ease: cfg.ease.out, stagger: 0.08 });
+      }
+    });
+  }
+
+  // --- Hero delle pagine interne: ingresso all'apertura --------------------
+  var heroIn = gsap.utils.toArray('[data-in]');
+  if (heroIn.length) {
+    gsap.fromTo(heroIn, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: cfg.dur.slow, ease: cfg.ease.out, stagger: 0.12, delay: 0.1 });
+  }
 })();

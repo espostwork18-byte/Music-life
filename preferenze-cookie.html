@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preferenze cookie — Music Life</title>
+<meta name="description" content="Stato dei cookie utilizzati dal sito di MUSIC LIFE e gestione delle preferenze.">
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reduced-motion');
+  }
+</script>
+</head>
+<body class="page-legal">
+
+<header class="nav" id="nav">
+  <div class="nav__bar">
+    <a href="progetti.html" class="nav__link">Progetti</a>
+    <a href="index.html" class="nav__logo" aria-label="Music Life — home">Music Life</a>
+    <button type="button" class="nav__link nav__link--right" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">Menu</button>
+  </div>
+  <div class="nav__panel" id="nav-panel" inert>
+    <div class="nav__panel-bg" id="nav-panel-bg" aria-hidden="true"></div>
+    <div class="nav__panel-inner" id="nav-panel-inner">
+      <nav class="nav__grid" aria-label="Sezioni del sito"><a href="index.html">Home</a><a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a></nav>
+      <div class="nav__info">
+        <div>
+          <p class="nav__label">Contatti</p>
+          <p>[Email aziendale]</p>
+          <p>[LinkedIn / Instagram]</p>
+          <a href="contatti.html">Parliamone</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<div class="sec sec--light legal">
+  <div class="legal__inner">
+    <h1>Preferenze cookie</h1>
+    <p class="legal__meta">Qui puoi consultare lo stato delle categorie di cookie utilizzate da questo sito.</p>
+    <h2>Il tuo stato attuale</h2>
+    <p>Al momento il sito non utilizza cookie che richiedano il tuo consenso: per questo non viene mostrato alcun banner e non è necessaria alcuna scelta da parte tua.</p>
+    <div class="switch-row"><div><p class="switch-row__title">Cookie tecnici</p><p class="switch-row__text">Necessari al funzionamento del sito. Attualmente non ne viene memorizzato alcuno.</p></div><span class="switch-row__state">Sempre attivi</span></div>
+    <div class="switch-row"><div><p class="switch-row__title">Cookie analitici</p><p class="switch-row__text">Servono a misurare l'uso del sito in forma aggregata. Non utilizzati.</p></div><span class="switch-row__state">Non utilizzati</span></div>
+    <div class="switch-row"><div><p class="switch-row__title">Cookie di marketing e profilazione</p><p class="switch-row__text">Servono a proporre contenuti pubblicitari personalizzati. Non utilizzati.</p></div><span class="switch-row__state">Non utilizzati</span></div>
+    <h2>Se le impostazioni cambiano</h2>
+    <p>Se in futuro il sito introdurrà strumenti di analisi o contenuti di terze parti, qui comparirà il pannello per accettare, rifiutare o personalizzare ciascuna categoria, e potrai modificare la tua scelta in ogni momento. Per i dettagli consulta la <a href="cookie-policy.html">Cookie Policy</a>.</p>
+    <!-- RIMUOVERE questo avviso prima della pubblicazione --><p class="legal__note">Testo redatto come modello: completa i campi evidenziati con i dati societari e fai verificare il documento da un consulente legale prima della pubblicazione.</p>
+  </div>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer__grid">
+    <div>
+      <p class="footer__brand">Music Life</p>
+      <p class="footer__company">Entertainment Company</p>
+      <p class="footer__tagline">People. Music. Experiences. Around the world.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <p class="footer__title">Sezioni</p>
+      <a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <div class="footer__contact">
+      <p class="footer__title">Contatti</p>
+      <p>[Email]</p>
+      <p>[Social]</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>&copy; MUSIC LIFE — Tutti i diritti riservati.</p>
+    <nav class="footer__legal" aria-label="Informazioni legali"><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="preferenze-cookie.html">Preferenze cookie</a><a href="note-legali.html">Note legali</a><a href="termini-e-condizioni.html">Termini e condizioni</a></nav>
+  </div>
+</footer>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/motion-config.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>

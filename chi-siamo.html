@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi siamo — Music Life</title>
+<meta name="description" content="MUSIC LIFE è una società indipendente di entertainment che riunisce professionisti dell'industria musicale e della comunicazione.">
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reduced-motion');
+  }
+</script>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav__bar">
+    <a href="progetti.html" class="nav__link">Progetti</a>
+    <a href="index.html" class="nav__logo" aria-label="Music Life — home">Music Life</a>
+    <button type="button" class="nav__link nav__link--right" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">Menu</button>
+  </div>
+  <div class="nav__panel" id="nav-panel" inert>
+    <div class="nav__panel-bg" id="nav-panel-bg" aria-hidden="true"></div>
+    <div class="nav__panel-inner" id="nav-panel-inner">
+      <nav class="nav__grid" aria-label="Sezioni del sito"><a href="index.html">Home</a><a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a></nav>
+      <div class="nav__info">
+        <div>
+          <p class="nav__label">Contatti</p>
+          <p>[Email aziendale]</p>
+          <p>[LinkedIn / Instagram]</p>
+          <a href="contatti.html">Parliamone</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="page-hero" style="--hero-pos: 50% 35%">
+  <picture><source type="image/avif" srcset="assets/hero-640.avif 640w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w, assets/hero-2000.avif 2000w, assets/hero-2800.avif 2800w" sizes="100vw"><source type="image/webp" srcset="assets/hero-640.webp 640w, assets/hero-960.webp 960w, assets/hero-1440.webp 1440w, assets/hero-2000.webp 2000w, assets/hero-2800.webp 2800w" sizes="100vw"><img class="page-hero__img" src="assets/hero-1440.jpg" srcset="assets/hero-640.jpg 640w, assets/hero-960.jpg 960w, assets/hero-1440.jpg 1440w, assets/hero-2000.jpg 2000w, assets/hero-2800.jpg 2800w" sizes="100vw" alt="" fetchpriority="high"></picture>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__inner">
+    
+    <h1 class="page-hero__title" data-in>Le idee prendono vita quando le persone giuste si incontrano.</h1>
+    <p class="page-hero__text" data-in>MUSIC LIFE è una società indipendente di entertainment che riunisce professionisti provenienti da diversi ambiti dell'industria musicale e della comunicazione.</p>
+    <p class="page-hero__tag" data-in>People. Music. Experiences. Around the world.</p>
+  </div>
+</section>
+
+<section class="sec sec--light" id="chi-siamo">
+  <div class="sec__grid">
+    <p class="sec__label">01 / Chi siamo</p>
+    <div>
+      <h2 class="sec__title sec__title--wide" data-fade>Esperienze diverse. Una visione condivisa.</h2>
+      <div class="prose" data-fade>
+        <p class="lead">MUSIC LIFE nasce dalla volontà di unire professionalità, competenze e visioni differenti all'interno di un unico progetto.</p>
+        <p>Un team multidisciplinare che conosce il mondo della musica e dell'intrattenimento attraverso esperienze dirette nella direzione artistica, nella progettazione, nella produzione, nella gestione operativa e nella comunicazione.</p>
+        <p>Crediamo nel valore della contaminazione tra competenze.</p>
+        <p>Nella capacità di osservare un progetto da prospettive differenti.</p>
+        <p>E nell'importanza di costruire relazioni solide tra artisti, brand, operatori e pubblico.</p>
+        <p>Lavoriamo al fianco di chi vuole ideare, sviluppare o far crescere un progetto nel mondo dell'entertainment, mettendo a disposizione una visione integrata e le competenze necessarie per realizzarla.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="missione">
+  <div class="sec__grid">
+    <p class="sec__label">02 / La nostra missione</p>
+    <div>
+      <h2 class="sec__title sec__title--wide" data-fade>Connettere competenze. Creare esperienze. Generare valore.</h2>
+      <div class="prose" data-fade>
+        <p class="lead">La nostra missione è accompagnare brand, festival e operatori dell'entertainment lungo l'intero percorso di sviluppo dei loro progetti.</p>
+        <p>Dalla definizione della visione artistica e strategica alla progettazione degli spazi. Dall'organizzazione e produzione alla costruzione dell'identità e della comunicazione.</p>
+        <p>Unendo creatività, competenze tecniche e visione manageriale, vogliamo contribuire alla realizzazione di esperienze capaci di generare valore per chi le crea, per chi le ospita e per chi le vive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--light" id="approccio">
+  <div class="sec__grid">
+    <p class="sec__label">03 / Il nostro approccio</p>
+    <div>
+      <h2 class="sec__title" data-fade>Ogni progetto è un mondo da costruire.</h2>
+      <div class="prose" data-fade>
+        <p>Non esiste un'unica formula per creare un'esperienza.</p>
+        <p>Esistono luoghi, persone, obiettivi e identità differenti. Per questo partiamo sempre dall'ascolto e dalla comprensione del contesto.</p>
+      </div>
+      <ol class="steps">
+      <li class="step" data-fade><span class="step__n">01</span><h3 class="step__title">Ascoltare</h3><p class="step__text">Comprendere la visione, il contesto e gli obiettivi di ogni progetto.</p></li>
+      <li class="step" data-fade><span class="step__n">02</span><h3 class="step__title">Immaginare</h3><p class="step__text">Individuare opportunità e sviluppare una direzione artistica, creativa e strategica coerente.</p></li>
+      <li class="step" data-fade><span class="step__n">03</span><h3 class="step__title">Progettare</h3><p class="step__text">Integrare competenze e professionalità per costruire ogni elemento dell'esperienza.</p></li>
+      <li class="step" data-fade><span class="step__n">04</span><h3 class="step__title">Realizzare</h3><p class="step__text">Trasformare la visione in realtà attraverso produzione, coordinamento tecnico e gestione operativa.</p></li>
+      <li class="step" data-fade><span class="step__n">05</span><h3 class="step__title">Valorizzare</h3><p class="step__text">Costruire identità, comunicazione e relazioni capaci di estendere il valore del progetto nel tempo.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark" id="persone">
+  <div class="sec__grid">
+    <p class="sec__label">04 / Le nostre persone</p>
+    <div>
+      <h2 class="sec__title" data-fade>Le competenze fanno la differenza.</h2>
+      <div class="prose" data-fade>
+        <p>Il valore di MUSIC LIFE nasce dalle persone che ne fanno parte.</p>
+        <p>Professionisti con background differenti, uniti da una profonda conoscenza del settore e dalla volontà di mettere la propria esperienza al servizio di una visione comune.</p>
+        <p>Le nostre competenze attraversano:</p>
+      </div>
+      <ul class="chips" data-fade><li>Direzione artistica e musicale</li><li>Architettura e progettazione</li><li>Ingegneria audio e direzione tecnica</li><li>Business management</li><li>Produzione e logistica</li><li>Strategia creativa e comunicazione</li></ul>
+      <div class="team">
+        <article class="team__card" data-fade>
+          <div class="team__img" style="--pos: 20% 14%" aria-hidden="true"></div>
+          <h3 class="team__name">Nome Cognome</h3>
+          <p class="team__role">Ruolo</p>
+          <p class="team__bio">Breve biografia in arrivo.</p>
+        </article>
+        <article class="team__card" data-fade>
+          <div class="team__img" style="--pos: 75% 38%" aria-hidden="true"></div>
+          <h3 class="team__name">Nome Cognome</h3>
+          <p class="team__role">Ruolo</p>
+          <p class="team__bio">Breve biografia in arrivo.</p>
+        </article>
+        <article class="team__card" data-fade>
+          <div class="team__img" style="--pos: 45% 80%" aria-hidden="true"></div>
+          <h3 class="team__name">Nome Cognome</h3>
+          <p class="team__role">Ruolo</p>
+          <p class="team__bio">Breve biografia in arrivo.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--light" id="mondo">
+  <div class="sec__grid">
+    <p class="sec__label">05 / Il nostro mondo</p>
+    <div>
+      <h2 class="sec__title sec__title--wide" data-fade>La stessa passione. Destinazioni differenti.</h2>
+      <div class="prose" data-fade>
+        <p class="lead">La musica attraversa confini, culture e luoghi.</p>
+        <p>MUSIC LIFE sviluppa collaborazioni in destinazioni differenti, adattando visione e competenze all'identità di ogni progetto.</p>
+        <p>Da Riccione a Saint-Tropez, fino a Courchevel, il nostro percorso si costruisce attraverso persone, relazioni ed esperienze.</p>
+      </div>
+      <div data-fade><a href="progetti.html" class="btn btn--outline">Esplora i nostri progetti <span aria-hidden="true">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  
+  <h2 class="cta__title" data-reveal-words>Le persone giuste possono fare la differenza.</h2>
+  
+  <div data-fade><a href="contatti.html" class="btn btn--outline">Lavoriamo insieme <span aria-hidden="true">&rarr;</span></a></div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer__grid">
+    <div>
+      <p class="footer__brand">Music Life</p>
+      <p class="footer__company">Entertainment Company</p>
+      <p class="footer__tagline">People. Music. Experiences. Around the world.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <p class="footer__title">Sezioni</p>
+      <a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <div class="footer__contact">
+      <p class="footer__title">Contatti</p>
+      <p>[Email]</p>
+      <p>[Social]</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>&copy; MUSIC LIFE — Tutti i diritti riservati.</p>
+    <nav class="footer__legal" aria-label="Informazioni legali"><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="preferenze-cookie.html">Preferenze cookie</a><a href="note-legali.html">Note legali</a><a href="termini-e-condizioni.html">Termini e condizioni</a></nav>
+  </div>
+</footer>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/motion-config.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/nav.js"></script>
+</body>
+</html>

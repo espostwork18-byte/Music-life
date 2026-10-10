@@ -4,13 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Music Life — Entertainment Company</title>
-<meta name="description" content="Music Life — direzione artistica, booking, eventi e comunicazione. People. Music. Experiences. Around the world.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="MUSIC LIFE è una entertainment company: direzione artistica, booking, produzione e comunicazione. People. Music. Experiences. Around the world.">
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <script>
-  // applica subito (prima del paint) la classe per chi preferisce poco/nessun movimento
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('reduced-motion');
   }
@@ -20,37 +17,20 @@
 
 <header class="nav" id="nav">
   <div class="nav__bar">
-    <a href="#projects" class="nav__link">Work</a>
-    <a href="#top" class="nav__logo" aria-label="Music Life — home">Music Life</a>
-    <button type="button" class="nav__link nav__link--right" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">About</button>
+    <a href="progetti.html" class="nav__link">Progetti</a>
+    <a href="index.html" class="nav__logo" aria-label="Music Life — home">Music Life</a>
+    <button type="button" class="nav__link nav__link--right" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">Menu</button>
   </div>
-
   <div class="nav__panel" id="nav-panel" inert>
     <div class="nav__panel-bg" id="nav-panel-bg" aria-hidden="true"></div>
     <div class="nav__panel-inner" id="nav-panel-inner">
-      <nav class="nav__grid" aria-label="Sezioni">
-        <a href="#about">About</a>
-        <a href="#entertainment">Entertainment</a>
-        <a href="#communications">Communications</a>
-        <a href="#projects">Our Projects</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <nav class="nav__grid" aria-label="Sezioni del sito"><a href="index.html">Home</a><a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a></nav>
       <div class="nav__info">
         <div>
-          <p class="nav__label">General inquiries</p>
-          <p>+00 000 000 0000</p>
-          <p>hello@musiclife.example</p>
-          <a href="#contact">Plan a call</a>
-        </div>
-        <div>
-          <p class="nav__label">Visit</p>
-          <p>Via Esempio 00<br>00000 Città<br>Italia</p>
-        </div>
-        <div class="nav__lang">
-          <button type="button" class="is-active">EN</button>
-          <span aria-hidden="true">|</span>
-          <button type="button">IT</button>
+          <p class="nav__label">Contatti</p>
+          <p>[Email aziendale]</p>
+          <p>[LinkedIn / Instagram]</p>
+          <a href="contatti.html">Parliamone</a>
         </div>
       </div>
     </div>
@@ -58,119 +38,154 @@
 </header>
 
 <main id="top">
+<section class="hero" id="hero">
+  <div class="hero__pin" id="hero-pin">
 
-  <section class="hero" id="hero">
-    <div class="hero__pin" id="hero-pin">
+    <div class="hero__light" id="hero-light" aria-hidden="true"></div>
 
-      <div class="hero__light" id="hero-light" aria-hidden="true"></div>
-
-      <div class="hero__frame" id="hero-frame">
-        <picture>
-          <source type="image/avif" srcset="assets/hero-640.avif 640w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w, assets/hero-2000.avif 2000w, assets/hero-2800.avif 2800w" sizes="100vw">
-          <source type="image/webp" srcset="assets/hero-640.webp 640w, assets/hero-960.webp 960w, assets/hero-1440.webp 1440w, assets/hero-2000.webp 2000w, assets/hero-2800.webp 2800w" sizes="100vw">
-          <img class="hero__frame-img" src="assets/hero-1440.jpg" srcset="assets/hero-640.jpg 640w, assets/hero-960.jpg 960w, assets/hero-1440.jpg 1440w, assets/hero-2000.jpg 2000w, assets/hero-2800.jpg 2800w" sizes="100vw" alt="" fetchpriority="high">
-        </picture>
-        <div class="hero__frame-overlay"></div>
-
-        <h1 class="hero__split hero__split--left" id="hero-split-left">People.<br>Music.</h1>
-        <p class="hero__split hero__split--right" id="hero-split-right">Experiences.<br>Around the world.</p>
-      </div>
-
-      <div class="hero__frame-border" id="hero-frame-border" aria-hidden="true"></div>
-
-      <div class="hero__brand" id="hero-brand">
-        <span class="dash"></span>
-        <span class="hero__brand-name">Music Life</span>
-        <span class="hero__brand-tag">Entertainment Company</span>
-      </div>
-
-      <p class="hero__rising" id="hero-rising">Direzione artistica, produzione di eventi e comunicazione per i migliori indirizzi internazionali.</p>
-
-      <a href="#about" class="btn btn--outline hero__cta" id="hero-cta">Discover <span aria-hidden="true">&rarr;</span></a>
+    <div class="hero__frame" id="hero-frame">
+      <picture><source type="image/avif" srcset="assets/hero-640.avif 640w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w, assets/hero-2000.avif 2000w, assets/hero-2800.avif 2800w" sizes="100vw"><source type="image/webp" srcset="assets/hero-640.webp 640w, assets/hero-960.webp 960w, assets/hero-1440.webp 1440w, assets/hero-2000.webp 2000w, assets/hero-2800.webp 2800w" sizes="100vw"><img class="hero__frame-img" src="assets/hero-1440.jpg" srcset="assets/hero-640.jpg 640w, assets/hero-960.jpg 960w, assets/hero-1440.jpg 1440w, assets/hero-2000.jpg 2000w, assets/hero-2800.jpg 2800w" sizes="100vw" alt="" fetchpriority="high"></picture>
+      <div class="hero__frame-overlay"></div>
+      <p class="hero__split hero__split--left" id="hero-split-left">People.<br>Music.</p>
+      <p class="hero__split hero__split--right" id="hero-split-right">Experiences.<br>Around the world.</p>
     </div>
-  </section>
 
-  <div class="light">
+    <div class="hero__frame-border" id="hero-frame-border" aria-hidden="true"></div>
 
-    <section class="intro" id="about">
-      <p class="intro__text" data-reveal-words>Music Life is an entertainment company shaping nights people remember: artistic direction, booking and production for the world's most-loved destinations, from <a href="projects/riccione.html">Riccione</a>, <a href="#projects">Saint Tropez</a>, <a href="#projects">Saint Barth</a> and <a href="#projects">Courchevel</a> to <a href="#projects">Ibiza</a>, <a href="#projects">Punta del Este</a>, <a href="#projects">Marbella</a> and <a href="#projects">New York</a>.</p>
-    </section>
+    <div class="hero__brand" id="hero-brand">
+      <span class="dash"></span>
+      <span class="hero__brand-name">Music Life</span>
+      <span class="hero__brand-tag">Entertainment Company</span>
+    </div>
 
-    <section class="jump" id="jump">
-      <h2 class="jump__label">Jump to</h2>
-      <div class="jump__grid">
-        <a href="#projects" class="card" id="entertainment">
-          <span class="card__thumb" style="--thumb-pos: 18% 12%"></span>
-          <span class="card__body">
-            <span class="card__title">01 Entertainment</span>
-            <span class="card__text">Artistic direction, booking, event organization and production.</span>
-            <span class="card__more">Explore <span aria-hidden="true">&rarr;</span></span>
-          </span>
-        </a>
-        <a href="#projects" class="card" id="communications">
-          <span class="card__thumb" style="--thumb-pos: 82% 34%"></span>
-          <span class="card__body">
-            <span class="card__title">02 Communications</span>
-            <span class="card__text">Strategy, branding, digital content and communication.</span>
-            <span class="card__more">Explore <span aria-hidden="true">&rarr;</span></span>
-          </span>
-        </a>
-        <a href="#contact" class="card" id="team">
-          <span class="card__thumb" style="--thumb-pos: 55% 78%"></span>
-          <span class="card__body">
-            <span class="card__title">Our team</span>
-            <span class="card__text">Small team, big nights.</span>
-            <span class="card__more">Meet team <span aria-hidden="true">&rarr;</span></span>
-          </span>
-        </a>
-        <a href="#contact" class="card">
-          <span class="card__thumb" style="--thumb-pos: 30% 55%"></span>
-          <span class="card__body">
-            <span class="card__title">Contact</span>
-            <span class="card__text">By mail, phone or book a call.</span>
-            <span class="card__more">Learn more <span aria-hidden="true">&rarr;</span></span>
-          </span>
-        </a>
+    <div class="hero__rising" id="hero-rising">
+      <h1 class="hero__headline">Diamo forma a ciò che la musica rende possibile.</h1>
+      <p class="hero__lede">Uniamo visione creativa, competenze artistiche, tecniche e manageriali per ideare, sviluppare e realizzare progetti nel mondo della musica e dell'entertainment.</p>
+      <p class="hero__tag">People. Music. Experiences. Around the world.</p>
+    </div>
+
+    <a href="chi-siamo.html" class="btn btn--outline hero__cta" id="hero-cta">Scopri Music Life <span aria-hidden="true">&rarr;</span></a>
+  </div>
+</section>
+
+<section class="sec sec--light" id="mondo">
+  <div class="sec__grid">
+    <p class="sec__label">01 / Il nostro mondo</p>
+    <div>
+      <h2 class="sec__title sec__title--wide" data-fade>Tutto parte dalla musica. Il resto lo costruiamo insieme.</h2>
+      <p class="statement" data-reveal-words>La musica è un linguaggio universale. Unisce persone, attraversa culture e trasforma i luoghi in esperienze.</p>
+      <div class="prose" data-fade>
+        <p class="lead">Noi conosciamo il mondo che le ruota intorno.</p>
+        <p>MUSIC LIFE nasce dall'incontro di professionisti che condividono un'unica visione: mettere competenze differenti al servizio di progetti capaci di connettere musica, persone e nuove opportunità.</p>
+        <p class="muted">Dall'idea alla realizzazione. Dalla progettazione alla comunicazione.</p>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="projects" id="projects">
-      <div class="projects__head">
-        <h2 class="projects__title">Our Projects</h2>
-        <p class="projects__sub">Same passion. Different destinations.</p>
+<section class="sec sec--dark" id="cosa-facciamo">
+  <div class="sec__grid">
+    <p class="sec__label">02 / Cosa facciamo</p>
+    <div>
+      <h2 class="sec__title" data-fade>Due anime. Un'unica visione.</h2>
+      <div class="pillars">
+        <article class="pillar" data-fade>
+          <div class="pillar__img" style="--pos: 20% 14%" aria-hidden="true"></div>
+          <h3 class="pillar__name">Entertainment</h3>
+          <p class="pillar__lead">Diamo vita alle esperienze.</p>
+          <p class="pillar__text">Direzione artistica, booking, progettazione degli spazi, ingegneria del suono, organizzazione e produzione.</p>
+          <p class="pillar__text">Uniamo visione creativa e competenze tecniche per sviluppare progetti di entertainment in ogni loro dimensione.</p>
+          <a href="entertainment.html" class="link-arrow">Esplora Entertainment <span aria-hidden="true">&rarr;</span></a>
+        </article>
+        <article class="pillar" data-fade>
+          <div class="pillar__img" style="--pos: 80% 40%" aria-hidden="true"></div>
+          <h3 class="pillar__name">Communications</h3>
+          <p class="pillar__lead">Diamo voce alle esperienze.</p>
+          <p class="pillar__text">Strategia, branding, direzione creativa, contenuti e comunicazione integrata.</p>
+          <p class="pillar__text">Costruiamo identità e narrazioni capaci di creare connessioni autentiche tra brand, progetti e persone.</p>
+          <a href="communications.html" class="link-arrow">Esplora Communications <span aria-hidden="true">&rarr;</span></a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--light" id="progetti">
+  <div class="sec__grid">
+    <p class="sec__label">03 / I nostri progetti</p>
+    <div>
+      <h2 class="sec__title" data-fade>Una visione. Luoghi diversi.</h2>
+      <div class="prose" data-fade>
+        <p>Ogni destinazione ha la propria identità. Ogni progetto, le proprie sfide. Ogni collaborazione, una nuova prospettiva.</p>
+        <p>Lavoriamo con realtà del mondo dell'entertainment, portando le nostre competenze in contesti e destinazioni differenti.</p>
       </div>
       <ul class="dest">
-        <li><a href="projects/riccione.html" class="dest__row" style="--thumb-pos: 12% 20%"><span class="dest__city">Riccione</span><span class="dest__country">Italy</span></a></li>
-        <li><a href="#contact" class="dest__row" style="--thumb-pos: 70% 15%"><span class="dest__city">Saint Tropez</span><span class="dest__country">France</span></a></li>
-        <li><a href="#contact" class="dest__row" style="--thumb-pos: 40% 60%"><span class="dest__city">Saint Barth</span><span class="dest__country">Caribbean</span></a></li>
-        <li><a href="#contact" class="dest__row" style="--thumb-pos: 88% 70%"><span class="dest__city">Courchevel</span><span class="dest__country">France</span></a></li>
-        <li><a href="#contact" class="dest__row" style="--thumb-pos: 25% 85%"><span class="dest__city">Ibiza</span><span class="dest__country">Spain</span></a></li>
-        <li><a href="#contact" class="dest__row" style="--thumb-pos: 60% 40%"><span class="dest__city">Punta del Este</span><span class="dest__country">Uruguay</span></a></li>
-        <li><a href="#contact" class="dest__row" style="--thumb-pos: 8% 55%"><span class="dest__city">Marbella</span><span class="dest__country">Spain</span></a></li>
-        <li><a href="#contact" class="dest__row" style="--thumb-pos: 95% 30%"><span class="dest__city">New York</span><span class="dest__country">USA</span></a></li>
+        <li data-fade><a href="progetti/space-riccione.html" class="dest__row" style="--thumb-pos: 58% 28%">
+          <span class="dest__city">SPACE RICCIONE</span><span class="dest__country">Riccione, Italia</span>
+        </a></li>
+        <li data-fade><a href="progetti/indie-beach.html" class="dest__row" style="--thumb-pos: 70% 20%">
+          <span class="dest__city">INDIE BEACH</span><span class="dest__country">Saint-Tropez, Francia</span>
+        </a></li>
+        <li data-fade><a href="progetti/cat-club.html" class="dest__row" style="--thumb-pos: 35% 60%">
+          <span class="dest__city">CAT CLUB</span><span class="dest__country">Courchevel, Francia</span>
+        </a></li>
       </ul>
-    </section>
-
+      <div data-fade><a href="progetti.html" class="btn btn--outline">Scopri tutti i progetti <span aria-hidden="true">&rarr;</span></a></div>
+    </div>
   </div>
+</section>
 
-  <section class="cta" id="contact">
-    <p class="cta__kicker">Ready when you are</p>
-    <p class="cta__title" data-reveal-words>Let's create the next experience together.</p>
-    <a href="mailto:hello@musiclife.example" class="btn btn--outline">Get in touch <span aria-hidden="true">&rarr;</span></a>
-  </section>
+<section class="sec sec--light" id="persone">
+  <div class="sec__grid">
+    <p class="sec__label">04 / Le persone</p>
+    <div>
+      <h2 class="sec__title sec__title--wide" data-fade>Le idee contano. Le persone fanno la differenza.</h2>
+      <div class="prose" data-fade>
+        <p class="lead">Direttori artistici, architetti, ingegneri del suono, business manager, specialisti della produzione, della logistica e della comunicazione.</p>
+        <p>Professionalità diverse, esperienze complementari e una passione comune per il mondo dell'entertainment.</p>
+        <p>Perché ogni grande progetto nasce dalle persone che lo immaginano. E prende vita grazie a quelle che sanno realizzarlo.</p>
+      </div>
+      <div data-fade><a href="chi-siamo.html" class="btn btn--outline">Conosci Music Life <span aria-hidden="true">&rarr;</span></a></div>
+    </div>
+  </div>
+</section>
 
+<section class="cta">
+  <p class="cta__kicker" data-fade>05 / Contatti</p>
+  <h2 class="cta__title" data-reveal-words>Le prossime esperienze iniziano da qui.</h2>
+  <p class="cta__text" data-fade>Hai un'idea, un progetto o una nuova sfida da condividere?</p>
+  <div data-fade><a href="contatti.html" class="btn btn--outline">Costruiamo qualcosa insieme <span aria-hidden="true">&rarr;</span></a></div>
+</section>
 </main>
 
 <footer class="site-footer">
-  <p>&copy; <span id="year"></span> Music Life Entertainment Company</p>
+  <div class="footer__grid">
+    <div>
+      <p class="footer__brand">Music Life</p>
+      <p class="footer__company">Entertainment Company</p>
+      <p class="footer__tagline">People. Music. Experiences. Around the world.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <p class="footer__title">Sezioni</p>
+      <a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <div class="footer__contact">
+      <p class="footer__title">Contatti</p>
+      <p>[Email]</p>
+      <p>[Social]</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>&copy; MUSIC LIFE — Tutti i diritti riservati.</p>
+    <nav class="footer__legal" aria-label="Informazioni legali"><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="preferenze-cookie.html">Preferenze cookie</a><a href="note-legali.html">Note legali</a><a href="termini-e-condizioni.html">Termini e condizioni</a></nav>
+  </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
 <script src="js/motion-config.js"></script>
 <script src="js/motion.js"></script>
 <script src="js/nav.js"></script>
-<script src="js/main.js"></script>
 </body>
 </html>
