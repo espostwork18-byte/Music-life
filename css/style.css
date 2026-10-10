@@ -737,6 +737,8 @@ h1, h2, h3, h4, p { margin: 0; }
   pointer-events: none;
 }
 
+.dest__row--blank { pointer-events: none; cursor: default; }
+.dest__row--blank .dest__city { color: var(--muted); }
 .more { margin-top: var(--space-5); border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line); }
 .more summary {
   display: flex;

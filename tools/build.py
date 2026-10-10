@@ -62,6 +62,19 @@ VENUES = [
         "crops": [1400, 3000, 600],
     },
     {
+        "slug": "super-island-festival", "name": "Super Island Festival", "short": "Super Island Festival",
+        "place": "Saint Barth, Caraibi",
+        "web": None, "ig": None,
+        "pos": "50% 45%",
+        "intro": [
+            "Saint Barth è una delle destinazioni più esclusive dei Caraibi.",
+            "Super Island Festival è una delle realtà con cui MUSIC LIFE collabora, in un contesto in cui musica, isola e stile di vita si incontrano.",
+        ],
+        "desc": "Festival musicale a Saint Barth: musica, giornate in spiaggia e serate sull'isola.",
+        "card": "",
+        "crops": [1200, 2400, 3300],
+    },
+    {
         "slug": "socialista-ibiza", "name": "Socialista Ibiza", "short": "Socialista",
         "place": "Ibiza, Spagna",
         "web": ("https://www.socialistalounge.com/location-ibiza", "socialistalounge.com"),
@@ -105,6 +118,8 @@ VENUES = [
     },
 ]
 V = {v["slug"]: v for v in VENUES}
+# New York: voce lasciata in bianco (nessuna scheda) finché non ci sono i dati
+BLANK_NY = {"blank": True, "name": "New York", "place": "USA"}
 
 # ---------------------------------------------------------------------------
 # Componenti
@@ -331,6 +346,11 @@ def tiles(items):
 def dest_list(items, prefix_href, with_desc=True, go="Scopri il progetto"):
     out = []
     for v in items:
+        if v.get("blank"):
+            out.append("""<li data-fade><div class="dest__row dest__row--blank">
+          <span class="dest__city">%s</span><span class="dest__country">%s &middot; In arrivo</span>
+        </div></li>""" % (v["name"].upper(), v["place"]))
+            continue
         desc = '<p class="dest__desc">%s</p>' % v["card"] if (with_desc and v.get("card")) else ""
         go_html = '<span class="dest__go">%s &rarr;</span>' % go if with_desc else ""
         out.append("""<li data-fade><a href="%(h)sprogetti/%(slug)s.html" class="dest__row" style="--thumb-pos: %(pos)s">
@@ -425,7 +445,8 @@ def page_home():
   </div>
 </section>"""
 
-    feat = [V["space-riccione"], V["indie-beach"], V["cat-club"]]
+    feat = [V["space-riccione"], V["indie-beach"], V["super-island-festival"], V["cat-club"],
+            V["socialista-ibiza"], V["cipriani-resort-punta-del-este"], V["cipriani-marbella"], BLANK_NY]
     s3 = """<section class="sec sec--light" id="progetti">
   <div class="sec__grid">
     <p class="sec__label">03 / I nostri progetti</p>
@@ -634,15 +655,11 @@ def page_progetti():
     sel = [V["space-riccione"], V["indie-beach"], V["cat-club"]]
     s1 = section("light", "01 / Collaborazioni selezionate", "", dest_list(sel, ""), "collaborazioni")
 
-    more = [V["socialista-ibiza"], V["cipriani-resort-punta-del-este"], V["cipriani-marbella"]]
-    # NOTA: sezione espandibile con le ulteriori venue del gruppo Cipriani; nomi e materiali da confermare prima della pubblicazione
-    det = """<details class="more" data-fade>
-        <summary><span>Altre destinazioni</span><span class="more__icon" aria-hidden="true"></span></summary>
-        %s
-      </details>""" % dest_list(more, "", with_desc=False)
+    more = [V["super-island-festival"], V["socialista-ibiza"], V["cipriani-resort-punta-del-este"], V["cipriani-marbella"], BLANK_NY]
+    # NOTA: nomi e materiali delle ulteriori venue (anche gruppo Cipriani) da confermare prima della pubblicazione
     s2 = section("dark", "02 / Destinazioni", "La musica non conosce confini.",
                  prose(["MUSIC LIFE costruisce il proprio percorso attraverso collaborazioni con realtà e operatori dell'entertainment in differenti destinazioni."], False) +
-                 "\n      " + det, "destinazioni")
+                 "\n      " + dest_list(more, "", with_desc=False), "destinazioni")
     s3 = cta("Il prossimo progetto potrebbe essere il tuo.", "", ("contatti.html", "Lavoriamo insieme"))
     write("progetti.html", document(p, "Progetti — Music Life",
                                     "Space Riccione, Indie Beach, Cat Club e le altre destinazioni con cui MUSIC LIFE collabora.",
@@ -657,7 +674,10 @@ def page_venue(v):
     hero = page_hero(p, esc(v["short"]), v["intro"][0],
                      crumb='<a href="%sprogetti.html">&larr; Progetti</a><span>%s</span>' % (p, v["place"]), pos=v["pos"], name_style=True)
 
-    links = """<ul class="venue-links" data-fade>
+    if not v["web"]:
+        links = '<p class="todo" data-fade>Sito web e Instagram ufficiali: da inserire.</p>'
+    else:
+      links = """<ul class="venue-links" data-fade>
         <li><a href="%s" target="_blank" rel="noopener noreferrer"><span class="venue-links__label">Sito web</span><span class="venue-links__value">%s <span aria-hidden="true">&nearr;</span></span></a></li>
         <li><a href="%s" target="_blank" rel="noopener noreferrer"><span class="venue-links__label">Instagram</span><span class="venue-links__value">%s <span aria-hidden="true">&nearr;</span></span></a></li>
       </ul>""" % (v["web"][0], v["web"][1], v["ig"][0], v["ig"][1])
