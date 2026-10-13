@@ -28,12 +28,10 @@
 
   function buildHero() {
     var h = cfg.hero;
-    var visuals = gsap.utils.toArray('.hero__visual');
     var words = gsap.utils.toArray('.hero__word');
 
     gsap.set(words, { yPercent: 112 });
     // la foto di sfondo resta ferma: si muovono solo le parole
-    gsap.set(visuals.slice(1), { display: 'none' });
 
     var tl = gsap.timeline({
       scrollTrigger: {

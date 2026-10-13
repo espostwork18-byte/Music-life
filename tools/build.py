@@ -139,13 +139,13 @@ def esc(t):
 # ---------------------------------------------------------------------------
 # Componenti comuni
 # ---------------------------------------------------------------------------
-def picture(prefix, cls, alt="", extra=""):
+def picture(prefix, cls, alt="", extra="", base="assets/hero", widths=(640, 960, 1440, 2000, 2800), sizes="100vw", fallback=1440):
     srcs = ""
     for ext, typ in (("avif", "image/avif"), ("webp", "image/webp")):
-        ss = ", ".join("%sassets/hero-%d.%s %dw" % (prefix, w, ext, w) for w in (640, 960, 1440, 2000, 2800))
-        srcs += '<source type="%s" srcset="%s" sizes="100vw">' % (typ, ss)
-    jpg = ", ".join("%sassets/hero-%d.jpg %dw" % (prefix, w, w) for w in (640, 960, 1440, 2000, 2800))
-    return '<picture>%s<img class="%s" src="%sassets/hero-1440.jpg" srcset="%s" sizes="100vw" alt="%s"%s></picture>' % (srcs, cls, prefix, jpg, alt, extra)
+        ss = ", ".join("%s%s-%d.%s %dw" % (prefix, base, w, ext, w) for w in widths)
+        srcs += '<source type="%s" srcset="%s" sizes="%s">' % (typ, ss, sizes)
+    jpg = ", ".join("%s%s-%d.jpg %dw" % (prefix, base, w, w) for w in widths)
+    return '<picture>%s<img class="%s" src="%s%s-%d.jpg" srcset="%s" sizes="%s" alt="%s"%s></picture>' % (srcs, cls, prefix, base, fallback, jpg, sizes, alt, extra)
 
 
 NAV_LINKS = [
@@ -269,9 +269,10 @@ def btn(href, text):
     return '<a href="%s" class="btn btn--outline">%s <span aria-hidden="true">&rarr;</span></a>' % (href, text)
 
 
-def art(pos, zoom="260%", ratio=""):
-    """Visual artistico (ritaglio della fotografia MUSIC LIFE)."""
-    return '<div class="art%s" style="--pos: %s; --zoom: %s" aria-hidden="true"></div>' % ((" " + ratio) if ratio else "", pos, zoom)
+def art(prefix, base, alt, ratio="", pos="50% 50%", widths=(960, 1440, 2000), sizes="(max-width: 900px) 100vw, 50vw"):
+    """Visual fotografico: ogni blocco ha la sua foto (assets/<base>-<larghezza>.<formato>)."""
+    extra = ' style="object-position: %s" loading="lazy" decoding="async"' % pos
+    return '<div class="art%s">%s</div>' % ((" " + ratio) if ratio else "", picture(prefix, "art__img", alt, extra, base, widths, sizes, widths[1]))
 
 
 def cta(title, button, big=False):
@@ -406,9 +407,8 @@ def write(path, html):
 # ---------------------------------------------------------------------------
 def page_home():
     p = ""
-    ys = ["10%", "36%", "62%", "90%"]
-    visuals = "".join('<div class="hero__visual">%s</div>' % picture(p, "hero__visual-img", "", ' style="--y: %s"%s' % (y, ' fetchpriority="high"' if i == 0 else ""))
-                      for i, y in enumerate(ys))
+    # una sola fotografia di sfondo, ferma: --y regola il ritaglio verticale
+    visuals = '<div class="hero__visual">%s</div>' % picture(p, "hero__visual-img", "", ' style="--y: 40%" fetchpriority="high"')
     words = "".join('<span class="hero__line"><span class="hero__word">%s</span></span>' % w
                     for w in ("People.", "Music.", "Experiences.", "Around the world."))
     hero = """<section class="hero" id="hero">
@@ -426,7 +426,7 @@ def page_home():
     <div data-fade>%s</div>
   </div>
   <div class="about__img" data-fade>%s</div>
-</div>""" % (h2("La musica è il nostro mondo."), btn("chi-siamo.html", "Scopri chi siamo"), art("22% 12%", "250%", "art--portrait")), "chi-siamo")
+</div>""" % (h2("La musica è il nostro mondo."), btn("chi-siamo.html", "Scopri chi siamo"), art(p, "assets/hero", "Una figura di spalle alza il pugno tra il fumo e le luci del palco.", "art--portrait", "50% 42%", (640, 960, 1440, 2000), "(max-width: 900px) 100vw, 40vw")), "chi-siamo")
 
     divisions = """<div class="divisions">
   <article class="division" data-fade>
@@ -443,8 +443,8 @@ def page_home():
     <p class="division__text">Strategia, branding, direzione creativa e comunicazione per brand, festival e venue.</p>
     <div>%(b2)s</div>
   </article>
-</div>""" % {"a1": art("30% 70%", "280%", "art--landscape"), "b1": btn("entertainment.html", "Scopri"),
-            "a2": art("78% 38%", "280%", "art--landscape"), "b2": btn("communications.html", "Scopri")}
+</div>""" % {"a1": art(p, "assets/divisions/entertainment", "Le mani di un DJ sulla console, in bianco e nero.", "art--landscape"), "b1": btn("entertainment.html", "Scopri"),
+            "a2": art(p, "assets/divisions/communications", "Un tecnico seduto alla regia, tra rack e cavi, davanti a un'arena.", "art--landscape"), "b2": btn("communications.html", "Scopri")}
     s3 = sec("dark", h2("Dall'idea all'esperienza.") + divisions, "divisioni")
 
     s4 = sec("light", h2("Una passione. Destinazioni diverse.") + "\n" + carousel_html(p) +

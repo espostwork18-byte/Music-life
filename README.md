@@ -14,5 +14,5 @@ Le pagine HTML sono **generate**: modifica `tools/build.py` (testi, menu, footer
     python tools/build.py
 
 ## Sostituire le immagini
-- Foto hero: sovrascrivi `assets/hero.jpg` e lancia `assets/generate-responsive-images.sh`
+- Foto hero e foto delle card Entertainment / Communications: sovrascrivi l'originale in `assets/source/` (`hero.jpg`, `entertainment.jpg`, `communications.jpg`) e lancia `python tools/make_images.py`
 - Foto delle venue: sovrascrivi `assets/projects/<slug>-1.jpg`, `-2.jpg`, `-3.jpg` (oggi sono segnaposto)

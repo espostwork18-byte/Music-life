@@ -1,12 +1,19 @@
 # Crediti immagini
 
-## hero.jpg (placeholder — da sostituire)
+Fotografie da Unsplash, Unsplash License (uso gratuito anche commerciale, attribuzione non richiesta): https://unsplash.com/license
+Gli originali a 3000 px sono in `assets/source/`; le varianti responsive si rigenerano con `python tools/make_images.py`.
 
-> Nota: questa immagine è un placeholder scelto per avviare l'anteprima. Verrà sostituita con un'immagine a tema più musicale/entertainment in una fase successiva.
+## Hero della Home e blocco "La musica è il nostro mondo" (`assets/hero-*`)
+- **Autore**: Matt Benson
+- **Pagina originale**: https://unsplash.com/photos/ZfcfV7fhLvE
+- **Modifiche**: nessuna, solo ridimensionamento
 
-- **Autore**: YEŞ
-- **Fonte**: Pexels
-- **Pagina originale**: https://www.pexels.com/photo/a-statue-in-a-cloak-8593505/
-- **Licenza**: Pexels License (uso gratuito commerciale e personale, non richiede attribuzione) — https://www.pexels.com/license/
-- **Modifiche**: specchiata orizzontalmente (hflip) per spostare l'area scura dal lato destro al lato sinistro, dove è posizionato il testo della hero
-- **Dimensioni originali**: 3512x6240px
+## Card Entertainment (`assets/divisions/entertainment-*`)
+- **Autore**: Nadia Sitova
+- **Pagina originale**: https://unsplash.com/photos/Tlwrp8ThUg8
+- **Modifiche**: ritaglio orizzontale 4:3 sulla console
+
+## Card Communications (`assets/divisions/communications-*`)
+- **Autore**: Jessie McCall
+- **Pagina originale**: https://unsplash.com/photos/2vfKU3bm8xM
+- **Modifiche**: nessuna, solo ridimensionamento
