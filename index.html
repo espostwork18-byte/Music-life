@@ -10,6 +10,8 @@
 <script>
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('reduced-motion');
+  } else {
+    document.documentElement.classList.add('js-reveal');
   }
 </script>
 </head>
@@ -75,21 +77,37 @@
 </div>
 </section>
 
-<section class="sec sec--light" id="progetti">
+<section class="sec sec--light sec--carousel" id="progetti">
 <h2 class="display" data-split>Una passione. Destinazioni diverse.</h2>
-<div class="pgrid">
-      <a href="progetti/space-riccione.html" class="pcard pcard--a" data-fade>
-        <div class="pcard__img"><img src="assets/projects/space-riccione/hero.jpg" alt="Space Riccione" loading="lazy" decoding="async"></div>
-        <div class="pcard__meta"><h3 class="pcard__name">SPACE RICCIONE</h3><p class="pcard__place">Riccione, Italia</p></div>
+<div class="carousel" id="carousel" tabindex="0" aria-label="I nostri progetti">
+      <a href="progetti/space-riccione.html" class="ccard">
+        <span class="ccard__media"><img src="assets/projects/space-riccione/hero.jpg" alt="Space Riccione" width="2000" height="1498" loading="lazy" decoding="async"></span>
+        <span class="ccard__meta"><span class="ccard__name">SPACE RICCIONE</span><span class="ccard__place">Riccione, Italia</span></span>
       </a>
-      <a href="progetti/indie-beach.html" class="pcard pcard--b" data-fade>
-        <div class="pcard__img"><img src="assets/projects/indie-beach/hero.jpg" alt="Indie Beach" loading="lazy" decoding="async"></div>
-        <div class="pcard__meta"><h3 class="pcard__name">INDIE BEACH</h3><p class="pcard__place">Saint-Tropez, Francia</p></div>
+      <a href="progetti/indie-beach.html" class="ccard">
+        <span class="ccard__media"><img src="assets/projects/indie-beach/02.jpg" alt="Indie Beach" width="906" height="1073" loading="lazy" decoding="async"></span>
+        <span class="ccard__meta"><span class="ccard__name">INDIE BEACH</span><span class="ccard__place">Saint-Tropez / Ramatuelle, Francia</span></span>
       </a>
-      <a href="progetti/cat-club.html" class="pcard pcard--c" data-fade>
-        <div class="pcard__img"><img src="assets/projects/cat-club/hero.jpg" alt="Cat Club" loading="lazy" decoding="async"></div>
-        <div class="pcard__meta"><h3 class="pcard__name">CAT CLUB</h3><p class="pcard__place">Courchevel, Francia</p></div>
+      <a href="progetti/cat-club.html" class="ccard">
+        <span class="ccard__media"><img src="assets/projects/cat-club/02.jpg" alt="Cat Club" width="918" height="1088" loading="lazy" decoding="async"></span>
+        <span class="ccard__meta"><span class="ccard__name">CAT CLUB</span><span class="ccard__place">Courchevel, Francia</span></span>
       </a>
+      <a href="progetti/cipriani-resort-casino.html" class="ccard">
+        <span class="ccard__media"><img src="assets/projects/cipriani-resort-casino/02.jpg" alt="Cipriani Resort &amp; Casino" width="1100" height="1379" loading="lazy" decoding="async"></span>
+        <span class="ccard__meta"><span class="ccard__name">CIPRIANI RESORT &AMP; CASINO</span><span class="ccard__place">Punta del Este, Uruguay</span></span>
+      </a>
+      <a href="progetti/socialista-ibiza.html" class="ccard">
+        <span class="ccard__media"><img src="assets/projects/socialista-ibiza/hero.jpg" alt="Socialista Ibiza" width="1500" height="1000" loading="lazy" decoding="async"></span>
+        <span class="ccard__meta"><span class="ccard__name">SOCIALISTA IBIZA</span><span class="ccard__place">Ibiza, Spagna</span></span>
+      </a>
+      <a href="progetti/cipriani-marbella.html" class="ccard">
+        <span class="ccard__media"><img src="assets/projects/cipriani-marbella/hero.jpg" alt="Cipriani Marbella" width="1200" height="1800" loading="lazy" decoding="async"></span>
+        <span class="ccard__meta"><span class="ccard__name">CIPRIANI MARBELLA</span><span class="ccard__place">Marbella, Spagna</span></span>
+      </a>
+    </div>
+    <div class="carousel__controls">
+      <button type="button" class="carousel__btn" data-dir="-1" aria-controls="carousel" aria-label="Progetti precedenti">&larr;</button>
+      <button type="button" class="carousel__btn" data-dir="1" aria-controls="carousel" aria-label="Progetti successivi">&rarr;</button>
     </div>
 <div class="sec__cta" data-fade><a href="progetti.html" class="btn btn--outline">Tutti i progetti <span aria-hidden="true">&rarr;</span></a></div>
 </section>

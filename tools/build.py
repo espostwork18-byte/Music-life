@@ -22,44 +22,114 @@ CLAIM = "People. Music. Experiences. Around the world."
 VENUES = [
     {
         "slug": "space-riccione", "name": "Space Riccione", "place": "Riccione, Italia",
-        "intro": "Una collaborazione nel mondo della musica e del clubbing sulla Riviera Romagnola.",
-        "web": ("https://spacericcione.com/", "spacericcione.com"),
-        "ig": ("https://www.instagram.com/spacericcione/", "@spacericcione"),
+        "bio": "Dall'eredità del leggendario Space Ibiza nasce a Riccione una nuova destinazione della club culture internazionale. Un progetto che unisce grandi artisti, produzioni immersive e un'esperienza musicale di respiro internazionale.",
+        "links": [("Sito ufficiale", "https://spacericcione.com/"),
+                  ("Instagram", "https://www.instagram.com/spacericcione/"),
+                  ("Altri social", "https://www.facebook.com/spacericcione/")],
     },
     {
-        "slug": "indie-beach", "name": "Indie Beach", "place": "Saint-Tropez, Francia",
-        "intro": "Una collaborazione che incontra musica, ospitalità e intrattenimento nel contesto della Costa Azzurra.",
-        "web": ("https://www.indie-beach.fr/en/", "indie-beach.fr"),
-        "ig": ("https://www.instagram.com/indiebeachpampelonne/", "@indiebeachpampelonne"),
+        "slug": "indie-beach", "name": "Indie Beach", "place": "Saint-Tropez / Ramatuelle, Francia",
+        "bio": "Sulla spiaggia di Pampelonne, Indie Beach interpreta lo spirito mediterraneo attraverso musica, hospitality e lifestyle. Un beach club dove atmosfere rilassate e DJ set accompagnano le giornate fino al tramonto.",
+        "links": [("Sito ufficiale", "https://www.indie-beach.fr/"),
+                  ("Instagram", "https://www.instagram.com/indiebeachpampelonne/")],
     },
     {
         "slug": "cat-club", "name": "Cat Club", "place": "Courchevel, Francia",
-        "intro": "Una collaborazione nel panorama dell'entertainment e della nightlife alpina.",
-        "web": ("https://www.cat-club.fr/en/", "cat-club.fr"),
-        "ig": ("https://www.instagram.com/catclub_courchevel/", "@catclub_courchevel"),
+        "bio": "Nel cuore di Courchevel, Cat Club propone un'esperienza di nightlife che unisce design, mixology e musica elettronica. Un ambiente intimo e sofisticato, dove la programmazione musicale accompagna la notte tra disco e house.",
+        "links": [("Sito ufficiale", "https://www.cat-club.fr/"),
+                  ("Instagram", "https://www.instagram.com/catclub_courchevel/")],
+    },
+    {
+        "slug": "cipriani-resort-casino", "name": "Cipriani Resort & Casino", "place": "Punta del Este, Uruguay",
+        "bio": "Affacciato sull'Atlantico, Cipriani Resort & Casino reinterpreta l'iconico Hotel San Rafael attraverso un progetto che integra ospitalità, residenze, gastronomia ed entertainment. Un nuovo riferimento per l'esperienza Cipriani in Sud America.",
+        "links": [("Sito ufficiale", "https://ciprianiresorts.com/punta-del-este/"),
+                  ("Instagram", "https://www.instagram.com/ciprianipunta/"),
+                  ("LinkedIn", "https://www.linkedin.com/company/cipriani-punta"),
+                  ("Altri social", "https://linktr.ee/ciprianipunta")],
+    },
+    {
+        "slug": "socialista-ibiza", "name": "Socialista Ibiza", "place": "Ibiza, Spagna",
+        "bio": "Nel cuore di Marina Botafoch, Socialista Ibiza by Cipriani propone una nuova interpretazione della nightlife dell'isola. Un lounge club esclusivo in cui musica, cocktail e atmosfere sofisticate danno vita a un'esperienza notturna intima e contemporanea.",
+        "links": [("Sito ufficiale", "https://www.socialistalounge.com/location-ibiza"),
+                  ("Instagram", "https://www.instagram.com/socialistaibiza/")],
+    },
+    {
+        "slug": "cipriani-marbella", "name": "Cipriani Marbella", "place": "Marbella, Spagna", "hero_pos": "50% 72%",
+        "bio": "Nel contesto esclusivo di Marbella, Cipriani porta la propria tradizione italiana in un ambiente che unisce eleganza, gastronomia e convivialità. Un'identità senza tempo, espressione dello stile e dell'ospitalità del gruppo.",
+        "links": [("Sito ufficiale", "https://www.cipriani.com/cipriani-marbella"),
+                  ("Instagram", "https://www.instagram.com/ciprianimarbella/")],
     },
 ]
 V = {v["slug"]: v for v in VENUES}
 
-# Bozze NON pubblicate: da spostare in VENUES solo quando i nomi ufficiali sono confermati.
-# (Saint Barth: Super Island Festival · Ibiza: Socialista Ibiza · Punta del Este: Cipriani Resort ·
-#  Marbella: Cipriani Marbella · New York: da definire)
-DRAFT_VENUES = ["super-island-festival", "socialista-ibiza", "cipriani-resort-punta-del-este", "cipriani-marbella"]
-
 IMG_EXT = (".jpg", ".jpeg", ".png", ".webp")
 
 
+VIDEO_EXT = (".mp4", ".webm")
+
+
 def venue_images(slug):
-    """Foto di una venue: assets/projects/<slug>/. 'hero.*' = immagine di apertura,
-    le altre (ordine alfabetico: 01.jpg, 02.jpg, ...) = galleria."""
+    """Media di una venue in assets/projects/<slug>/. 'hero.*' = apertura, le altre foto
+    (ordine alfabetico: 01.jpg, 02.jpg, ...) = galleria, mp4/webm = video della galleria."""
     folder = os.path.join(ROOT, "assets", "projects", slug)
     os.makedirs(folder, exist_ok=True)
     keep = os.path.join(folder, ".gitkeep")
     if not os.path.exists(keep):
         open(keep, "w").close()
-    files = sorted(f for f in os.listdir(folder) if f.lower().endswith(IMG_EXT))
-    hero = next((f for f in files if os.path.splitext(f)[0].lower() == "hero"), None)
+    files = sorted(f for f in os.listdir(folder) if f.lower().endswith(IMG_EXT + VIDEO_EXT))
+    hero = next((f for f in files if os.path.splitext(f)[0].lower() == "hero" and f.lower().endswith(IMG_EXT)), None)
     return hero, [f for f in files if f != hero]
+
+
+def image_size(path):
+    try:
+        from PIL import Image
+        with Image.open(path) as im:
+            return im.size
+    except Exception:
+        pass
+    try:  # fallback senza dipendenze: JPEG / PNG
+        with open(path, "rb") as f:
+            d = f.read()
+        if d[:8] == b"\x89PNG\r\n\x1a\n":
+            return int.from_bytes(d[16:20], "big"), int.from_bytes(d[20:24], "big")
+        i = 2
+        while i < len(d):
+            if d[i] != 0xFF:
+                i += 1
+                continue
+            m = d[i + 1]
+            if 0xC0 <= m <= 0xCF and m not in (0xC4, 0xC8, 0xCC):
+                return int.from_bytes(d[i + 7:i + 9], "big"), int.from_bytes(d[i + 5:i + 7], "big")
+            i += 2 + int.from_bytes(d[i + 2:i + 4], "big")
+    except Exception:
+        pass
+    return (4, 3)
+
+
+def media_list(slug):
+    """[(file, w, h, kind)] — hero per primo, poi la galleria."""
+    hero, rest = venue_images(slug)
+    out = []
+    for f in ([hero] if hero else []) + rest:
+        if f.lower().endswith(VIDEO_EXT):
+            out.append((f, 16, 9, "video"))
+        else:
+            w, h = image_size(os.path.join(ROOT, "assets", "projects", slug, f))
+            out.append((f, w, h, "img"))
+    return out
+
+
+def pick(slug, want):
+    """Immagine migliore per una cella 'portrait' o 'landscape' (None se non ci sono foto)."""
+    imgs = [m for m in media_list(slug) if m[3] == "img"]
+    if not imgs:
+        return None
+    for m in imgs:
+        is_portrait = m[2] > m[1] * 1.05
+        if (want == "portrait") == is_portrait:
+            return m
+    return imgs[0]
 
 
 def esc(t):
@@ -158,6 +228,8 @@ def document(p, title, desc, body, scripts="", body_class=""):
 <script>
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('reduced-motion');
+  } else {
+    document.documentElement.classList.add('js-reveal');
   }
 </script>
 </head>
@@ -208,7 +280,7 @@ def cta(title, button, big=False):
 </section>""" % (" cta--big" if big else "", title, btn(*button))
 
 
-def page_hero(p, title, text=None, headline=None, giant=False, crumb="", img=None):
+def page_hero(p, title, text=None, headline=None, giant=False, crumb="", img=None, pos=None):
     text = text or []
     if isinstance(text, str):
         text = [text]
@@ -217,7 +289,7 @@ def page_hero(p, title, text=None, headline=None, giant=False, crumb="", img=Non
     hl = '<p class="page-hero__headline" data-in>%s</p>' % headline if headline else ""
     tx = "".join('<p class="page-hero__text" data-in>%s</p>' % t for t in text)
     if img:
-        media = '<img class="page-hero__img" src="%s" alt="" fetchpriority="high">\n  <div class="page-hero__overlay"></div>' % img
+        media = '<img class="page-hero__img" src="%s" alt="" fetchpriority="high"%s>\n  <div class="page-hero__overlay"></div>' % (img, (' style="object-position: %s"' % pos) if pos else "")
         cls = "page-hero"
     else:
         media = ""
@@ -243,18 +315,81 @@ def rows(items):
     return '<div class="rows">\n      %s\n      </div>' % "\n      ".join(out)
 
 
-def pcard(v, p, variant=""):
-    hero, gal = venue_images(v["slug"])
-    photo = hero or (gal[0] if gal else None)
-    if photo:
-        media = '<div class="pcard__img"><img src="%sassets/projects/%s/%s" alt="%s" loading="lazy" decoding="async"></div>' % (p, v["slug"], photo, esc(v["name"]))
-    else:
-        media = '<div class="pcard__img pcard__img--empty"><span>Foto in arrivo</span></div>'
-    return """<a href="%(p)sprogetti/%(slug)s.html" class="pcard%(var)s" data-fade>
-        %(media)s
-        <div class="pcard__meta"><h3 class="pcard__name">%(name)s</h3><p class="pcard__place">%(place)s</p></div>
-      </a>""" % {"p": p, "slug": v["slug"], "var": (" " + variant) if variant else "", "media": media,
-                 "name": v["name"].upper(), "place": v["place"]}
+def img_tag(slug, m, p, alt, lazy=True, extra=""):
+    f, w, h, _ = m
+    return '<img src="%sassets/projects/%s/%s" alt="%s" width="%d" height="%d"%s%s>' % (
+        p, slug, f, esc(alt), w, h, ' loading="lazy" decoding="async"' if lazy else "", extra)
+
+
+def empty_media(label="Foto in arrivo"):
+    return '<span class="empty"><span>%s</span></span>' % label
+
+
+def pf_card(v, p, cell, want):
+    m = pick(v["slug"], want)
+    media = img_tag(v["slug"], m, p, v["name"]) if m else empty_media()
+    return """<a href="%(p)sprogetti/%(slug)s.html" class="pf pf--%(cell)s" data-fade>
+        <span class="pf__media rv">%(media)s
+          <span class="pf__veil"><span class="pf__name">%(name)s</span><span class="pf__place">%(place)s</span></span>
+        </span>
+        <span class="pf__text"><span class="pf__bio">%(bio)s</span><span class="pf__more">Scopri il progetto <span aria-hidden="true">&rarr;</span></span></span>
+      </a>""" % {"p": p, "slug": v["slug"], "cell": cell, "media": media, "name": esc(v["name"]).upper(),
+                 "place": v["place"], "bio": v["bio"]}
+
+
+PF_CELLS = [("a", "landscape"), ("b", "landscape"), ("c", "portrait"), ("d", "landscape"), ("e", "landscape"), ("f", "portrait")]
+
+
+def portfolio_html(p):
+    cards = "\n      ".join(pf_card(v, p, *PF_CELLS[i % len(PF_CELLS)]) for i, v in enumerate(VENUES))
+    return '<div class="portfolio">\n      %s\n    </div>' % cards
+
+
+def carousel_html(p):
+    cards = []
+    for v in VENUES:
+        m = pick(v["slug"], "portrait")
+        media = img_tag(v["slug"], m, p, v["name"]) if m else empty_media()
+        cards.append("""<a href="%(p)sprogetti/%(slug)s.html" class="ccard">
+        <span class="ccard__media">%(media)s</span>
+        <span class="ccard__meta"><span class="ccard__name">%(name)s</span><span class="ccard__place">%(place)s</span></span>
+      </a>""" % {"p": p, "slug": v["slug"], "media": media, "name": esc(v["name"]).upper(), "place": v["place"]})
+    return """<div class="carousel" id="carousel" tabindex="0" aria-label="I nostri progetti">
+      %s
+    </div>
+    <div class="carousel__controls">
+      <button type="button" class="carousel__btn" data-dir="-1" aria-controls="carousel" aria-label="Progetti precedenti">&larr;</button>
+      <button type="button" class="carousel__btn" data-dir="1" aria-controls="carousel" aria-label="Progetti successivi">&rarr;</button>
+    </div>""" % "\n      ".join(cards)
+
+
+def gallery_html(slug, name, p):
+    """Galleria a ritmo editoriale: full-bleed, coppie asimmetriche, singole decentrate."""
+    all_media = media_list(slug)
+    items = all_media[1:] if venue_images(slug)[0] else all_media
+    if not items:
+        slot = '<figure class="gal__item gal__item--%s gallery__slot" data-fade><span>Foto in arrivo</span></figure>'
+        return '<div class="gal">%s</div>' % "".join(slot % k for k in ("bleed", "l", "r"))
+    pattern = ["bleed", "l", "r", "single", "bleed", "r", "l", "single"]
+    figs = []
+    for i, (f, w, h, kind) in enumerate(items):
+        pos = pattern[i % len(pattern)]
+        portrait = h > w * 1.05
+        if kind == "video":
+            inner = '<video src="%sassets/projects/%s/%s" controls playsinline preload="none"></video>' % (p, slug, f)
+        else:
+            inner = img_tag(slug, (f, w, h, kind), p, "%s — immagine %d" % (name, i + 1), lazy=(i > 0))
+        figs.append('<figure class="gal__item gal__item--%s%s rv" data-fade>%s</figure>' % (pos, " is-portrait" if portrait else "", inner))
+    return '<div class="gal">%s</div>' % "".join(figs)
+
+
+def pager_tile(v, p, label, nxt=False):
+    m = pick(v["slug"], "landscape")
+    media = img_tag(v["slug"], m, p, "") if m else ""
+    return """<a href="%(slug)s.html" class="pager__tile%(cls)s">
+    <span class="pager__media">%(media)s</span>
+    <span class="pager__text"><span class="pager__label">%(label)s</span><span class="pager__name">%(name)s</span></span>
+  </a>""" % {"slug": v["slug"], "cls": " pager__tile--next" if nxt else "", "media": media, "label": label, "name": esc(v["name"]).upper()}
 
 
 def write(path, html):
@@ -311,8 +446,8 @@ def page_home():
             "a2": art("78% 38%", "280%", "art--landscape"), "b2": btn("communications.html", "Scopri")}
     s3 = sec("dark", h2("Dall'idea all'esperienza.") + divisions, "divisioni")
 
-    cards = "\n      ".join([pcard(V["space-riccione"], p, "pcard--a"), pcard(V["indie-beach"], p, "pcard--b"), pcard(V["cat-club"], p, "pcard--c")])
-    s4 = sec("light", h2("Una passione. Destinazioni diverse.") + '\n<div class="pgrid">\n      %s\n    </div>\n<div class="sec__cta" data-fade>%s</div>' % (cards, btn("progetti.html", "Tutti i progetti")), "progetti")
+    s4 = sec("light", h2("Una passione. Destinazioni diverse.") + "\n" + carousel_html(p) +
+             '\n<div class="sec__cta" data-fade>%s</div>' % btn("progetti.html", "Tutti i progetti"), "progetti", "sec--carousel")
 
     s5 = cta("Il prossimo progetto? Costruiamolo insieme.", ("contatti.html", "Contattaci"), big=True)
     write("index.html", document(p, "Music Life — Entertainment Company",
@@ -414,12 +549,11 @@ def page_communications():
 def page_progetti():
     p = ""
     hero = page_hero(p, "Una passione. Destinazioni diverse.",
-                     "Una selezione delle realtà con cui collaboriamo nel mondo dell'entertainment.")
-    cards = "\n      ".join(pcard(v, p, "pcard--wide") for v in VENUES)
-    s2 = sec("light", '<h2 class="sr-only">Portfolio</h2>\n<div class="pgrid pgrid--list">\n      %s\n    </div>' % cards, "portfolio")
+                     "Una selezione delle realtà con cui collaboriamo nel mondo della musica e dell'entertainment.")
+    s2 = sec("light", '<h2 class="sr-only">Portfolio</h2>\n' + portfolio_html(p), "portfolio", "sec--portfolio")
     s3 = cta("Il prossimo progetto potrebbe essere il tuo.", ("contatti.html", "Lavoriamo insieme"))
     write("progetti.html", document(p, "Progetti — Music Life",
-                                    "Space Riccione, Indie Beach e Cat Club: le realtà con cui MUSIC LIFE collabora.",
+                                    "Space Riccione, Indie Beach, Cat Club, Cipriani Resort & Casino, Socialista Ibiza e Cipriani Marbella.",
                                     "\n\n".join([hero, s2, s3])))
 
 
@@ -428,47 +562,39 @@ def page_progetti():
 # ---------------------------------------------------------------------------
 def page_venue(v, i):
     p = "../"
-    hero_file, gal_files = venue_images(v["slug"])
+    hero_file, _ = venue_images(v["slug"])
     hero_img = "%sassets/projects/%s/%s" % (p, v["slug"], hero_file) if hero_file else None
-    hero = page_hero(p, esc(v["name"]), [v["place"] + "."], giant=True, img=hero_img,
+    hero = page_hero(p, esc(v["name"]), [v["place"]], giant=True, img=hero_img, pos=v.get("hero_pos"),
                      crumb='<a href="%sprogetti.html">&larr; Progetti</a>' % p)
 
-    links = """<ul class="venue-links" data-fade>
-        <li><a href="%s" target="_blank" rel="noopener noreferrer"><span class="venue-links__label">Sito web</span><span class="venue-links__value">%s <span aria-hidden="true">&nearr;</span></span></a></li>
-        <li><a href="%s" target="_blank" rel="noopener noreferrer"><span class="venue-links__label">Instagram</span><span class="venue-links__value">%s <span aria-hidden="true">&nearr;</span></span></a></li>
-      </ul>""" % (v["web"][0], v["web"][1], v["ig"][0], v["ig"][1])
-
+    # Il progetto
     s2 = sec("light", """<div class="split">
   %s
-  <div class="split__text">
-    <p class="lede" data-fade>%s</p>
-    %s
-  </div>
+  <div class="split__text"><p class="bio" data-fade>%s</p></div>
 </div>
-<div class="split split--gap">
-  %s
-  <div class="split__text">
-    <p class="todo" data-fade>Le descrizioni delle attività svolte verranno integrate successivamente.</p>
-  </div>
-</div>""" % (h2("Il progetto", "display display--s"), v["intro"], links, h2("La nostra collaborazione", "display display--s")), "progetto")
+<!-- LA COLLABORAZIONE (non pubblicata): [ATTIVITÀ MUSIC LIFE DA CONFERMARE]
+     Quando le attività sono confermate, aggiungi qui una sezione con titolo "La collaborazione". -->""" % (
+        h2("Il progetto", "display display--s"), v["bio"]), "progetto")
 
-    if gal_files:
-        figs = "".join('<figure data-fade><img src="%sassets/projects/%s/%s" alt="%s — immagine %d"%s></figure>' % (
-            p, v["slug"], f, esc(v["name"]), n, "" if n == 1 else ' loading="lazy" decoding="async"') for n, f in enumerate(gal_files, 1))
-        gal = '<div class="gallery">%s</div>' % figs
-    else:
-        gal = '<div class="gallery">%s</div>' % "".join('<figure class="gallery__slot" data-fade><span>Foto in arrivo</span></figure>' for _ in range(3))
-    s3 = sec("dark", h2("Gallery", "display display--s") + "\n" + gal, "gallery")
+    # Gallery
+    s3 = sec("dark", h2("Gallery", "display display--s") + "\n" + gallery_html(v["slug"], v["name"], p), "gallery", "sec--gallery")
 
+    # Link esterni (si aprono in una nuova scheda)
+    lis = "".join('<li data-fade><a href="%s" target="_blank" rel="noopener noreferrer"><span class="ext__label">%s</span><span class="ext__arrow" aria-hidden="true">&nearr;</span></a></li>' % (url, label)
+                  for label, url in v["links"])
+    s4 = sec("light", '<h2 class="sr-only">Link esterni</h2>\n<ul class="ext">%s</ul>' % lis, "link-esterni")
+
+    # Navigazione tra progetti: nome e fotografia
     prev_v = VENUES[(i - 1) % len(VENUES)]
     next_v = VENUES[(i + 1) % len(VENUES)]
-    s4 = sec("light", """<nav class="pager" aria-label="Navigazione tra i progetti">
-  <a href="%(p)s%(ps)s.html" class="pager__link"><span class="pager__label">&larr; Progetto precedente</span><span class="pager__name">%(pn)s</span></a>
-  <a href="%(p)s%(ns)s.html" class="pager__link pager__link--next"><span class="pager__label">Progetto successivo &rarr;</span><span class="pager__name">%(nn)s</span></a>
-</nav>""" % {"p": "", "ps": prev_v["slug"], "pn": prev_v["name"].upper(), "ns": next_v["slug"], "nn": next_v["name"].upper()}, "navigazione")
+    s5 = sec("dark", """<nav class="pager" aria-label="Navigazione tra i progetti">
+  %s
+  %s
+</nav>""" % (pager_tile(prev_v, p, "&larr; Progetto precedente"), pager_tile(next_v, p, "Progetto successivo &rarr;", True)), "navigazione", "sec--pager")
+
     write("progetti/%s.html" % v["slug"], document(p, "%s — %s · Music Life" % (v["name"], v["place"]),
-                                                  "%s, %s. %s" % (v["name"], v["place"], v["intro"]),
-                                                  "\n\n".join([hero, s2, s3, s4])))
+                                                  "%s, %s. %s" % (v["name"], v["place"], v["bio"]),
+                                                  "\n\n".join([hero, s2, s3, s4, s5])))
 
 
 # ---------------------------------------------------------------------------

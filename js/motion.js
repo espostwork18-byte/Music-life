@@ -4,7 +4,10 @@
   var hasLibs = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
 
   // movimento ridotto o librerie assenti: pagina statica, tutto subito visibile (stati definiti in CSS)
-  if (reduced || !hasLibs) return;
+  if (reduced || !hasLibs) {
+    document.documentElement.classList.remove('js-reveal');
+    return;
+  }
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -104,6 +107,19 @@
       once: true,
       onEnter: function (batch) {
         gsap.to(batch, { opacity: 1, y: 0, duration: cfg.dur.base, ease: cfg.ease.out, stagger: 0.08 });
+      }
+    });
+  }
+
+  // --- Immagini: la tendina si apre durante lo scroll (solo transform, via variabile CSS) ---
+  var reveals = gsap.utils.toArray('.rv');
+  if (reveals.length) {
+    gsap.set(reveals, { '--rv': 1 });
+    ScrollTrigger.batch(reveals, {
+      start: 'top 92%',
+      once: true,
+      onEnter: function (batch) {
+        gsap.to(batch, { '--rv': 0, duration: cfg.dur.slow, ease: cfg.ease.inOut, stagger: 0.1 });
       }
     });
   }
