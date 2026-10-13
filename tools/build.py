@@ -184,7 +184,6 @@ def nav(p):
 LEGAL_LINKS = [
     ("privacy-policy.html", "Privacy Policy"),
     ("cookie-policy.html", "Cookie Policy"),
-    ("preferenze-cookie.html", "Preferenze cookie"),
     ("note-legali.html", "Note legali"),
 ]
 
@@ -209,7 +208,7 @@ def footer(p):
     </div>
   </div>
   <div class="footer__bottom">
-    <p>&copy; MUSIC LIFE — Tutti i diritti riservati.</p>
+    <p>&copy; MUSIC LIFE SRLS &middot; Via Ancona 15/bis, 60035 Jesi (AN) &middot; P. IVA IT 03053720425 — Tutti i diritti riservati.</p>
     <nav class="footer__legal" aria-label="Informazioni legali">%(legal)s</nav>
   </div>
 </footer>""" % {"nav": nav_items, "legal": legal, "p": p}
@@ -628,7 +627,7 @@ def page_contatti():
           <textarea class="field__input" name="message" rows="6" required></textarea>
           <span class="field__error" role="alert"></span></label>
         <div class="field" data-field="consent" data-fade>
-          <label class="consent"><input type="checkbox" name="consent" required><span>Ho letto la <a href="privacy-policy.html">Privacy Policy</a> e acconsento al trattamento dei dati personali.</span></label>
+          <label class="consent"><input type="checkbox" name="consent" required><span>Ho letto la <a href="privacy-policy.html">Privacy Policy</a>.</span></label>
           <span class="field__error" role="alert"></span>
         </div>
         <button type="submit" class="btn btn--outline" data-fade>Invia il messaggio <span aria-hidden="true">&rarr;</span></button>
@@ -661,9 +660,10 @@ TITOLARE = """<table>
 <tr><th>Titolare del trattamento</th><td>%s</td></tr>
 <tr><th>Sede legale</th><td>%s</td></tr>
 <tr><th>Partita IVA / Codice fiscale</th><td>%s</td></tr>
+<tr><th>Codice SDI</th><td>0000000</td></tr>
 <tr><th>Email</th><td>%s</td></tr>
 <tr><th>PEC</th><td>%s</td></tr>
-</table>""" % (F("[Ragione sociale di MUSIC LIFE]"), F("[Indirizzo, CAP, città, provincia]"), F("[P.IVA / C.F.]"), F("[Email aziendale]"), F("[PEC]"))
+</table>""" % ("MUSIC LIFE S.R.L.S. — società a responsabilità limitata semplificata con socio unico", "Via Ancona 15/bis, 60035 Jesi (AN)", "03053720425", F("[Email aziendale]"), "musiclifesrls@pec.it")
 
 
 def legal_page(slug, title, desc, inner):
@@ -676,8 +676,8 @@ def legal_page(slug, title, desc, inner):
 
 
 def page_legal():
-    legal_page("privacy-policy", "Privacy Policy", "Informativa sul trattamento dei dati personali di MUSIC LIFE ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679.", """<h1>Privacy Policy</h1>
-    <p class="legal__meta">Informativa ai sensi degli artt. 13 e 14 del Regolamento (UE) 2016/679 (GDPR). Ultimo aggiornamento: %s</p>
+    legal_page("privacy-policy", "Privacy Policy", "Informativa sul trattamento dei dati personali di MUSIC LIFE ai sensi dell'art. 13 del Regolamento (UE) 2016/679.", """<h1>Privacy Policy</h1>
+    <p class="legal__meta">Informativa ai sensi dell'art. 13 del Regolamento (UE) 2016/679 (GDPR). Ultimo aggiornamento: %s</p>
     %s
     <h2>1. Titolare del trattamento</h2>
     %s
@@ -700,7 +700,7 @@ def page_legal():
     <h2>6. Destinatari dei dati</h2>
     <p>I dati possono essere trattati da persone autorizzate dal Titolare e da fornitori di servizi che agiscono come responsabili del trattamento ai sensi dell'art. 28 GDPR (ad esempio il fornitore di hosting %s e il fornitore del servizio di posta elettronica %s). I dati non sono diffusi né ceduti a terzi per finalità di marketing.</p>
     <h2>7. Trasferimento dei dati fuori dallo Spazio Economico Europeo</h2>
-    <p>Il Titolare non trasferisce i dati personali verso Paesi extra-UE. Qualora in futuro ciò si rendesse necessario, il trasferimento avverrà nel rispetto del Capo V del GDPR (decisioni di adeguatezza o garanzie adeguate).</p>
+    <p>Il sito è ospitato da Vercel Inc., società con sede negli Stati Uniti: i dati di navigazione e quelli inviati tramite il sito possono quindi essere trattati anche al di fuori dello Spazio Economico Europeo. Il trasferimento avviene nel rispetto del Capo V del GDPR, sulla base della decisione di adeguatezza relativa al Data Privacy Framework UE-USA, ove applicabile, o delle clausole contrattuali standard approvate dalla Commissione europea. Lo stesso vale per gli altri fornitori indicati al punto 6 che abbiano sede fuori dallo Spazio Economico Europeo.</p>
     <h2>8. Periodo di conservazione</h2>
     <p>I dati forniti tramite il modulo di contatto sono conservati per il tempo necessario a gestire la richiesta e, successivamente, per un periodo non superiore a %s, salvo diversi obblighi di legge o la necessità di tutelare un diritto in sede giudiziaria. I dati di navigazione sono conservati per il tempo strettamente necessario alle finalità di sicurezza.</p>
     <h2>9. Diritti dell'interessato</h2>
@@ -710,7 +710,7 @@ def page_legal():
     <p>Informazioni sull'uso di cookie e tecnologie analoghe sono disponibili nella <a href="cookie-policy.html">Cookie Policy</a>.</p>
     <h2>11. Modifiche alla presente informativa</h2>
     <p>Il Titolare può aggiornare la presente informativa, ad esempio per adeguarla a modifiche normative o ai servizi offerti. La versione aggiornata è sempre disponibile in questa pagina.</p>""" % (
-        F("[data]"), BOZZA, TITOLARE, F("[nome del fornitore di hosting]"), F("[nome del fornitore di posta]"), F("[24 mesi]")))
+        F("[data]"), BOZZA, TITOLARE, "Vercel Inc.", F("[nome del fornitore di posta]"), F("[24 mesi]")))
 
     legal_page("cookie-policy", "Cookie Policy", "Informazioni sull'uso di cookie e tecnologie analoghe sul sito di MUSIC LIFE.", """<h1>Cookie Policy</h1>
     <p class="legal__meta">Ultimo aggiornamento: %s</p>
@@ -730,68 +730,30 @@ def page_legal():
     <h2>4. Come gestire i cookie dal browser</h2>
     <p>È possibile in ogni momento bloccare o eliminare i cookie dalle impostazioni del proprio browser (Chrome, Firefox, Safari, Edge e altri), nella sezione dedicata a privacy e sicurezza. La disattivazione dei cookie di terze parti può comportare limitazioni nell'uso dei siti esterni raggiungibili tramite i collegamenti presenti in questo sito.</p>
     <h2>5. Aggiornamenti</h2>
-    <p>Qualora in futuro vengano introdotti strumenti che richiedono il consenso (ad esempio statistiche o contenuti incorporati da terze parti), questa informativa sarà aggiornata e verrà mostrato un apposito banner con la possibilità di accettare, rifiutare o personalizzare le scelte, modificabili in ogni momento dalla pagina <a href="preferenze-cookie.html">Preferenze cookie</a>.</p>
+    <p>Qualora in futuro vengano introdotti strumenti che richiedono il consenso (ad esempio statistiche o contenuti incorporati da terze parti), questa informativa sarà aggiornata e verrà mostrato un apposito banner con la possibilità di accettare, rifiutare o personalizzare le scelte, modificabili in ogni momento.</p>
     <h2>6. Titolare e contatti</h2>
     %s
     <p>Per ulteriori informazioni sul trattamento dei dati personali consulta la <a href="privacy-policy.html">Privacy Policy</a>.</p>""" % (F("[data]"), BOZZA, TITOLARE))
-
-    sw = lambda t, d, s: '<div class="switch-row"><div><p class="switch-row__title">%s</p><p class="switch-row__text">%s</p></div><span class="switch-row__state">%s</span></div>' % (t, d, s)
-    legal_page("preferenze-cookie", "Preferenze cookie", "Stato dei cookie utilizzati dal sito di MUSIC LIFE e gestione delle preferenze.", """<h1>Preferenze cookie</h1>
-    <p class="legal__meta">Qui puoi consultare lo stato delle categorie di cookie utilizzate da questo sito.</p>
-    <h2>Il tuo stato attuale</h2>
-    <p>Al momento il sito non utilizza cookie che richiedano il tuo consenso: per questo non viene mostrato alcun banner e non è necessaria alcuna scelta da parte tua.</p>
-    %s
-    %s
-    %s
-    <h2>Se le impostazioni cambiano</h2>
-    <p>Se in futuro il sito introdurrà strumenti di analisi o contenuti di terze parti, qui comparirà il pannello per accettare, rifiutare o personalizzare ciascuna categoria, e potrai modificare la tua scelta in ogni momento. Per i dettagli consulta la <a href="cookie-policy.html">Cookie Policy</a>.</p>
-    %s""" % (sw("Cookie tecnici", "Necessari al funzionamento del sito. Attualmente non ne viene memorizzato alcuno.", "Sempre attivi"),
-             sw("Cookie analitici", "Servono a misurare l'uso del sito in forma aggregata. Non utilizzati.", "Non utilizzati"),
-             sw("Cookie di marketing e profilazione", "Servono a proporre contenuti pubblicitari personalizzati. Non utilizzati.", "Non utilizzati"), BOZZA))
 
     legal_page("note-legali", "Note legali", "Note legali, proprietà intellettuale e marchi del sito di MUSIC LIFE.", """<h1>Note legali</h1>
     <p class="legal__meta">Ultimo aggiornamento: %s</p>
     %s
     <h2>1. Titolare del sito</h2>
     %s
-    <p>Capitale sociale: %s &middot; Registro delle imprese di %s &middot; REA: %s</p>
+    <p>Capitale sociale: € 1.000,00 i.v. &middot; Iscritta al Registro delle Imprese delle Marche al n. 03053720425 &middot; REA: AN-317080</p>
     <h2>2. Proprietà intellettuale</h2>
     <p>Testi, grafica, layout, logo MUSIC LIFE e ogni altro contenuto del sito sono di proprietà del Titolare o utilizzati con il consenso dei rispettivi titolari, e sono protetti dalle norme sul diritto d'autore e sulla proprietà industriale. È vietata la riproduzione, la distribuzione o la modifica, anche parziale, senza autorizzazione scritta.</p>
     <h2>3. Marchi e riferimenti a terzi</h2>
-    <p>I nomi, i marchi e i loghi delle venue e dei partner citati nel sito (tra cui Space Riccione, Indie Beach, Cat Club e relativi marchi) appartengono ai rispettivi titolari e sono menzionati al solo scopo di descrivere le collaborazioni di MUSIC LIFE. Il loro utilizzo non implica sponsorizzazione, affiliazione o approvazione oltre quanto espressamente indicato.</p>
+    <p>I nomi, i marchi e i loghi delle venue e dei partner citati nel sito (Space Riccione, Indie Beach, Cat Club, Cipriani Resort &amp; Casino, Socialista Ibiza, Cipriani Marbella e relativi marchi) appartengono ai rispettivi titolari e sono menzionati al solo scopo di descrivere le collaborazioni di MUSIC LIFE. Il loro utilizzo non implica sponsorizzazione, affiliazione o approvazione oltre quanto espressamente indicato.</p>
     <h2>4. Fotografie e materiali</h2>
-    <p>Le fotografie e i materiali dedicati ai progetti sono pubblicati con l'autorizzazione dei rispettivi titolari dei diritti. Chi ritenga che un contenuto violi propri diritti può segnalarlo agli indirizzi indicati al punto 1 per la tempestiva verifica.</p>
+    <p>Le fotografie e i materiali dedicati ai progetti appartengono ai rispettivi titolari dei diritti e sono riprodotti al solo scopo di descrivere le collaborazioni di MUSIC LIFE. Chi ritenga che un contenuto violi propri diritti può segnalarlo agli indirizzi indicati al punto 1 per la tempestiva verifica.</p>
     <h2>5. Limitazione di responsabilità</h2>
     <p>I contenuti del sito hanno finalità esclusivamente informativa e sono curati con la massima attenzione, ma non si garantisce l'assenza di errori o la continuità del servizio. Il Titolare non risponde di danni derivanti dall'uso delle informazioni pubblicate né dei contenuti di siti di terzi raggiungibili tramite collegamento.</p>
-    <h2>6. Legge applicabile e foro competente</h2>
-    <p>Il sito e le presenti note sono regolati dalla legge italiana. Per ogni controversia è competente il foro di %s, fatti salvi i fori inderogabili previsti a tutela del consumatore.</p>
+    <h2>6. Legge applicabile</h2>
+    <p>Il sito e le presenti note sono regolati dalla legge italiana.</p>
     <h2>7. Documenti collegati</h2>
-    <p><a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="cookie-policy.html">Cookie Policy</a> &middot; <a href="termini-e-condizioni.html">Termini e condizioni</a></p>""" % (
-        F("[data]"), BOZZA, TITOLARE, F("[capitale sociale]"), F("[provincia]"), F("[numero REA]"), F("[foro competente]")))
-
-    legal_page("termini-e-condizioni", "Termini e condizioni", "Termini e condizioni di utilizzo del sito di MUSIC LIFE.", """<h1>Termini e condizioni</h1>
-    <p class="legal__meta">Condizioni generali di utilizzo del sito. Ultimo aggiornamento: %s</p>
-    %s
-    <h2>1. Accettazione</h2>
-    <p>L'accesso e la navigazione sul sito presuppongono la lettura e l'accettazione dei presenti termini. Se non si è d'accordo con quanto indicato, si prega di non utilizzare il sito.</p>
-    <h2>2. Natura dei contenuti</h2>
-    <p>Le informazioni pubblicate descrivono l'attività di MUSIC LIFE e le sue collaborazioni. Non costituiscono offerta al pubblico né proposta contrattuale: eventuali rapporti commerciali sono regolati da accordi scritti specifici.</p>
-    <h2>3. Uso consentito</h2>
-    <p>Il sito può essere utilizzato per finalità lecite e nel rispetto di questi termini. È vietato tentare di accedere ad aree riservate, compromettere la sicurezza o il funzionamento del sito, o utilizzare i contenuti per scopi commerciali senza autorizzazione.</p>
-    <h2>4. Richieste inviate tramite il sito</h2>
-    <p>Inviando una richiesta tramite il modulo di contatto l'utente dichiara che i dati forniti sono corretti e prende visione della <a href="privacy-policy.html">Privacy Policy</a>. L'invio di una richiesta non genera alcun obbligo per MUSIC LIFE di avviare una collaborazione.</p>
-    <h2>5. Proprietà intellettuale</h2>
-    <p>Tutti i contenuti del sito sono protetti secondo quanto indicato nelle <a href="note-legali.html">Note legali</a>. Marchi e denominazioni di terzi appartengono ai rispettivi titolari.</p>
-    <h2>6. Collegamenti a siti di terzi</h2>
-    <p>Il sito può contenere collegamenti a siti e profili social di terzi. MUSIC LIFE non controlla né è responsabile dei loro contenuti, delle loro politiche sulla privacy o dei loro servizi.</p>
-    <h2>7. Limitazione di responsabilità</h2>
-    <p>Nei limiti consentiti dalla legge, MUSIC LIFE non risponde di interruzioni, errori o omissioni del sito, né di danni derivanti dall'utilizzo delle informazioni in esso contenute.</p>
-    <h2>8. Modifiche</h2>
-    <p>I presenti termini possono essere modificati in qualsiasi momento; la versione in vigore è quella pubblicata in questa pagina.</p>
-    <h2>9. Legge applicabile e foro competente</h2>
-    <p>I presenti termini sono regolati dalla legge italiana. Per ogni controversia è competente il foro di %s, fatti salvi i fori inderogabili previsti a tutela del consumatore.</p>
-    <h2>10. Contatti</h2>
-    %s""" % (F("[data]"), BOZZA, F("[foro competente]"), TITOLARE))
+    <p><a href="privacy-policy.html">Privacy Policy</a> &middot; <a href="cookie-policy.html">Cookie Policy</a></p>""" % (
+        F("[data]"), BOZZA, TITOLARE))
 
 
 def main():

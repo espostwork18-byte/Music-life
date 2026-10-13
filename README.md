@@ -5,7 +5,7 @@ Sito statico (HTML/CSS/JS, nessuna dipendenza da servizi esterni).
 ## Struttura
 - `index.html`, `chi-siamo.html`, `entertainment.html`, `communications.html`, `progetti.html`, `contatti.html`
 - `progetti/*.html` — una scheda per venue
-- pagine legali: `privacy-policy.html`, `cookie-policy.html`, `preferenze-cookie.html`, `note-legali.html`, `termini-e-condizioni.html`
+- pagine legali: `privacy-policy.html`, `cookie-policy.html`, `note-legali.html`
 - `css/style.css`, `js/` (animazioni: `motion-config.js` per durate/easing/distanze), `assets/`
 
 ## Modificare i testi
