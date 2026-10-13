@@ -12,18 +12,15 @@ window.MOTION = {
     slow: 1.4
   },
   hero: {
-    // lunghezza totale della sezione pinnata, in multipli dell'altezza viewport
-    pinHeightVh: 400,
-    // frazioni (0-1) della progress bar dello ScrollTrigger pinnato in cui avvengono le fasi
-    paragraphRiseEnd: 0.22,
-    paragraphHoldEnd: 0.34,
-    paragraphExitEnd: 0.48,
-    frameShrinkStart: 0.42,
-    frameShrinkEnd: 0.82,
-    revealEnd: 0.92,
-    // quanto si rimpicciolisce il riquadro immagine (1 = pieno schermo)
-    frameScaleEnd: 0.62,
-    paragraphTravel: 70 // px di risalita del paragrafo
+    // altezza totale della sezione pinnata, in multipli dell'altezza viewport
+    pinHeightVh: 500,
+    // frazioni (0-1) della progress in cui compare ciascuna delle quattro parole
+    wordAt: [0.04, 0.26, 0.48, 0.70],
+    wordDur: 0.14,
+    // dissolvenza incrociata fra un visual e il successivo
+    visualFade: 0.16,
+    // zoom lento di ogni visual (da questo valore a 1)
+    zoomFrom: 1.16
   },
   nav: {
     // UI usata spesso: tempi brevi, uscita più rapida dell'ingresso

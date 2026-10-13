@@ -3,122 +3,95 @@
   var reduced = document.documentElement.classList.contains('reduced-motion');
   var hasLibs = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
 
-  if (reduced || !hasLibs) {
-    // niente pin/scrub: la sezione hero resta nello stato finale definito in CSS (.reduced-motion)
-    return;
-  }
+  // movimento ridotto o librerie assenti: pagina statica, tutto subito visibile (stati definiti in CSS)
+  if (reduced || !hasLibs) return;
 
   gsap.registerPlugin(ScrollTrigger);
 
   // --- Lenis (smooth scroll), agganciato al ticker di GSAP --------------
-  // disattivo su touch: niente smooth-scroll/parallax lì, solo scroll nativo
+  // disattivo su touch e per i test automatici (?no-smooth=1): resta lo scroll nativo
   var noSmooth = navigator.webdriver || /(?:^|[?&])no-smooth=1(?:&|$)/.test(location.search);
-  var lenis = null;
   if (typeof Lenis !== 'undefined' && matchMedia('(hover: hover) and (pointer: fine)').matches && !noSmooth) {
-    lenis = new Lenis({
-      duration: cfg.lenis.duration,
-      easing: cfg.lenis.easing
-    });
+    var lenis = new Lenis({ duration: cfg.lenis.duration, easing: cfg.lenis.easing });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
   }
 
-  // --- Hero: sezione pinnata con titolo diviso, paragrafo e riquadro ----
+  // --- Hero della Home: le quattro parole del claim, una per volta -------
   var heroEl = document.getElementById('hero');
   var pinEl = document.getElementById('hero-pin');
   if (heroEl && pinEl) buildHero();
 
   function buildHero() {
-  var h = cfg.hero;
+    var h = cfg.hero;
+    var visuals = gsap.utils.toArray('.hero__visual');
+    var words = gsap.utils.toArray('.hero__word');
 
-  var tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: heroEl,
-      start: 'top top',
-      end: '+=' + (h.pinHeightVh - 100) + '%',
-      scrub: 1,
-      pin: pinEl,
-      anticipatePin: 1
-    }
-  });
+    gsap.set(words, { yPercent: 112 });
+    gsap.set(visuals.slice(1), { opacity: 0 });
+    gsap.set('.hero__visual-img', { scale: h.zoomFrom });
 
-  // intro: dissolvenza incrociata fra il wordmark e il titolo diviso
-  tl.to('#hero-brand', { opacity: 0, y: -20, ease: cfg.ease.out, duration: 0.08 }, 0);
-  tl.to(['#hero-split-left', '#hero-split-right'], { opacity: 1, ease: cfg.ease.out, duration: 0.1 }, 0.02);
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: heroEl,
+        start: 'top top',
+        end: '+=' + (h.pinHeightVh - 100) + '%',
+        scrub: 1,
+        pin: pinEl,
+        anticipatePin: 1
+      }
+    });
 
-  // il paragrafo segnaposto sale, si ferma al centro, poi esce verso l'alto
-  tl.to('#hero-rising', {
-    opacity: 1,
-    y: 0,
-    ease: cfg.ease.out,
-    duration: h.paragraphRiseEnd
-  }, 0);
-  tl.to('#hero-rising', {
-    opacity: 0,
-    y: -h.paragraphTravel,
-    ease: cfg.ease.inOut,
-    duration: h.paragraphExitEnd - h.paragraphHoldEnd
-  }, h.paragraphHoldEnd);
-
-  // lo sfondo scuro lascia il posto alla sabbia mentre il riquadro si restringe
-  tl.to('#hero-light', {
-    opacity: 1,
-    ease: cfg.ease.inOut,
-    duration: h.frameShrinkEnd - h.frameShrinkStart
-  }, h.frameShrinkStart);
-
-  // il riquadro (immagine + titolo diviso) si rimpicciolisce verso il centro;
-  // il bordo sottile scala in sincrono e appare solo a fine corsa
-  tl.to(['#hero-frame', '#hero-frame-border'], {
-    scale: h.frameScaleEnd,
-    ease: cfg.ease.inOut,
-    duration: h.frameShrinkEnd - h.frameShrinkStart
-  }, h.frameShrinkStart);
-  tl.to('#hero-frame-border', {
-    opacity: 1,
-    ease: cfg.ease.out,
-    duration: 0.12
-  }, h.frameShrinkEnd - 0.12);
-
-  // CTA finale
-  tl.to('#hero-cta', {
-    opacity: 1,
-    y: 0,
-    ease: cfg.ease.out,
-    duration: h.revealEnd - h.frameShrinkEnd
-  }, h.frameShrinkEnd);
+    words.forEach(function (word, i) {
+      var t = h.wordAt[i];
+      var enter = i === 0 ? 0 : t - 0.02;
+      var next = i < words.length - 1 ? h.wordAt[i + 1] : 1;
+      tl.to(word, { yPercent: 0, ease: cfg.ease.out, duration: h.wordDur }, t);
+      if (i > 0) tl.to(visuals[i], { opacity: 1, ease: 'none', duration: h.visualFade }, enter);
+      tl.to(visuals[i].querySelector('.hero__visual-img'), {
+        scale: 1,
+        ease: 'none',
+        duration: Math.min(1, next + 0.1) - enter
+      }, enter);
+    });
+    tl.to({}, { duration: 0 }, 1); // la timeline dura esattamente 1
   }
 
-  // --- Testi grandi: parole che si accendono con lo scroll ----------------
+  // --- Titoli: rivelazione tipografica parola per parola -------------------
   function splitWords(root) {
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     var nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
-    var words = [];
+    var inner = [];
     nodes.forEach(function (node) {
-      var parts = node.textContent.split(/(\s+)/);
       var frag = document.createDocumentFragment();
-      parts.forEach(function (part) {
+      node.textContent.split(/(\s+)/).forEach(function (part) {
         if (!part) return;
         if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+        var outer = document.createElement('span');
+        outer.className = 'sw';
         var span = document.createElement('span');
-        span.className = 'w';
+        span.className = 'sw__i';
         span.textContent = part;
-        frag.appendChild(span);
-        words.push(span);
+        outer.appendChild(span);
+        frag.appendChild(outer);
+        inner.push(span);
       });
       node.parentNode.replaceChild(frag, node);
     });
-    return words;
+    return inner;
   }
-  document.querySelectorAll('[data-reveal-words]').forEach(function (el) {
+  gsap.utils.toArray('[data-split]').forEach(function (el) {
     var words = splitWords(el);
-    gsap.fromTo(words, { opacity: 0.12 }, {
-      opacity: 1,
-      ease: 'none',
-      stagger: 0.12,
-      scrollTrigger: { trigger: el, start: 'top 82%', end: 'bottom 80%', scrub: true }
+    gsap.set(words, { yPercent: 112 });
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 88%',
+      once: true,
+      onEnter: function () {
+        gsap.to(words, { yPercent: 0, duration: cfg.dur.slow, ease: cfg.ease.out, stagger: 0.06 });
+      }
     });
   });
 

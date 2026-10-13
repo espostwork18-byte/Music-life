@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contatti — Music Life</title>
-<meta name="description" content="Hai un progetto musicale da sviluppare? Scrivi a MUSIC LIFE: Entertainment, Communications o entrambe.">
+<meta name="description" content="Hai un progetto da sviluppare? Scrivi a MUSIC LIFE: Entertainment, Communications o entrambe.">
 <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <script>
@@ -24,13 +24,12 @@
   <div class="nav__panel" id="nav-panel" inert>
     <div class="nav__panel-bg" id="nav-panel-bg" aria-hidden="true"></div>
     <div class="nav__panel-inner" id="nav-panel-inner">
-      <nav class="nav__grid" aria-label="Sezioni del sito"><a href="index.html">Home</a><a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a></nav>
+      <nav class="nav__grid" aria-label="Sezioni del sito"><a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a></nav>
       <div class="nav__info">
         <div>
           <p class="nav__label">Contatti</p>
           <p>[Email aziendale]</p>
           <p>[LinkedIn / Instagram]</p>
-          <a href="contatti.html">Parliamone</a>
         </div>
       </div>
     </div>
@@ -38,27 +37,19 @@
 </header>
 
 <main id="top">
-<section class="page-hero page-hero--plain" style="--hero-pos: 62% 30%">
+<section class="page-hero page-hero--plain">
   
   <div class="page-hero__inner">
     
-    <h1 class="page-hero__title" data-in>La prossima esperienza potrebbe iniziare qui.</h1>
-    <p class="page-hero__text" data-in>Un nuovo progetto. Un'idea da sviluppare. Una collaborazione da costruire.</p><p class="page-hero__text" data-in>Siamo sempre interessati a incontrare persone e realtà che condividono la nostra visione dell'entertainment.</p>
-    <p class="page-hero__tag" data-in>Parliamone.</p>
+    <h1 class="page-hero__title" data-in>Le idee migliori nascono dalle connessioni.</h1>
+    
+    <p class="page-hero__text" data-in>Hai un progetto da sviluppare? Parliamone.</p>
   </div>
 </section>
 
-<section class="sec sec--light" id="contattaci">
-  <div class="sec__grid">
-    <p class="sec__label">Contatti</p>
-    <div>
-      <h2 class="sec__title sec__title--wide" data-fade>Contattaci</h2>
-      <div class="prose" data-fade>
-        <p class="lead">Hai un progetto musicale da sviluppare?</p>
-        <p>Vuoi dare vita a un nuovo format, valorizzare una venue o costruire una collaborazione tra il tuo brand e il mondo dell'entertainment?</p>
-        <p>Raccontaci la tua idea.</p>
-      </div>
-      <form class="form" id="contact-form" novalidate>
+<section class="sec sec--light" id="form">
+<h2 class="sr-only">Scrivici</h2>
+<form class="form" id="contact-form" novalidate>
         <label class="field" data-field="name" data-fade><span class="field__label">Nome e cognome</span>
           <input class="field__input" type="text" name="name" autocomplete="name" required>
           <span class="field__error" role="alert"></span></label>
@@ -78,28 +69,25 @@
           </div>
           <span class="field__error" role="alert"></span>
         </fieldset>
-        <label class="field" data-field="message" data-fade><span class="field__label">Il tuo progetto</span>
-          <textarea class="field__input" name="message" rows="6" placeholder="Messaggio libero" required></textarea>
+        <label class="field" data-field="message" data-fade><span class="field__label">Messaggio</span>
+          <textarea class="field__input" name="message" rows="6" required></textarea>
           <span class="field__error" role="alert"></span></label>
         <div class="field" data-field="consent" data-fade>
-          <label class="consent"><input type="checkbox" name="consent" required><span>Consenso al trattamento dei dati personali secondo l'<a href="privacy-policy.html">informativa privacy</a>.</span></label>
+          <label class="consent"><input type="checkbox" name="consent" required><span>Ho letto la <a href="privacy-policy.html">Privacy Policy</a> e acconsento al trattamento dei dati personali.</span></label>
           <span class="field__error" role="alert"></span>
         </div>
         <button type="submit" class="btn btn--outline" data-fade>Invia il messaggio <span aria-hidden="true">&rarr;</span></button>
         <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
       </form>
-    </div>
-  </div>
 </section>
 
-<section class="sec sec--dark" id="diretto">
-  <div class="sec__grid">
-    <p class="sec__label">Contatto diretto</p>
-    <div>
-      <h2 class="sec__title sec__title--wide" data-fade>Preferisci scriverci direttamente?</h2>
-      <div class="contact-direct" data-fade><p>[Email aziendale]</p><p>[LinkedIn / Instagram]</p></div>
-    </div>
-  </div>
+<section class="sec sec--dark" id="diretti">
+<h2 class="sr-only">Contatti diretti</h2>
+<div class="contact-lines">
+  <div class="contact-lines__row" data-fade><span class="contact-lines__label">Email aziendale</span><span class="contact-lines__value">[Email aziendale]</span></div>
+  <div class="contact-lines__row" data-fade><span class="contact-lines__label">LinkedIn</span><span class="contact-lines__value">[LinkedIn]</span></div>
+  <div class="contact-lines__row" data-fade><span class="contact-lines__label">Instagram</span><span class="contact-lines__value">[Instagram]</span></div>
+</div>
 </section>
 </main>
 
@@ -110,18 +98,18 @@
       <p class="footer__tagline">People. Music. Experiences. Around the world.</p>
     </div>
     <nav class="footer__nav" aria-label="Footer">
-      <p class="footer__title">Sezioni</p>
+      <p class="footer__title">Navigazione</p>
       <a href="chi-siamo.html">Chi siamo</a><a href="entertainment.html">Entertainment</a><a href="communications.html">Communications</a><a href="progetti.html">Progetti</a><a href="contatti.html">Contatti</a>
     </nav>
     <div class="footer__contact">
       <p class="footer__title">Contatti</p>
-      <p>[Email]</p>
-      <p>[Social]</p>
+      <p>[Email aziendale]</p>
+      <p>[LinkedIn / Instagram]</p>
     </div>
   </div>
   <div class="footer__bottom">
     <p>&copy; MUSIC LIFE — Tutti i diritti riservati.</p>
-    <nav class="footer__legal" aria-label="Informazioni legali"><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="preferenze-cookie.html">Preferenze cookie</a><a href="note-legali.html">Note legali</a><a href="termini-e-condizioni.html">Termini e condizioni</a></nav>
+    <nav class="footer__legal" aria-label="Informazioni legali"><a href="privacy-policy.html">Privacy Policy</a><a href="cookie-policy.html">Cookie Policy</a><a href="preferenze-cookie.html">Preferenze cookie</a><a href="note-legali.html">Note legali</a></nav>
   </div>
 </footer>
 

@@ -5,132 +5,53 @@ Uso (dalla cartella del progetto):  python tools/build.py
 
 Menu, footer e componenti sono definiti qui una volta sola; i testi delle pagine
 sono nelle funzioni page_* più sotto. Dopo ogni modifica rigenera i file HTML.
+
+Aggiungere una venue: copia un blocco in VENUES (compare in Home, Progetti e
+ottiene la sua scheda) e metti le foto in assets/projects/<slug>/ (hero.jpg + 01.jpg, 02.jpg, ...).
 """
 import os
 import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SITE = "MUSIC LIFE"
-TAGLINE = "People. Music. Experiences. Around the world."
+CLAIM = "People. Music. Experiences. Around the world."
 
 # ---------------------------------------------------------------------------
-# Venue (una pagina ciascuna in /progetti/)
+# Venue pubblicate (una scheda ciascuna in /progetti/)
 # ---------------------------------------------------------------------------
 VENUES = [
     {
-        "slug": "space-riccione", "name": "Space Riccione", "short": "Space",
-        "place": "Riccione, Italia",
+        "slug": "space-riccione", "name": "Space Riccione", "place": "Riccione, Italia",
+        "intro": "Una collaborazione nel mondo della musica e del clubbing sulla Riviera Romagnola.",
         "web": ("https://spacericcione.com/", "spacericcione.com"),
         "ig": ("https://www.instagram.com/spacericcione/", "@spacericcione"),
-        "pos": "58% 28%",
-        "intro": [
-            "La cultura musicale e l'entertainment sono parte dell'identità di Riccione.",
-            "Space Riccione rappresenta una delle realtà con cui MUSIC LIFE collabora in questo contesto.",
-            "Un progetto da raccontare attraverso la sua identità, le esperienze che ospita e il contributo specifico delle professionalità coinvolte.",
-        ],
-        "desc": "Sulla celebre collina delle discoteche di Riccione, Space è uno dei locali di riferimento della Riviera: una grande pista per dj internazionali e per le serate simbolo dell'estate adriatica.",
-        "card": "Una collaborazione nel mondo del clubbing e dell'entertainment sulla Riviera Romagnola.",
-        "crops": [350, 1900, 3200],
     },
     {
-        "slug": "indie-beach", "name": "Indie Beach", "short": "Indie Beach",
-        "place": "Saint-Tropez, Francia",
+        "slug": "indie-beach", "name": "Indie Beach", "place": "Saint-Tropez, Francia",
+        "intro": "Una collaborazione che incontra musica, ospitalità e intrattenimento nel contesto della Costa Azzurra.",
         "web": ("https://www.indie-beach.fr/en/", "indie-beach.fr"),
         "ig": ("https://www.instagram.com/indiebeachpampelonne/", "@indiebeachpampelonne"),
-        "pos": "70% 20%",
-        "intro": [
-            "La musica incontra l'ospitalità e lo stile di vita della Costa Azzurra.",
-            "Indie Beach è una delle realtà con cui MUSIC LIFE collabora, in un contesto in cui atmosfera, identità musicale ed esperienza degli ospiti si incontrano.",
-        ],
-        "desc": "Sulla spiaggia di Pampelonne, tra Saint-Tropez e Ramatuelle, Indie Beach unisce beach club, ristorante e bar in una delle destinazioni più conosciute della Costa Azzurra.",
-        "card": "Musica, ospitalità e intrattenimento in una delle destinazioni più conosciute della Costa Azzurra.",
-        "crops": [900, 2600, 4000],
     },
     {
-        "slug": "cat-club", "name": "Cat Club", "short": "Cat Club",
-        "place": "Courchevel, Francia",
+        "slug": "cat-club", "name": "Cat Club", "place": "Courchevel, Francia",
+        "intro": "Una collaborazione nel panorama dell'entertainment e della nightlife alpina.",
         "web": ("https://www.cat-club.fr/en/", "cat-club.fr"),
         "ig": ("https://www.instagram.com/catclub_courchevel/", "@catclub_courchevel"),
-        "pos": "35% 60%",
-        "intro": [
-            "Ogni destinazione esprime un proprio modo di vivere la musica e l'intrattenimento.",
-            "A Courchevel, MUSIC LIFE collabora con Cat Club, una realtà inserita nel contesto della nightlife alpina.",
-        ],
-        "desc": "Bar e nightclub nel cuore di Courchevel, uno dei punti di riferimento della nightlife alpina.",
-        "card": "Una collaborazione nel panorama dell'intrattenimento e della nightlife delle Alpi francesi.",
-        "crops": [1400, 3000, 600],
-    },
-    {
-        "slug": "super-island-festival", "name": "Super Island Festival", "short": "Super Island Festival",
-        "place": "Saint Barth, Caraibi",
-        "web": None, "ig": None,
-        "pos": "50% 45%",
-        "intro": [
-            "Saint Barth è una delle destinazioni più esclusive dei Caraibi.",
-            "Super Island Festival è una delle realtà con cui MUSIC LIFE collabora, in un contesto in cui musica, isola e stile di vita si incontrano.",
-        ],
-        "desc": "Festival musicale a Saint Barth: musica, giornate in spiaggia e serate sull'isola.",
-        "card": "",
-        "crops": [1200, 2400, 3300],
-    },
-    {
-        "slug": "socialista-ibiza", "name": "Socialista Ibiza", "short": "Socialista",
-        "place": "Ibiza, Spagna",
-        "web": ("https://www.socialistalounge.com/location-ibiza", "socialistalounge.com"),
-        "ig": ("https://www.instagram.com/socialistaibiza/", "@socialistaibiza"),
-        "pos": "25% 80%",
-        "intro": [
-            "Ibiza è da sempre un punto di riferimento per la musica e la vita notturna.",
-            "Socialista Ibiza è una delle realtà con cui MUSIC LIFE collabora, in un contesto in cui lounge, musica e ospitalità si incontrano.",
-        ],
-        "desc": "Lounge notturno a Ibiza città, ispirato alla cultura cubana: un luogo intimo in cui musica e ospitalità si incontrano.",
-        "card": "",
-        "crops": [2200, 100, 3600],
-    },
-    {
-        "slug": "cipriani-resort-punta-del-este", "name": "Cipriani Resort", "short": "Cipriani Resort",
-        "place": "Punta del Este, Uruguay",
-        "web": ("https://www.ciprianipunta.com/", "ciprianipunta.com"),
-        "ig": ("https://www.instagram.com/ciprianipunta/", "@ciprianipunta"),
-        "pos": "88% 70%",
-        "intro": [
-            "Punta del Este è una delle destinazioni più conosciute dell'Uruguay.",
-            "Cipriani Resort è una delle realtà con cui MUSIC LIFE collabora, in un contesto in cui ospitalità, musica ed esperienza degli ospiti si incontrano.",
-        ],
-        "desc": "Resort, residenze e casinò a Punta del Este, sulla Brava: l'ospitalità di lusso firmata Cipriani.",
-        "card": "",
-        "crops": [3300, 1100, 2000],
-    },
-    {
-        "slug": "cipriani-marbella", "name": "Cipriani Marbella", "short": "Cipriani Marbella",
-        "place": "Marbella, Spagna",
-        "web": ("https://www.cipriani.com/cipriani-marbella", "cipriani.com"),
-        "ig": ("https://www.instagram.com/ciprianimarbella/", "@ciprianimarbella"),
-        "pos": "8% 55%",
-        "intro": [
-            "La Costa del Sol è uno dei luoghi simbolo dell'ospitalità e dello stile di vita mediterraneo.",
-            "Cipriani Marbella è una delle realtà con cui MUSIC LIFE collabora, in un contesto in cui gusto, atmosfera e musica si incontrano.",
-        ],
-        "desc": "Il ristorante Cipriani a Marbella, nel contesto del Puente Romano: la tradizione dell'ospitalità veneziana sulla Costa del Sol.",
-        "card": "",
-        "crops": [200, 2800, 1700],
     },
 ]
 V = {v["slug"]: v for v in VENUES}
-# New York: voce lasciata in bianco (nessuna scheda) finché non ci sono i dati
-BLANK_NY = {"blank": True, "name": "New York", "place": "USA"}
 
-# ---------------------------------------------------------------------------
-# Componenti
-# ---------------------------------------------------------------------------
+# Bozze NON pubblicate: da spostare in VENUES solo quando i nomi ufficiali sono confermati.
+# (Saint Barth: Super Island Festival · Ibiza: Socialista Ibiza · Punta del Este: Cipriani Resort ·
+#  Marbella: Cipriani Marbella · New York: da definire)
+DRAFT_VENUES = ["super-island-festival", "socialista-ibiza", "cipriani-resort-punta-del-este", "cipriani-marbella"]
 
 IMG_EXT = (".jpg", ".jpeg", ".png", ".webp")
 
 
 def venue_images(slug):
     """Foto di una venue: assets/projects/<slug>/. 'hero.*' = immagine di apertura,
-    tutte le altre (ordine alfabetico: 01.jpg, 02.jpg, ...) = galleria."""
+    le altre (ordine alfabetico: 01.jpg, 02.jpg, ...) = galleria."""
     folder = os.path.join(ROOT, "assets", "projects", slug)
     os.makedirs(folder, exist_ok=True)
     keep = os.path.join(folder, ".gitkeep")
@@ -138,14 +59,16 @@ def venue_images(slug):
         open(keep, "w").close()
     files = sorted(f for f in os.listdir(folder) if f.lower().endswith(IMG_EXT))
     hero = next((f for f in files if os.path.splitext(f)[0].lower() == "hero"), None)
-    gallery = [f for f in files if f != hero]
-    return hero, gallery
+    return hero, [f for f in files if f != hero]
 
 
 def esc(t):
     return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+# ---------------------------------------------------------------------------
+# Componenti comuni
+# ---------------------------------------------------------------------------
 def picture(prefix, cls, alt="", extra=""):
     srcs = ""
     for ext, typ in (("avif", "image/avif"), ("webp", "image/webp")):
@@ -156,7 +79,6 @@ def picture(prefix, cls, alt="", extra=""):
 
 
 NAV_LINKS = [
-    ("index.html", "Home"),
     ("chi-siamo.html", "Chi siamo"),
     ("entertainment.html", "Entertainment"),
     ("communications.html", "Communications"),
@@ -166,7 +88,7 @@ NAV_LINKS = [
 
 
 def nav(p):
-    grid = "".join('<a href="%s%s">%s</a>' % (p, href, label) for href, label in NAV_LINKS)
+    items = "".join('<a href="%s%s">%s</a>' % (p, href, label) for href, label in NAV_LINKS)
     return """<header class="nav" id="nav">
   <div class="nav__bar">
     <a href="%(p)sprogetti.html" class="nav__link">Progetti</a>
@@ -176,18 +98,17 @@ def nav(p):
   <div class="nav__panel" id="nav-panel" inert>
     <div class="nav__panel-bg" id="nav-panel-bg" aria-hidden="true"></div>
     <div class="nav__panel-inner" id="nav-panel-inner">
-      <nav class="nav__grid" aria-label="Sezioni del sito">%(grid)s</nav>
+      <nav class="nav__grid" aria-label="Sezioni del sito">%(items)s</nav>
       <div class="nav__info">
         <div>
           <p class="nav__label">Contatti</p>
           <p>[Email aziendale]</p>
           <p>[LinkedIn / Instagram]</p>
-          <a href="%(p)scontatti.html">Parliamone</a>
         </div>
       </div>
     </div>
   </div>
-</header>""" % {"p": p, "grid": grid}
+</header>""" % {"p": p, "items": items}
 
 
 LEGAL_LINKS = [
@@ -195,12 +116,11 @@ LEGAL_LINKS = [
     ("cookie-policy.html", "Cookie Policy"),
     ("preferenze-cookie.html", "Preferenze cookie"),
     ("note-legali.html", "Note legali"),
-    ("termini-e-condizioni.html", "Termini e condizioni"),
 ]
 
 
 def footer(p):
-    nav_items = "".join('<a href="%s%s">%s</a>' % (p, h, l) for h, l in NAV_LINKS[1:])
+    nav_items = "".join('<a href="%s%s">%s</a>' % (p, h, l) for h, l in NAV_LINKS)
     legal = "".join('<a href="%s%s">%s</a>' % (p, h, l) for h, l in LEGAL_LINKS)
     return """<footer class="site-footer">
   <div class="footer__grid">
@@ -209,13 +129,13 @@ def footer(p):
       <p class="footer__tagline">People. Music. Experiences. Around the world.</p>
     </div>
     <nav class="footer__nav" aria-label="Footer">
-      <p class="footer__title">Sezioni</p>
+      <p class="footer__title">Navigazione</p>
       %(nav)s
     </nav>
     <div class="footer__contact">
       <p class="footer__title">Contatti</p>
-      <p>[Email]</p>
-      <p>[Social]</p>
+      <p>[Email aziendale]</p>
+      <p>[LinkedIn / Instagram]</p>
     </div>
   </div>
   <div class="footer__bottom">
@@ -263,125 +183,78 @@ def document(p, title, desc, body, scripts="", body_class=""):
        "scripts": scripts, "bc": (' class="%s"' % body_class) if body_class else ""}
 
 
-def paras(items, first_lead=False):
-    out = []
-    for i, t in enumerate(items):
-        cls = ' class="lead"' if (first_lead and i == 0) else ""
-        out.append("<p%s>%s</p>" % (cls, t))
-    return "\n        ".join(out)
-
-
-def section(theme, label, title, content, sid="", wide=False, label_hidden_title=False):
+def sec(theme, inner, sid="", cls=""):
     idattr = ' id="%s"' % sid if sid else ""
-    tw = " sec__title--wide" if wide else ""
-    if title:
-        head = '<h2 class="sec__title%s" data-fade>%s</h2>' % (tw, title)
-        lab = '<p class="sec__label">%s</p>' % label
-    else:
-        head = '<h2 class="sr-only">%s</h2>' % re.sub(r"^\d+ / ", "", label)
-        lab = '<p class="sec__label">%s</p>' % label
-    return """<section class="sec sec--%(t)s"%(id)s>
-  <div class="sec__grid">
-    %(lab)s
-    <div>
-      %(head)s
-      %(c)s
-    </div>
-  </div>
-</section>""" % {"t": theme, "id": idattr, "lab": lab, "head": head, "c": content}
+    return '<section class="sec sec--%s%s"%s>\n%s\n</section>' % (theme, (" " + cls) if cls else "", idattr, inner)
 
 
-def prose(items, lead=True):
-    return '<div class="prose" data-fade>\n        %s\n      </div>' % paras(items, lead)
+def h2(text, cls="display"):
+    return '<h2 class="%s" data-split>%s</h2>' % (cls, text)
 
 
 def btn(href, text):
     return '<a href="%s" class="btn btn--outline">%s <span aria-hidden="true">&rarr;</span></a>' % (href, text)
 
 
-def cta(title, text="", button=("", ""), kicker=""):
-    k = '<p class="cta__kicker" data-fade>%s</p>' % kicker if kicker else ""
-    t = '<p class="cta__text" data-fade>%s</p>' % text if text else ""
-    return """<section class="cta">
-  %s
-  <h2 class="cta__title" data-reveal-words>%s</h2>
-  %s
+def art(pos, zoom="260%", ratio=""):
+    """Visual artistico (ritaglio della fotografia MUSIC LIFE)."""
+    return '<div class="art%s" style="--pos: %s; --zoom: %s" aria-hidden="true"></div>' % ((" " + ratio) if ratio else "", pos, zoom)
+
+
+def cta(title, button, big=False):
+    return """<section class="cta%s">
+  <h2 class="cta__title" data-split>%s</h2>
   <div data-fade>%s</div>
-</section>""" % (k, title, t, btn(button[0], button[1]))
+</section>""" % (" cta--big" if big else "", title, btn(*button))
 
 
-def page_hero(p, title, text="", tag="", crumb="", pos="62% 30%", name_style=False, img=None):
-    cr = ""
-    if crumb:
-        cr = '<p class="page-hero__crumb" data-in>%s</p>' % crumb
-    tt = ' class="page-hero__title page-hero__title--name"' if name_style else ' class="page-hero__title"'
-    tx = ""
-    if text:
-        tx = "".join('<p class="page-hero__text" data-in>%s</p>' % t for t in (text if isinstance(text, list) else [text]))
-    tg = '<p class="page-hero__tag" data-in>%s</p>' % tag if tag else ""
+def page_hero(p, title, text=None, headline=None, giant=False, crumb="", img=None):
+    text = text or []
+    if isinstance(text, str):
+        text = [text]
+    cr = '<p class="page-hero__crumb" data-in>%s</p>' % crumb if crumb else ""
+    cls_t = "page-hero__title page-hero__title--name" if giant else "page-hero__title"
+    hl = '<p class="page-hero__headline" data-in>%s</p>' % headline if headline else ""
+    tx = "".join('<p class="page-hero__text" data-in>%s</p>' % t for t in text)
     if img:
         media = '<img class="page-hero__img" src="%s" alt="" fetchpriority="high">\n  <div class="page-hero__overlay"></div>' % img
         cls = "page-hero"
     else:
         media = ""
         cls = "page-hero page-hero--plain"
-    return """<section class="%(cls)s" style="--hero-pos: %(pos)s">
+    return """<section class="%(cls)s">
   %(media)s
   <div class="page-hero__inner">
     %(cr)s
-    <h1%(tt)s data-in>%(title)s</h1>
+    <h1 class="%(ct)s" data-in>%(title)s</h1>
+    %(hl)s
     %(tx)s
-    %(tg)s
   </div>
-</section>""" % {"cls": cls, "pos": pos, "media": media, "cr": cr, "tt": tt, "title": title, "tx": tx, "tg": tg}
+</section>""" % {"cls": cls, "media": media, "cr": cr, "ct": cls_t, "title": title, "hl": hl, "tx": tx}
 
 
 def rows(items):
     out = []
-    for title, lead, body in items:
+    for title, desc in items:
         out.append("""<article class="row" data-fade>
         <h3 class="row__title">%s</h3>
-        <div class="row__body"><p class="row__lead">%s</p><p>%s</p></div>
-      </article>""" % (title, lead, body))
+        <p class="row__text">%s</p>
+      </article>""" % (title, desc))
     return '<div class="rows">\n      %s\n      </div>' % "\n      ".join(out)
 
 
-def steps(items, three=False):
-    out = []
-    for i, it in enumerate(items, 1):
-        if three:
-            title, lead, text = it
-            inner = '<span class="step__n">%02d</span><h3 class="step__title">%s</h3><p class="step__lead">%s</p><p class="step__text">%s</p>' % (i, title, lead, text)
-        else:
-            title, text = it
-            inner = '<span class="step__n">%02d</span><h3 class="step__title">%s</h3><p class="step__text">%s</p>' % (i, title, text)
-        out.append('<li class="step" data-fade>%s</li>' % inner)
-    return '<ol class="steps%s">\n      %s\n      </ol>' % (" steps--3" if three else "", "\n      ".join(out))
-
-
-def tiles(items):
-    out = ['<div class="tile" data-fade><h3 class="tile__title">%s</h3><p class="tile__text">%s</p></div>' % it for it in items]
-    return '<div class="tiles">\n      %s\n      </div>' % "\n      ".join(out)
-
-
-def dest_list(items, prefix_href, with_desc=True, go="Scopri il progetto"):
-    out = []
-    for v in items:
-        if v.get("blank"):
-            out.append("""<li data-fade><div class="dest__row dest__row--blank">
-          <span class="dest__city">%s</span><span class="dest__country">%s &middot; In arrivo</span>
-        </div></li>""" % (v["name"].upper(), v["place"]))
-            continue
-        desc = '<p class="dest__desc">%s</p>' % v["card"] if (with_desc and v.get("card")) else ""
-        h_, g_ = venue_images(v["slug"])
-        thumb_file = h_ or (g_[0] if g_ else None)
-        thumb = (' data-thumb style="--thumb: url(\'../assets/projects/%s/%s\')"' % (v["slug"], thumb_file)) if thumb_file else ""
-        go_html = '<span class="dest__go">%s &rarr;</span>' % go if with_desc else ""
-        out.append("""<li data-fade><a href="%(h)sprogetti/%(slug)s.html" class="dest__row"%(thumb)s>
-          <span class="dest__city">%(name)s</span><span class="dest__country">%(place)s</span>%(desc)s%(go)s
-        </a></li>""" % {"h": prefix_href, "slug": v["slug"], "name": v["name"].upper(), "place": v["place"],
-                        "thumb": thumb, "desc": desc, "go": go_html})
-    return '<ul class="dest">\n        %s\n      </ul>' % "\n        ".join(out)
+def pcard(v, p, variant=""):
+    hero, gal = venue_images(v["slug"])
+    photo = hero or (gal[0] if gal else None)
+    if photo:
+        media = '<div class="pcard__img"><img src="%sassets/projects/%s/%s" alt="%s" loading="lazy" decoding="async"></div>' % (p, v["slug"], photo, esc(v["name"]))
+    else:
+        media = '<div class="pcard__img pcard__img--empty"><span>Foto in arrivo</span></div>'
+    return """<a href="%(p)sprogetti/%(slug)s.html" class="pcard%(var)s" data-fade>
+        %(media)s
+        <div class="pcard__meta"><h3 class="pcard__name">%(name)s</h3><p class="pcard__place">%(place)s</p></div>
+      </a>""" % {"p": p, "slug": v["slug"], "var": (" " + variant) if variant else "", "media": media,
+                 "name": v["name"].upper(), "place": v["place"]}
 
 
 def write(path, html):
@@ -393,357 +266,217 @@ def write(path, html):
 
 
 # ---------------------------------------------------------------------------
-# PAGINA 01 — HOME
+# HOMEPAGE
 # ---------------------------------------------------------------------------
 def page_home():
     p = ""
+    ys = ["10%", "36%", "62%", "90%"]
+    visuals = "".join('<div class="hero__visual">%s</div>' % picture(p, "hero__visual-img", "", ' style="--y: %s"%s' % (y, ' fetchpriority="high"' if i == 0 else ""))
+                      for i, y in enumerate(ys))
+    words = "".join('<span class="hero__line"><span class="hero__word">%s</span></span>' % w
+                    for w in ("People.", "Music.", "Experiences.", "Around the world."))
     hero = """<section class="hero" id="hero">
   <div class="hero__pin" id="hero-pin">
-
-    <div class="hero__light" id="hero-light" aria-hidden="true"></div>
-
-    <div class="hero__frame" id="hero-frame">
-      %(pic)s
-      <div class="hero__frame-overlay"></div>
-      <p class="hero__split hero__split--left" id="hero-split-left">People.<br>Music.</p>
-      <p class="hero__split hero__split--right" id="hero-split-right">Experiences.<br>Around the world.</p>
-    </div>
-
-    <div class="hero__frame-border" id="hero-frame-border" aria-hidden="true"></div>
-
-    <div class="hero__brand" id="hero-brand">
-      <img class="hero__brand-logo" src="assets/logo/logo-tagline-light.webp" alt="Music Life — Entertainment Company" width="1200" height="256">
-    </div>
-
-    <div class="hero__rising" id="hero-rising">
-      <h1 class="hero__headline">Diamo forma a ciò che la musica rende possibile.</h1>
-      <p class="hero__lede">Uniamo visione creativa, competenze artistiche, tecniche e manageriali per ideare, sviluppare e realizzare progetti nel mondo della musica e dell'entertainment.</p>
-      <p class="hero__tag">People. Music. Experiences. Around the world.</p>
-    </div>
-
-    <a href="chi-siamo.html" class="btn btn--outline hero__cta" id="hero-cta">Scopri Music Life <span aria-hidden="true">&rarr;</span></a>
+    %s
+    <div class="hero__shade"></div>
+    <h1 class="hero__claim">%s</h1>
   </div>
-</section>""" % {"pic": picture(p, "hero__frame-img", "", ' fetchpriority="high"')}
+</section>""" % (visuals, words)
 
-    s1 = """<section class="sec sec--light" id="mondo">
-  <div class="sec__grid">
-    <p class="sec__label">01 / Il nostro mondo</p>
-    <div>
-      <h2 class="sec__title sec__title--wide" data-fade>Tutto parte dalla musica. Il resto lo costruiamo insieme.</h2>
-      <p class="statement" data-reveal-words>La musica è un linguaggio universale. Unisce persone, attraversa culture e trasforma i luoghi in esperienze.</p>
-      <div class="prose" data-fade>
-        <p class="lead">Noi conosciamo il mondo che le ruota intorno.</p>
-        <p>MUSIC LIFE nasce dall'incontro di professionisti che condividono un'unica visione: mettere competenze differenti al servizio di progetti capaci di connettere musica, persone e nuove opportunità.</p>
-        <p class="muted">Dall'idea alla realizzazione. Dalla progettazione alla comunicazione.</p>
-      </div>
-    </div>
+    s2 = sec("light", """<div class="about">
+  <div class="about__text">
+    %s
+    <p class="lede" data-fade>MUSIC LIFE riunisce professionisti dell'entertainment, della progettazione e della comunicazione per sviluppare progetti musicali, dall'idea alla realizzazione.</p>
+    <div data-fade>%s</div>
   </div>
-</section>"""
+  <div class="about__img" data-fade>%s</div>
+</div>""" % (h2("La musica è il nostro mondo."), btn("chi-siamo.html", "Scopri chi siamo"), art("22% 12%", "250%", "art--portrait")), "chi-siamo")
 
-    s2 = """<section class="sec sec--dark" id="cosa-facciamo">
-  <div class="sec__grid">
-    <p class="sec__label">02 / Cosa facciamo</p>
-    <div>
-      <h2 class="sec__title" data-fade>Due anime. Un'unica visione.</h2>
-      <div class="pillars">
-        <article class="pillar" data-fade>
-          <div class="pillar__img" style="--pos: 20% 14%" aria-hidden="true"></div>
-          <h3 class="pillar__name">Entertainment</h3>
-          <p class="pillar__lead">Diamo vita alle esperienze.</p>
-          <p class="pillar__text">Direzione artistica, booking, progettazione degli spazi, ingegneria del suono, organizzazione e produzione.</p>
-          <p class="pillar__text">Uniamo visione creativa e competenze tecniche per sviluppare progetti di entertainment in ogni loro dimensione.</p>
-          <a href="entertainment.html" class="link-arrow">Esplora Entertainment <span aria-hidden="true">&rarr;</span></a>
-        </article>
-        <article class="pillar" data-fade>
-          <div class="pillar__img" style="--pos: 80% 40%" aria-hidden="true"></div>
-          <h3 class="pillar__name">Communications</h3>
-          <p class="pillar__lead">Diamo voce alle esperienze.</p>
-          <p class="pillar__text">Strategia, branding, direzione creativa, contenuti e comunicazione integrata.</p>
-          <p class="pillar__text">Costruiamo identità e narrazioni capaci di creare connessioni autentiche tra brand, progetti e persone.</p>
-          <a href="communications.html" class="link-arrow">Esplora Communications <span aria-hidden="true">&rarr;</span></a>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>"""
+    divisions = """<div class="divisions">
+  <article class="division" data-fade>
+    %(a1)s
+    <h3 class="division__name">Entertainment</h3>
+    <p class="division__lead">Diamo vita alle esperienze.</p>
+    <p class="division__text">Direzione artistica, booking, progettazione, produzione e gestione di eventi e format musicali.</p>
+    <div>%(b1)s</div>
+  </article>
+  <article class="division division--offset" data-fade>
+    %(a2)s
+    <h3 class="division__name">Communications</h3>
+    <p class="division__lead">Diamo voce alle esperienze.</p>
+    <p class="division__text">Strategia, branding, direzione creativa e comunicazione per brand, festival e venue.</p>
+    <div>%(b2)s</div>
+  </article>
+</div>""" % {"a1": art("30% 70%", "280%", "art--landscape"), "b1": btn("entertainment.html", "Scopri"),
+            "a2": art("78% 38%", "280%", "art--landscape"), "b2": btn("communications.html", "Scopri")}
+    s3 = sec("dark", h2("Dall'idea all'esperienza.") + divisions, "divisioni")
 
-    feat = [V["space-riccione"], V["indie-beach"], V["super-island-festival"], V["cat-club"],
-            V["socialista-ibiza"], V["cipriani-resort-punta-del-este"], V["cipriani-marbella"], BLANK_NY]
-    s3 = """<section class="sec sec--light" id="progetti">
-  <div class="sec__grid">
-    <p class="sec__label">03 / I nostri progetti</p>
-    <div>
-      <h2 class="sec__title" data-fade>Una visione. Luoghi diversi.</h2>
-      %(prose)s
-      %(list)s
-      <div data-fade>%(btn)s</div>
-    </div>
-  </div>
-</section>""" % {
-        "prose": prose(["Ogni destinazione ha la propria identità. Ogni progetto, le proprie sfide. Ogni collaborazione, una nuova prospettiva.",
-                        "Lavoriamo con realtà del mondo dell'entertainment, portando le nostre competenze in contesti e destinazioni differenti."], False),
-        "list": dest_list(feat, "", with_desc=False),
-        "btn": btn("progetti.html", "Scopri tutti i progetti")}
+    cards = "\n      ".join([pcard(V["space-riccione"], p, "pcard--a"), pcard(V["indie-beach"], p, "pcard--b"), pcard(V["cat-club"], p, "pcard--c")])
+    s4 = sec("light", h2("Una passione. Destinazioni diverse.") + '\n<div class="pgrid">\n      %s\n    </div>\n<div class="sec__cta" data-fade>%s</div>' % (cards, btn("progetti.html", "Tutti i progetti")), "progetti")
 
-    s4 = """<section class="sec sec--light" id="persone">
-  <div class="sec__grid">
-    <p class="sec__label">04 / Le persone</p>
-    <div>
-      <h2 class="sec__title sec__title--wide" data-fade>Le idee contano. Le persone fanno la differenza.</h2>
-      %(prose)s
-      <div data-fade>%(btn)s</div>
-    </div>
-  </div>
-</section>""" % {
-        "prose": prose(["Direttori artistici, architetti, ingegneri del suono, business manager, specialisti della produzione, della logistica e della comunicazione.",
-                        "Professionalità diverse, esperienze complementari e una passione comune per il mondo dell'entertainment.",
-                        "Perché ogni grande progetto nasce dalle persone che lo immaginano. E prende vita grazie a quelle che sanno realizzarlo."]),
-        "btn": btn("chi-siamo.html", "Conosci Music Life")}
-
-    s5 = cta("Le prossime esperienze iniziano da qui.", "Hai un'idea, un progetto o una nuova sfida da condividere?",
-             ("contatti.html", "Costruiamo qualcosa insieme"), kicker="05 / Contatti")
-
-    body = "\n\n".join([hero, s1, s2, s3, s4, s5])
+    s5 = cta("Il prossimo progetto? Costruiamolo insieme.", ("contatti.html", "Contattaci"), big=True)
     write("index.html", document(p, "Music Life — Entertainment Company",
-                                 "MUSIC LIFE è una entertainment company: direzione artistica, booking, produzione e comunicazione. People. Music. Experiences. Around the world.", body))
+                                 "MUSIC LIFE — Entertainment Company. People. Music. Experiences. Around the world.",
+                                 "\n\n".join([hero, s2, s3, s4, s5])))
 
 
 # ---------------------------------------------------------------------------
-# PAGINA 02 — CHI SIAMO
+# CHI SIAMO
 # ---------------------------------------------------------------------------
 def page_chi_siamo():
     p = ""
-    hero = page_hero(p, "Le idee prendono vita quando le persone giuste si incontrano.",
-                     "MUSIC LIFE è una società indipendente di entertainment che riunisce professionisti provenienti da diversi ambiti dell'industria musicale e della comunicazione.",
-                     "People. Music. Experiences. Around the world.")
+    hero = page_hero(p, "Competenze diverse. Una visione comune.", [
+        "MUSIC LIFE è una società indipendente che unisce professionisti della musica, dell'entertainment e della comunicazione.",
+        "Una struttura multidisciplinare che accompagna brand, festival e venue nello sviluppo dei propri progetti."])
 
-    s1 = section("light", "01 / Chi siamo", "Esperienze diverse. Una visione condivisa.", prose([
-        "MUSIC LIFE nasce dalla volontà di unire professionalità, competenze e visioni differenti all'interno di un unico progetto.",
-        "Un team multidisciplinare che conosce il mondo della musica e dell'intrattenimento attraverso esperienze dirette nella direzione artistica, nella progettazione, nella produzione, nella gestione operativa e nella comunicazione.",
-        "Crediamo nel valore della contaminazione tra competenze.",
-        "Nella capacità di osservare un progetto da prospettive differenti.",
-        "E nell'importanza di costruire relazioni solide tra artisti, brand, operatori e pubblico.",
-        "Lavoriamo al fianco di chi vuole ideare, sviluppare o far crescere un progetto nel mondo dell'entertainment, mettendo a disposizione una visione integrata e le competenze necessarie per realizzarla."]), "chi-siamo", wide=True)
+    s2 = sec("light", """<div class="split">
+  %s
+  <div class="split__text">
+    <p class="lede" data-fade>Crediamo nell'incontro tra creatività, competenze tecniche e visione manageriale.</p>
+    <p class="lede" data-fade>Un approccio integrato per immaginare, progettare e realizzare esperienze di entertainment.</p>
+  </div>
+</div>""" % h2("La differenza nasce dalle persone."), "visione")
 
-    s2 = section("dark", "02 / La nostra missione", "Connettere competenze. Creare esperienze. Generare valore.", prose([
-        "La nostra missione è accompagnare brand, festival e operatori dell'entertainment lungo l'intero percorso di sviluppo dei loro progetti.",
-        "Dalla definizione della visione artistica e strategica alla progettazione degli spazi. Dall'organizzazione e produzione alla costruzione dell'identità e della comunicazione.",
-        "Unendo creatività, competenze tecniche e visione manageriale, vogliamo contribuire alla realizzazione di esperienze capaci di generare valore per chi le crea, per chi le ospita e per chi le vive."]), "missione", wide=True)
+    # NOTA: schede del team = segnaposto, da sostituire con foto, nome, ruolo e biografia reali
+    team = "".join("""<article class="team__card" data-fade>
+        <div class="team__img" aria-hidden="true"></div>
+        <h3 class="team__name">Nome Cognome</h3>
+        <p class="team__role">Ruolo</p>
+        <p class="team__bio">Breve biografia (segnaposto).</p>
+      </article>""" for _ in range(4))
+    s3 = sec("dark", """<div class="split">
+  %s
+  <div class="split__text">
+    <p class="lede" data-fade>Direttori artistici, architetti, ingegneri del suono, business manager e professionisti della produzione, della logistica e della comunicazione.</p>
+    <p class="lede" data-fade>Esperienze complementari, un unico obiettivo.</p>
+  </div>
+</div>
+<div class="team">
+      %s
+</div>""" % (h2("Le persone dietro MUSIC LIFE."), team), "team")
 
-    s3 = section("light", "03 / Il nostro approccio", "Ogni progetto è un mondo da costruire.",
-                 prose(["Non esiste un'unica formula per creare un'esperienza.",
-                        "Esistono luoghi, persone, obiettivi e identità differenti. Per questo partiamo sempre dall'ascolto e dalla comprensione del contesto."], False) + "\n      " +
-                 steps([("Ascoltare", "Comprendere la visione, il contesto e gli obiettivi di ogni progetto."),
-                        ("Immaginare", "Individuare opportunità e sviluppare una direzione artistica, creativa e strategica coerente."),
-                        ("Progettare", "Integrare competenze e professionalità per costruire ogni elemento dell'esperienza."),
-                        ("Realizzare", "Trasformare la visione in realtà attraverso produzione, coordinamento tecnico e gestione operativa."),
-                        ("Valorizzare", "Costruire identità, comunicazione e relazioni capaci di estendere il valore del progetto nel tempo.")]), "approccio")
-
-    skills = ["Direzione artistica e musicale", "Architettura e progettazione", "Ingegneria audio e direzione tecnica",
-              "Business management", "Produzione e logistica", "Strategia creativa e comunicazione"]
-    chips = '<ul class="chips" data-fade>%s</ul>' % "".join("<li>%s</li>" % s for s in skills)
-    team = []
-    for i in range(3):
-        team.append("""<article class="team__card" data-fade>
-          <div class="team__img" aria-hidden="true"></div>
-          <h3 class="team__name">Nome Cognome</h3>
-          <p class="team__role">Ruolo</p>
-          <p class="team__bio">Breve biografia in arrivo.</p>
-        </article>""")
-    # NOTA: schede nominative del management e del team da inserire (ruolo, foto, breve biografia)
-    s4 = section("dark", "04 / Le nostre persone", "Le competenze fanno la differenza.",
-                 prose(["Il valore di MUSIC LIFE nasce dalle persone che ne fanno parte.",
-                        "Professionisti con background differenti, uniti da una profonda conoscenza del settore e dalla volontà di mettere la propria esperienza al servizio di una visione comune.",
-                        "Le nostre competenze attraversano:"], False) + "\n      " + chips +
-                 '\n      <div class="team">\n        %s\n      </div>' % "\n        ".join(team), "persone")
-
-    s5 = section("light", "05 / Il nostro mondo", "La stessa passione. Destinazioni differenti.",
-                 prose(["La musica attraversa confini, culture e luoghi.",
-                        "MUSIC LIFE sviluppa collaborazioni in destinazioni differenti, adattando visione e competenze all'identità di ogni progetto.",
-                        "Da Riccione a Saint-Tropez, fino a Courchevel, il nostro percorso si costruisce attraverso persone, relazioni ed esperienze."]) +
-                 '\n      <div data-fade>%s</div>' % btn("progetti.html", "Esplora i nostri progetti"), "mondo", wide=True)
-
-    s6 = cta("Le persone giuste possono fare la differenza.", "", ("contatti.html", "Lavoriamo insieme"))
+    s4 = sec("light", """<div class="split">
+  %s
+  <div class="split__text">
+    <p class="lede" data-fade>Collaboriamo con realtà dell'entertainment in destinazioni internazionali, portando competenze e visione all'interno di ogni progetto.</p>
+    <div data-fade>%s</div>
+  </div>
+</div>""" % (h2("Senza confini."), btn("progetti.html", "Scopri i progetti")), "mondo")
     write("chi-siamo.html", document(p, "Chi siamo — Music Life",
-                                     "MUSIC LIFE è una società indipendente di entertainment che riunisce professionisti dell'industria musicale e della comunicazione.",
-                                     "\n\n".join([hero, s1, s2, s3, s4, s5, s6])))
+                                     "MUSIC LIFE è una società indipendente che unisce professionisti della musica, dell'entertainment e della comunicazione.",
+                                     "\n\n".join([hero, s2, s3, s4])))
 
 
 # ---------------------------------------------------------------------------
-# PAGINA 03 — ENTERTAINMENT
+# ENTERTAINMENT / COMMUNICATIONS (stessa architettura)
 # ---------------------------------------------------------------------------
+def division_page(slug, title, headline, desc, items, projects_title, closing, seo):
+    p = ""
+    hero = page_hero(p, title, desc, headline=headline, giant=True)
+    s2 = sec("dark", '<h2 class="sr-only">Cosa facciamo</h2>\n' + rows(items), "cosa-facciamo")
+    s3 = sec("light", """<div class="split">
+  %s
+  <div class="split__text"><div data-fade>%s</div></div>
+</div>""" % (h2(projects_title), btn("progetti.html", "Scopri i progetti")), "progetti")
+    s4 = cta(closing, ("contatti.html", "Contattaci"))
+    write(slug + ".html", document(p, "%s — Music Life" % title.rstrip("."), seo, "\n\n".join([hero, s2, s3, s4])))
+
+
 def page_entertainment():
-    p = ""
-    hero = page_hero(p, "La visione prende forma. La musica prende vita.",
-                     "Dall'ideazione di un progetto alla sua realizzazione, MUSIC LIFE integra competenze artistiche, creative, tecniche e organizzative per costruire esperienze di entertainment.")
-    s1 = section("light", "01 / La nostra visione", "Un'esperienza è molto più di quello che accade sul palco.", prose([
-        "Dietro ogni evento, festival o venue esiste un universo fatto di idee, persone, spazi, suoni e processi.",
-        "Il nostro lavoro è dare forma a questo universo.",
-        "Attraverso un approccio multidisciplinare, affianchiamo i nostri partner nelle differenti fasi di sviluppo, dalla definizione dell'identità artistica alla progettazione e realizzazione dell'esperienza.",
-        "Con un unico obiettivo: costruire progetti coerenti nella visione, efficaci nell'organizzazione e riconoscibili nella loro identità."]), "visione", wide=True)
-
-    comp = rows([
-        ("Direzione artistica", "Ogni progetto ha una propria identità musicale.",
-         "Lavoriamo alla definizione della visione artistica di club, festival, eventi e format musicali, sviluppando programmazioni, concept e percorsi capaci di valorizzarne il posizionamento."),
-        ("Artist booking &amp; talent relations", "La scelta degli artisti è parte integrante della costruzione di un'esperienza.",
-         "Supportiamo i progetti attraverso scouting, selezione, booking e gestione delle relazioni con artisti, management e agenzie."),
-        ("Architettura &amp; experience design", "Lo spazio è parte dell'esperienza.",
-         "Dalla progettazione architettonica allo stage design, sviluppiamo ambienti, allestimenti e soluzioni scenografiche che contribuiscono a definire l'identità del progetto e il modo in cui viene vissuto dal pubblico."),
-        ("Sound &amp; technical design", "Il suono è uno degli elementi fondamentali dell'esperienza musicale.",
-         "Mettiamo a disposizione competenze di ingegneria audio e progettazione tecnica per studiare soluzioni coerenti con gli spazi, le necessità artistiche e gli obiettivi della produzione."),
-        ("Event production &amp; operations", "Una grande idea richiede un'organizzazione all'altezza.",
-         "Coordiniamo le diverse fasi di produzione, dalla pianificazione operativa alla gestione di team, fornitori, risorse e logistica, per accompagnare il progetto fino alla sua realizzazione."),
-        ("Entertainment development", "Ogni progetto deve trovare il proprio equilibrio tra visione artistica e sostenibilità.",
-         "Affianchiamo i partner nella definizione di nuovi format, nell'evoluzione di progetti esistenti e nell'individuazione di opportunità di sviluppo."),
-    ])
-    s2 = section("dark", "02 / Le nostre competenze", "Dall'idea all'esperienza.", comp, "competenze")
-
-    ctx = tiles([
-        ("Club &amp; Nightlife", "Identità artistiche, programmazioni musicali e progetti di entertainment per club e venue."),
-        ("Festival &amp; Live events", "Ideazione, sviluppo, direzione artistica e produzione di eventi e format musicali."),
-        ("Hospitality &amp; Destinations", "Progetti musicali ed esperienziali capaci di valorizzare luoghi e destinazioni."),
-        ("Brand experiences", "Esperienze di entertainment progettate per creare connessioni tra brand, musica e pubblico."),
-    ])
-    s3 = section("light", "03 / I contesti in cui lavoriamo", "Ogni spazio può diventare un'esperienza.", ctx, "contesti")
-
-    s4 = section("light", "04 / Progetti", "Il nostro mondo, attraverso le esperienze.",
-                 prose(["Scopri le realtà con cui collaboriamo e i progetti a cui contribuiamo attraverso le nostre competenze."], False) +
-                 '\n      <div data-fade>%s</div>' % btn("progetti.html", "Esplora i progetti"), "progetti", wide=True)
-
-    s5 = cta("Hai una visione? Diamo forma al progetto.", "", ("contatti.html", "Contattaci"))
-    write("entertainment.html", document(p, "Entertainment — Music Life",
-                                         "Direzione artistica, booking, architettura ed experience design, sound design, produzione e sviluppo: le competenze Entertainment di MUSIC LIFE.",
-                                         "\n\n".join([hero, s1, s2, s3, s4, s5])))
+    division_page("entertainment", "Entertainment.", "Diamo forma alla musica.",
+                  "Dall'ideazione alla realizzazione, sviluppiamo esperienze di entertainment attraverso competenze artistiche, tecniche e produttive.",
+                  [("Direzione artistica", "Ideazione di format, curatela musicale e programmazione artistica."),
+                   ("Artist booking", "Scouting, selezione degli artisti e gestione delle relazioni con talent e management."),
+                   ("Architettura &amp; design", "Progettazione di spazi, palchi, scenografie ed esperienze."),
+                   ("Sound &amp; technical design", "Progettazione audio, sviluppo tecnico e coordinamento delle soluzioni tecnologiche."),
+                   ("Event production", "Organizzazione, produzione e gestione operativa di eventi e festival."),
+                   ("Business &amp; development", "Sviluppo di nuovi format, modelli di business e opportunità commerciali.")],
+                  "Le nostre esperienze.", "Diamo vita al tuo progetto.",
+                  "Entertainment: direzione artistica, booking, architettura, sound design, produzione e sviluppo.")
 
 
-# ---------------------------------------------------------------------------
-# PAGINA 04 — COMMUNICATIONS
-# ---------------------------------------------------------------------------
 def page_communications():
-    p = ""
-    hero = page_hero(p, "Ogni esperienza ha una storia. Noi le diamo voce.",
-                     "Costruiamo strategie, identità e contenuti capaci di connettere brand, progetti e persone.")
-    s1 = section("light", "01 / La nostra visione", "Un'esperienza non inizia quando si aprono le porte.", prose([
-        "E non finisce quando la musica si spegne.",
-        "Ogni progetto vive attraverso il modo in cui viene raccontato, percepito e condiviso.",
-        "Per questo consideriamo la comunicazione una parte integrante dell'entertainment, capace di costruire aspettativa, rafforzare l'identità e creare relazioni con il pubblico.",
-        "Uniamo visione strategica, sensibilità creativa e conoscenza delle dinamiche dell'industria musicale per sviluppare progetti di comunicazione coerenti, contemporanei e riconoscibili."]), "visione", wide=True)
-
-    comp = rows([
-        ("Strategy &amp; brand positioning", "Ogni progetto ha bisogno di una direzione chiara.",
-         "Definiamo strategie di posizionamento e comunicazione a partire dall'identità, dal contesto e dagli obiettivi di brand, festival e realtà dell'entertainment."),
-        ("Branding &amp; creative direction", "Diamo forma a identità riconoscibili.",
-         "Sviluppiamo concept creativi, linguaggi visivi e sistemi di comunicazione capaci di esprimere la personalità di ogni progetto attraverso tutti i suoi punti di contatto."),
-        ("Digital &amp; social media", "Costruiamo relazioni attraverso i canali digitali.",
-         "Dalla definizione della strategia alla pianificazione dei contenuti, sviluppiamo attività social e digitali che contribuiscono a rafforzare il dialogo tra i progetti e le loro community."),
-        ("Content &amp; storytelling", "Ogni esperienza genera storie da raccontare.",
-         "Ideiamo narrazioni e contenuti fotografici, video ed editoriali pensati per accompagnare i progetti nei diversi momenti della loro comunicazione."),
-        ("Campaigns &amp; activations", "Trasformiamo le strategie in iniziative concrete.",
-         "Sviluppiamo concept, campagne e attivazioni capaci di creare occasioni di incontro tra brand, cultura musicale e pubblico."),
-        ("PR &amp; partnerships", "Le connessioni giuste amplificano il valore di un progetto.",
-         "Lavoriamo alla costruzione di relazioni e collaborazioni con media, partner e professionisti, contribuendo a rafforzare la visibilità e il posizionamento dei progetti."),
-    ])
-    s2 = section("dark", "02 / Le nostre competenze", "Costruiamo identità. Creiamo connessioni.", comp, "competenze")
-
-    st = steps([("Prima", "Creare aspettativa.", "Costruire l'identità, definire il racconto e attivare la relazione con il pubblico."),
-                ("Durante", "Dare valore al momento.", "Raccontare l'esperienza mentre accade, attraverso contenuti e comunicazione in tempo reale."),
-                ("Oltre", "Lasciare una traccia.", "Prolungare la vita del progetto attraverso storie, contenuti e relazioni che continuano nel tempo.")], three=True)
-    s3 = section("light", "03 / Il nostro approccio", "Prima. Durante. Oltre.", st, "approccio")
-
-    s4 = section("dark", "04 / Entertainment &amp; Communications", "Due competenze. Un'unica visione.", prose([
-        "La nostra conoscenza diretta dell'entertainment ci permette di sviluppare strategie di comunicazione che nascono dall'interno dei progetti.",
-        "Comprendiamo le dinamiche artistiche, produttive e culturali che caratterizzano questo mondo.",
-        "Per questo Entertainment e Communications lavorano in modo complementare, condividendo visione, competenze e obiettivi."]), "visione-unica", wide=True)
-
-    s5 = section("light", "05 / Progetti", "Le idee diventano storie.",
-                 prose(["Scopri i progetti e le collaborazioni che raccontano il nostro approccio alla comunicazione."], False) +
-                 '\n      <div data-fade>%s</div>' % btn("progetti.html", "Scopri i progetti"), "progetti")
-
-    s6 = cta("Ogni grande progetto merita una storia all'altezza.", "", ("contatti.html", "Parliamone"))
-    write("communications.html", document(p, "Communications — Music Life",
-                                          "Strategia, branding, social, contenuti, campagne e PR: le competenze Communications di MUSIC LIFE.",
-                                          "\n\n".join([hero, s1, s2, s3, s4, s5, s6])))
+    division_page("communications", "Communications.", "Diamo voce alle esperienze.",
+                  "Sviluppiamo identità, strategie e contenuti che connettono brand, musica e persone.",
+                  [("Strategy &amp; positioning", "Strategie di brand, analisi delle audience e posizionamento."),
+                   ("Branding &amp; creative direction", "Concept creativi, identità visive e direzione della comunicazione."),
+                   ("Digital &amp; social", "Strategie digitali, gestione dei canali e sviluppo delle community."),
+                   ("Content production", "Storytelling, produzione fotografica, video e contenuti editoriali."),
+                   ("Campaigns &amp; activations", "Campagne integrate e progetti speciali tra brand ed entertainment."),
+                   ("PR &amp; partnerships", "Relazioni media, collaborazioni e partnership strategiche.")],
+                  "Le nostre storie.", "Costruiamo nuove connessioni.",
+                  "Communications: strategia, branding, digital, contenuti, campagne e PR.")
 
 
 # ---------------------------------------------------------------------------
-# PAGINA 05 — PROGETTI
+# PROGETTI
 # ---------------------------------------------------------------------------
 def page_progetti():
     p = ""
-    hero = page_hero(p, "Una visione. Luoghi diversi. Esperienze uniche.",
-                     ["Ogni collaborazione rappresenta un incontro tra persone, competenze e identità differenti.",
-                      "Dai club alle destinazioni internazionali, scopri alcune delle realtà con cui MUSIC LIFE collabora."])
-    sel = [V["space-riccione"], V["indie-beach"], V["cat-club"]]
-    s1 = section("light", "01 / Collaborazioni selezionate", "", dest_list(sel, ""), "collaborazioni")
-
-    more = [V["super-island-festival"], V["socialista-ibiza"], V["cipriani-resort-punta-del-este"], V["cipriani-marbella"], BLANK_NY]
-    # NOTA: nomi e materiali delle ulteriori venue (anche gruppo Cipriani) da confermare prima della pubblicazione
-    s2 = section("dark", "02 / Destinazioni", "La musica non conosce confini.",
-                 prose(["MUSIC LIFE costruisce il proprio percorso attraverso collaborazioni con realtà e operatori dell'entertainment in differenti destinazioni."], False) +
-                 "\n      " + dest_list(more, "", with_desc=False), "destinazioni")
-    s3 = cta("Il prossimo progetto potrebbe essere il tuo.", "", ("contatti.html", "Lavoriamo insieme"))
+    hero = page_hero(p, "Una passione. Destinazioni diverse.",
+                     "Una selezione delle realtà con cui collaboriamo nel mondo dell'entertainment.")
+    cards = "\n      ".join(pcard(v, p, "pcard--wide") for v in VENUES)
+    s2 = sec("light", '<h2 class="sr-only">Portfolio</h2>\n<div class="pgrid pgrid--list">\n      %s\n    </div>' % cards, "portfolio")
+    s3 = cta("Il prossimo progetto potrebbe essere il tuo.", ("contatti.html", "Lavoriamo insieme"))
     write("progetti.html", document(p, "Progetti — Music Life",
-                                    "Space Riccione, Indie Beach, Cat Club e le altre destinazioni con cui MUSIC LIFE collabora.",
-                                    "\n\n".join([hero, s1, s2, s3])))
+                                    "Space Riccione, Indie Beach e Cat Club: le realtà con cui MUSIC LIFE collabora.",
+                                    "\n\n".join([hero, s2, s3])))
 
 
 # ---------------------------------------------------------------------------
-# PAGINE 06 — SCHEDE DEI SINGOLI PROGETTI
+# SCHEDA PROGETTO (template)
 # ---------------------------------------------------------------------------
-def page_venue(v):
+def page_venue(v, i):
     p = "../"
     hero_file, gal_files = venue_images(v["slug"])
     hero_img = "%sassets/projects/%s/%s" % (p, v["slug"], hero_file) if hero_file else None
-    hero = page_hero(p, esc(v["short"]), v["intro"][0],
-                     crumb='<a href="%sprogetti.html">&larr; Progetti</a><span>%s</span>' % (p, v["place"]), pos=v["pos"], name_style=True, img=hero_img)
+    hero = page_hero(p, esc(v["name"]), [v["place"] + "."], giant=True, img=hero_img,
+                     crumb='<a href="%sprogetti.html">&larr; Progetti</a>' % p)
 
-    if not v["web"]:
-        links = '<p class="todo" data-fade>Sito web e Instagram ufficiali: da inserire.</p>'
-    else:
-      links = """<ul class="venue-links" data-fade>
+    links = """<ul class="venue-links" data-fade>
         <li><a href="%s" target="_blank" rel="noopener noreferrer"><span class="venue-links__label">Sito web</span><span class="venue-links__value">%s <span aria-hidden="true">&nearr;</span></span></a></li>
         <li><a href="%s" target="_blank" rel="noopener noreferrer"><span class="venue-links__label">Instagram</span><span class="venue-links__value">%s <span aria-hidden="true">&nearr;</span></span></a></li>
       </ul>""" % (v["web"][0], v["web"][1], v["ig"][0], v["ig"][1])
 
-    s1 = section("light", "01 / Il progetto", "",
-                 prose(v["intro"][1:] + [v["desc"]], False) + "\n      " + links, "progetto")
-
-    s2 = section("dark", "02 / La nostra collaborazione", "",
-                 '<p class="todo" data-fade>Da inserire: attività svolte e periodo della collaborazione (Entertainment e Communications, quando opportuno).</p>', "collaborazione")
-
-    s3 = section("light", "03 / Le competenze coinvolte", "",
-                 '<p class="todo" data-fade>Da definire, selezionando solo le attività pertinenti: direzione artistica · booking · produzione · progettazione tecnica · comunicazione.</p>', "competenze")
+    s2 = sec("light", """<div class="split">
+  %s
+  <div class="split__text">
+    <p class="lede" data-fade>%s</p>
+    %s
+  </div>
+</div>
+<div class="split split--gap">
+  %s
+  <div class="split__text">
+    <p class="todo" data-fade>Le descrizioni delle attività svolte verranno integrate successivamente.</p>
+  </div>
+</div>""" % (h2("Il progetto", "display display--s"), v["intro"], links, h2("La nostra collaborazione", "display display--s")), "progetto")
 
     if gal_files:
         figs = "".join('<figure data-fade><img src="%sassets/projects/%s/%s" alt="%s — immagine %d"%s></figure>' % (
-            p, v["slug"], f, esc(v["name"]), i, "" if i == 1 else ' loading="lazy" decoding="async"') for i, f in enumerate(gal_files, 1))
-        gal_html = '<div class="gallery">%s</div>' % figs
+            p, v["slug"], f, esc(v["name"]), n, "" if n == 1 else ' loading="lazy" decoding="async"') for n, f in enumerate(gal_files, 1))
+        gal = '<div class="gallery">%s</div>' % figs
     else:
-        slots = "".join('<figure class="gallery__slot" data-fade><span>Foto in arrivo</span></figure>' for _ in range(3))
-        gal_html = '<div class="gallery">%s</div>' % slots
-    s4 = section("dark", "04 / L'esperienza", "", gal_html, "esperienza")
+        gal = '<div class="gallery">%s</div>' % "".join('<figure class="gallery__slot" data-fade><span>Foto in arrivo</span></figure>' for _ in range(3))
+    s3 = sec("dark", h2("Gallery", "display display--s") + "\n" + gal, "gallery")
 
-    s5 = section("light", "05 / Risultati", "",
-                 '<p class="todo" data-fade>Eventuali risultati, traguardi o dati autorizzati alla pubblicazione: da inserire.</p>', "risultati")
-
-    s6 = """<section class="cta">
-  <div data-fade>%s</div>
-</section>""" % btn(p + "progetti.html", "Scopri altri progetti")
+    prev_v = VENUES[(i - 1) % len(VENUES)]
+    next_v = VENUES[(i + 1) % len(VENUES)]
+    s4 = sec("light", """<nav class="pager" aria-label="Navigazione tra i progetti">
+  <a href="%(p)s%(ps)s.html" class="pager__link"><span class="pager__label">&larr; Progetto precedente</span><span class="pager__name">%(pn)s</span></a>
+  <a href="%(p)s%(ns)s.html" class="pager__link pager__link--next"><span class="pager__label">Progetto successivo &rarr;</span><span class="pager__name">%(nn)s</span></a>
+</nav>""" % {"p": "", "ps": prev_v["slug"], "pn": prev_v["name"].upper(), "ns": next_v["slug"], "nn": next_v["name"].upper()}, "navigazione")
     write("progetti/%s.html" % v["slug"], document(p, "%s — %s · Music Life" % (v["name"], v["place"]),
-                                                  "%s: %s" % (v["name"], v["desc"]),
-                                                  "\n\n".join([hero, s1, s2, s3, s4, s5, s6])))
+                                                  "%s, %s. %s" % (v["name"], v["place"], v["intro"]),
+                                                  "\n\n".join([hero, s2, s3, s4])))
 
 
 # ---------------------------------------------------------------------------
-# PAGINA 07 — CONTATTI
+# CONTATTI
 # ---------------------------------------------------------------------------
 def page_contatti():
     p = ""
-    hero = page_hero(p, "La prossima esperienza potrebbe iniziare qui.",
-                     ["Un nuovo progetto. Un'idea da sviluppare. Una collaborazione da costruire.",
-                      "Siamo sempre interessati a incontrare persone e realtà che condividono la nostra visione dell'entertainment."],
-                     "Parliamone.")
-
+    hero = page_hero(p, "Le idee migliori nascono dalle connessioni.", "Hai un progetto da sviluppare? Parliamone.")
     form = """<form class="form" id="contact-form" novalidate>
         <label class="field" data-field="name" data-fade><span class="field__label">Nome e cognome</span>
           <input class="field__input" type="text" name="name" autocomplete="name" required>
@@ -764,25 +497,27 @@ def page_contatti():
           </div>
           <span class="field__error" role="alert"></span>
         </fieldset>
-        <label class="field" data-field="message" data-fade><span class="field__label">Il tuo progetto</span>
-          <textarea class="field__input" name="message" rows="6" placeholder="Messaggio libero" required></textarea>
+        <label class="field" data-field="message" data-fade><span class="field__label">Messaggio</span>
+          <textarea class="field__input" name="message" rows="6" required></textarea>
           <span class="field__error" role="alert"></span></label>
         <div class="field" data-field="consent" data-fade>
-          <label class="consent"><input type="checkbox" name="consent" required><span>Consenso al trattamento dei dati personali secondo l'<a href="privacy-policy.html">informativa privacy</a>.</span></label>
+          <label class="consent"><input type="checkbox" name="consent" required><span>Ho letto la <a href="privacy-policy.html">Privacy Policy</a> e acconsento al trattamento dei dati personali.</span></label>
           <span class="field__error" role="alert"></span>
         </div>
         <button type="submit" class="btn btn--outline" data-fade>Invia il messaggio <span aria-hidden="true">&rarr;</span></button>
         <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
       </form>"""
-    s1 = section("light", "Contatti", "Contattaci",
-                 prose(["Hai un progetto musicale da sviluppare?",
-                        "Vuoi dare vita a un nuovo format, valorizzare una venue o costruire una collaborazione tra il tuo brand e il mondo dell'entertainment?",
-                        "Raccontaci la tua idea."]) + "\n      " + form, "contattaci", wide=True)
-    s2 = section("dark", "Contatto diretto", "Preferisci scriverci direttamente?",
-                 '<div class="contact-direct" data-fade><p>[Email aziendale]</p><p>[LinkedIn / Instagram]</p></div>', "diretto", wide=True)
+    s2 = sec("light", '<h2 class="sr-only">Scrivici</h2>\n' + form, "form")
+    # NOTA: contatti diretti = segnaposto finché non vengono forniti i dati
+    s3 = sec("dark", """<h2 class="sr-only">Contatti diretti</h2>
+<div class="contact-lines">
+  <div class="contact-lines__row" data-fade><span class="contact-lines__label">Email aziendale</span><span class="contact-lines__value">[Email aziendale]</span></div>
+  <div class="contact-lines__row" data-fade><span class="contact-lines__label">LinkedIn</span><span class="contact-lines__value">[LinkedIn]</span></div>
+  <div class="contact-lines__row" data-fade><span class="contact-lines__label">Instagram</span><span class="contact-lines__value">[Instagram]</span></div>
+</div>""", "diretti")
     write("contatti.html", document(p, "Contatti — Music Life",
-                                    "Hai un progetto musicale da sviluppare? Scrivi a MUSIC LIFE: Entertainment, Communications o entrambe.",
-                                    "\n\n".join([hero, s1, s2]), scripts='\n<script src="js/form.js"></script>'))
+                                    "Hai un progetto da sviluppare? Scrivi a MUSIC LIFE: Entertainment, Communications o entrambe.",
+                                    "\n\n".join([hero, s2, s3]), scripts='\n<script src="js/form.js"></script>'))
 
 
 # ---------------------------------------------------------------------------
@@ -896,7 +631,7 @@ def page_legal():
     <h2>2. Proprietà intellettuale</h2>
     <p>Testi, grafica, layout, logo MUSIC LIFE e ogni altro contenuto del sito sono di proprietà del Titolare o utilizzati con il consenso dei rispettivi titolari, e sono protetti dalle norme sul diritto d'autore e sulla proprietà industriale. È vietata la riproduzione, la distribuzione o la modifica, anche parziale, senza autorizzazione scritta.</p>
     <h2>3. Marchi e riferimenti a terzi</h2>
-    <p>I nomi, i marchi e i loghi delle venue e dei partner citati nel sito (tra cui Space Riccione, Indie Beach, Cat Club, Socialista, Cipriani e relativi marchi) appartengono ai rispettivi titolari e sono menzionati al solo scopo di descrivere le collaborazioni di MUSIC LIFE. Il loro utilizzo non implica sponsorizzazione, affiliazione o approvazione oltre quanto espressamente indicato.</p>
+    <p>I nomi, i marchi e i loghi delle venue e dei partner citati nel sito (tra cui Space Riccione, Indie Beach, Cat Club e relativi marchi) appartengono ai rispettivi titolari e sono menzionati al solo scopo di descrivere le collaborazioni di MUSIC LIFE. Il loro utilizzo non implica sponsorizzazione, affiliazione o approvazione oltre quanto espressamente indicato.</p>
     <h2>4. Fotografie e materiali</h2>
     <p>Le fotografie e i materiali dedicati ai progetti sono pubblicati con l'autorizzazione dei rispettivi titolari dei diritti. Chi ritenga che un contenuto violi propri diritti può segnalarlo agli indirizzi indicati al punto 1 per la tempestiva verifica.</p>
     <h2>5. Limitazione di responsabilità</h2>
@@ -938,8 +673,8 @@ def main():
     page_entertainment()
     page_communications()
     page_progetti()
-    for v in VENUES:
-        page_venue(v)
+    for i, v in enumerate(VENUES):
+        page_venue(v, i)
     page_contatti()
     page_legal()
 

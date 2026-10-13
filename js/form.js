@@ -8,7 +8,7 @@
     email: 'Inserisci un indirizzo email valido.',
     org: 'Indica azienda o organizzazione.',
     area: 'Seleziona un’area di interesse.',
-    message: 'Raccontaci brevemente il tuo progetto.',
+    message: 'Scrivi un breve messaggio.',
     consent: 'Il consenso è necessario per inviare il messaggio.'
   };
 
@@ -46,7 +46,11 @@
       if (el) el.focus();
       return;
     }
-    status.textContent = 'Grazie! Anteprima del sito: il messaggio non viene ancora inviato. Il collegamento all’email aziendale sarà attivato a breve.';
+    status.textContent = 'Grazie per averci scritto. Ti risponderemo al più presto.';
+    var note = document.createElement('span');
+    note.className = 'form__note';
+    note.textContent = 'Anteprima del sito: l’invio non è ancora collegato alla casella email aziendale.';
+    status.appendChild(note);
     form.reset();
   });
 })();
