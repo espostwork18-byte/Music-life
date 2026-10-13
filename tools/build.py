@@ -710,7 +710,7 @@ def page_legal():
     <p>Informazioni sull'uso di cookie e tecnologie analoghe sono disponibili nella <a href="cookie-policy.html">Cookie Policy</a>.</p>
     <h2>11. Modifiche alla presente informativa</h2>
     <p>Il Titolare può aggiornare la presente informativa, ad esempio per adeguarla a modifiche normative o ai servizi offerti. La versione aggiornata è sempre disponibile in questa pagina.</p>""" % (
-        F("[data]"), BOZZA, TITOLARE, "Vercel Inc.", F("[nome del fornitore di posta]"), F("[24 mesi]")))
+        F("[data]"), BOZZA, TITOLARE, "Vercel Inc.", F("[nome del fornitore di posta]"), "24 mesi"))
 
     legal_page("cookie-policy", "Cookie Policy", "Informazioni sull'uso di cookie e tecnologie analoghe sul sito di MUSIC LIFE.", """<h1>Cookie Policy</h1>
     <p class="legal__meta">Ultimo aggiornamento: %s</p>
