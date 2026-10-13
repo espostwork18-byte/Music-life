@@ -32,8 +32,8 @@
     var words = gsap.utils.toArray('.hero__word');
 
     gsap.set(words, { yPercent: 112 });
-    gsap.set(visuals.slice(1), { opacity: 0 });
-    gsap.set('.hero__visual-img', { scale: h.zoomFrom });
+    // la foto di sfondo resta ferma: si muovono solo le parole
+    gsap.set(visuals.slice(1), { display: 'none' });
 
     var tl = gsap.timeline({
       scrollTrigger: {
@@ -48,15 +48,7 @@
 
     words.forEach(function (word, i) {
       var t = h.wordAt[i];
-      var enter = i === 0 ? 0 : t - 0.02;
-      var next = i < words.length - 1 ? h.wordAt[i + 1] : 1;
       tl.to(word, { yPercent: 0, ease: cfg.ease.out, duration: h.wordDur }, t);
-      if (i > 0) tl.to(visuals[i], { opacity: 1, ease: 'none', duration: h.visualFade }, enter);
-      tl.to(visuals[i].querySelector('.hero__visual-img'), {
-        scale: 1,
-        ease: 'none',
-        duration: Math.min(1, next + 0.1) - enter
-      }, enter);
     });
     tl.to({}, { duration: 0 }, 1); // la timeline dura esattamente 1
   }

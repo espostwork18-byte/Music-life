@@ -248,7 +248,8 @@ def document(p, title, desc, body, scripts="", body_class=""):
 <script src="%(p)sjs/vendor/lenis.min.js"></script>
 <script src="%(p)sjs/motion-config.js"></script>
 <script src="%(p)sjs/motion.js"></script>
-<script src="%(p)sjs/nav.js"></script>%(scripts)s
+<script src="%(p)sjs/nav.js"></script>
+<script src="%(p)sjs/main.js"></script>%(scripts)s
 </body>
 </html>
 """ % {"p": p, "title": esc(title), "desc": esc(desc), "nav": nav(p), "body": body, "footer": footer(p),
