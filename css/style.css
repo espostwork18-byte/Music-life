@@ -151,14 +151,8 @@ h1, h2, h3, h4, p { margin: 0; }
   transform: scaleX(1);
   transform-origin: left;
 }
-.nav__logo {
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-paper);
-  white-space: nowrap;
-}
+.nav__logo { display: flex; align-items: center; min-height: 44px; }
+.nav__logo img { display: block; height: 1.35rem; width: auto; }
 
 .nav__panel {
   position: absolute;
@@ -327,6 +321,7 @@ h1, h2, h3, h4, p { margin: 0; }
   text-align: center;
 }
 .hero__brand .dash { margin: 0 auto var(--space-3); }
+.hero__brand-logo { display: block; width: min(34rem, 78vw); height: auto; }
 .hero__brand-name {
   font-size: clamp(2.25rem, 5vw, 3.5rem);
   font-weight: 800;
@@ -849,6 +844,8 @@ h1, h2, h3, h4, p { margin: 0; }
   border-top: 1px solid var(--color-line);
 }
 .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: var(--space-5); }
+.footer__logo { display: inline-block; }
+.footer__logo img { display: block; width: min(20rem, 70vw); height: auto; }
 .footer__brand { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; }
 .footer__company { margin-top: var(--space-1); font-size: 0.72rem; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--color-text-muted); }
 .footer__tagline { margin-top: var(--space-4); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.6; max-width: 20rem; }

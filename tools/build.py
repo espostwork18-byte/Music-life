@@ -170,7 +170,7 @@ def nav(p):
     return """<header class="nav" id="nav">
   <div class="nav__bar">
     <a href="%(p)sprogetti.html" class="nav__link">Progetti</a>
-    <a href="%(p)sindex.html" class="nav__logo" aria-label="Music Life — home">Music Life</a>
+    <a href="%(p)sindex.html" class="nav__logo" aria-label="Music Life — home"><img src="%(p)sassets/logo/logo-light-sm.webp" alt="Music Life" width="480" height="85"></a>
     <button type="button" class="nav__link nav__link--right" id="nav-toggle" aria-expanded="false" aria-controls="nav-panel">Menu</button>
   </div>
   <div class="nav__panel" id="nav-panel" inert>
@@ -205,8 +205,7 @@ def footer(p):
     return """<footer class="site-footer">
   <div class="footer__grid">
     <div>
-      <p class="footer__brand">Music Life</p>
-      <p class="footer__company">Entertainment Company</p>
+      <a href="%(p)sindex.html" class="footer__logo" aria-label="Music Life Entertainment Company — home"><img src="%(p)sassets/logo/logo-tagline-light-sm.webp" alt="Music Life — Entertainment Company" width="640" height="136"></a>
       <p class="footer__tagline">People. Music. Experiences. Around the world.</p>
     </div>
     <nav class="footer__nav" aria-label="Footer">
@@ -223,7 +222,7 @@ def footer(p):
     <p>&copy; MUSIC LIFE — Tutti i diritti riservati.</p>
     <nav class="footer__legal" aria-label="Informazioni legali">%(legal)s</nav>
   </div>
-</footer>""" % {"nav": nav_items, "legal": legal}
+</footer>""" % {"nav": nav_items, "legal": legal, "p": p}
 
 
 def document(p, title, desc, body, scripts="", body_class=""):
@@ -413,9 +412,7 @@ def page_home():
     <div class="hero__frame-border" id="hero-frame-border" aria-hidden="true"></div>
 
     <div class="hero__brand" id="hero-brand">
-      <span class="dash"></span>
-      <span class="hero__brand-name">Music Life</span>
-      <span class="hero__brand-tag">Entertainment Company</span>
+      <img class="hero__brand-logo" src="assets/logo/logo-tagline-light.webp" alt="Music Life — Entertainment Company" width="1200" height="256">
     </div>
 
     <div class="hero__rising" id="hero-rising">
