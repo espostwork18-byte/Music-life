@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /tools/
+Disallow: /assets/source/
+
+Sitemap: https://www.musiclife.world/sitemap.xml

@@ -136,7 +136,14 @@ h1, h2, h3, h4, p { margin: 0; }
   padding: 0.6em 0;
   position: relative;
 }
-.nav__link--right { justify-self: end; }
+.nav__right { justify-self: end; display: flex; align-items: center; gap: var(--space-2); }
+.nav__lang { color: rgba(245, 245, 243, 0.72); padding-left: 0.5em; padding-right: 0.5em; min-width: 44px; justify-content: center; }
+.nav__lang::after { left: 0.5em; width: calc(100% - 1em); }
+.nav__langs span[aria-current] { font-weight: 600; margin-right: 0.9em; }
+.nav__langs a { margin-right: 0.9em; }
+.footer__lang { padding: 0.5em 0; font-weight: 600; }
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 100; padding: 0.8em 1.2em; background: var(--color-paper); color: var(--color-ink); font-size: 0.85rem; }
+.skip-link:focus { top: 16px; }
 .nav__link::after {
   content: "";
   position: absolute;
@@ -268,6 +275,7 @@ h1, h2, h3, h4, p { margin: 0; }
 /* ==========================================================================
    Tipografia di sezione, layout editoriali
    ========================================================================== */
+picture.pic { display: contents; }
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 .sec { position: relative; padding: var(--space-7) var(--gutter); }
@@ -741,7 +749,7 @@ mark.todo-field { background: transparent; color: inherit; padding: 0 0.25em; bo
   .hero__claim { font-size: clamp(2.2rem, 11.5vw, 6.5rem); bottom: 6vh; }
   .hero__line:nth-child(2) { padding-left: 8vw; }
   .hero__line:nth-child(4) { padding-left: 4vw; }
-  .divisions { grid-template-columns: 1fr; }
+  .divisions { grid-template-columns: minmax(0, 1fr); }
   .division--offset { margin-top: 0; }
   .row { grid-template-columns: 1fr; gap: var(--space-2); }
   .contact-lines__row { grid-template-columns: 1fr; gap: var(--space-1); }
@@ -751,6 +759,8 @@ mark.todo-field { background: transparent; color: inherit; padding: 0 0.25em; bo
   .sec { padding-top: var(--space-6); padding-bottom: var(--space-6); }
   .team, .footer__grid { grid-template-columns: 1fr; }
   .legal table, .legal thead, .legal tbody, .legal tr, .legal th, .legal td { display: block; }
+  .division__name { font-size: min(2rem, 8.6vw); }
+  .cta--big .cta__title { font-size: min(3rem, 11vw); }
 }
 
 @media (max-width: 900px) {
@@ -795,4 +805,13 @@ mark.todo-field { background: transparent; color: inherit; padding: 0 0.25em; bo
   .ext a:hover .ext__arrow { transform: translate(8px, -8px); }
   .ext a:hover .ext__label { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.12em; }
   .pager__tile:hover .pager__media img { transform: scale(1.05); }
+}
+
+/* Barra di navigazione sugli schermi molto stretti: spazio per il selettore lingua */
+@media (max-width: 420px) {
+  .nav__bar { padding: 0 var(--space-2); column-gap: 0.5rem; }
+  .nav__logo img { height: 1.1rem; }
+  .nav__link { letter-spacing: 0.14em; }
+  .nav__right { gap: 0.15rem; }
+  .nav__lang { min-width: 40px; }
 }
